@@ -1,0 +1,111 @@
+set nocompatible
+source $VIMRUNTIME/vimrc_example.vim
+source $VIMRUNTIME/mswin.vim
+behave mswin
+set diffexpr=MyDiff()
+function MyDiff()
+  let opt = '-a --binary '
+  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+  let arg1 = v:fname_in
+  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+  let arg2 = v:fname_new
+  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+  let arg3 = v:fname_out
+  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+  let eq = ''
+  if $VIMRUNTIME =~ ' '
+    if &sh =~ '\<cmd'
+      let cmd = '""' . $VIMRUNTIME . '\diff"'
+      let eq = '"'
+    else
+      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+    endif
+  else
+    let cmd = $VIMRUNTIME . '\diff'
+  endif
+  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+endfunction
+
+"install pathogen
+execute pathogen#infect()
+
+
+" unix style line endings
+set ff=unix
+
+" scrollbars, no
+"set guioptions=
+"set guioptions+=LlRrb
+"set guioptions-=LlRrb
+
+
+
+"Set Color Scheme and Font Optionvs
+colorscheme xoria256
+
+
+
+filetype plugin indent on
+syntax on
+"Set the status line options. Make it show more information.
+set laststatus=2
+set statusline+=%{fugitive#statusline()} " git status (courtesy of fugitive)
+set statusline+=[%{strlen(&fenc)?&fenc:'none'}, " file encoding
+set statusline+=%{&ff}] " file format
+set statusline+=%h      " help file flag
+set statusline+=%m      " modified flag
+set statusline+=%r      " read only flag
+set statusline+=%y      " filetype
+set statusline+=%=      " left/right separator
+set statusline+=%c,     " cursor column
+set statusline+=%l/%L   " cursor line/total lines
+set statusline+=\ %P    " percent of file on screen
+
+
+
+" unix style line endings
+set ff=unix
+"font size
+"set guifont=Consolas:h10
+:set guifont=Lucida_Console:h10:cDEFAULT
+"======= set line nu, buffer, search, highlight, autoindent and more. ========
+
+" line numbers, yes
+set number
+set nuw=5 " number width to 6 makes things look a little neater
+
+set hidden
+set ignorecase
+set incsearch
+set smartcase
+set smartindent
+set tabstop=4
+set showmatch
+set autoindent
+set noruler
+set vb
+set nowrap
+set viminfo+=n$VIM/_viminfo
+set noerrorbells
+set showcmd
+set mouse=a
+set history=1000
+set undolevels=1000
+
+"geometry {columns}x{lines}+{offsetLeft}+{offsetTop}
+set lines=200 columns=145
+"gvim.geometry 145x200+8+100
+
+"toolbar
+set go+=T
+set go+=M
+"home folder
+cd c:/localdev
+
+"NERD TREE
+autocmd vimenter * NERDTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+map <C-n> :NERDTreeToggle<CR>
