@@ -54,7 +54,8 @@ set shortmess+=I
     set shiftwidth=4
     set softtabstop=4   " number of spaces in tab when editing
     set expandtab " tabs are spaces
-
+    set list
+    set listchars=tab:>-,trail:.
 "=====================================================================
 "VIM UI 
 "=====================================================================
@@ -67,7 +68,7 @@ set noerrorbells " no beeping
 " -: hide
 " **************** 
     set go-=T " toolbar
-    set go+=m " menu 
+    set go-=m " menu 
     set go-=l " hide left scroll bar
     set go-=L " hide left scroll bar in split
     set go-=R " hide right scroll bar
@@ -118,7 +119,7 @@ set noruler " Show the ruler
 "MISC
 " **************** 
     set lazyredraw " redraw only when we need to
-    set showmatch " highlight matching [{()}]
+    "set showmatch " highlight matching [{()}]
     set nobackup       "no backup files
     set nowritebackup  "only in case you don't want a backup file while editing
     set noswapfile     "no swap files
@@ -147,11 +148,11 @@ set noruler " Show the ruler
 " **************** 
     set backspace=indent,eol,start
     " TABS
-    map  tn :tabn<CR> " next tab
+    map  tn :tabn<CR> "next tab
     map  tp :tabp<CR> "previous tab
-    map  <C-n><C-t> :tabnew<CR> "new tab
-    map  <C-n><C-w> :enew<CR> "new window
-
+    map  <C-n> <C-t> :tabnew<CR> "new tab
+    map  <C-n> <C-w> :enew<CR> "new window
+    map  <C-s> :w<CR> 
 " **************** 
 " SPLIT CONTROLS
 " **************** 
