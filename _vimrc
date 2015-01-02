@@ -43,6 +43,7 @@ execute pathogen#infect()
 
 set ff=dos
 scriptencoding utf-8
+set encoding=utf-8
 syntax enable " enable syntax processing
 cd c:/localdev/m " home diretory
 set shortmess+=I
@@ -54,8 +55,8 @@ set shortmess+=I
     set shiftwidth=4
     set softtabstop=4   " number of spaces in tab when editing
     set expandtab " tabs are spaces
+    set listchars=tab:>-,trail:_,nbsp:.
     set list
-    set listchars=tab:>-,trail:.
 "=====================================================================
 "VIM UI 
 "=====================================================================
@@ -69,7 +70,7 @@ set noerrorbells " no beeping
 " **************** 
     set go-=T " toolbar
     set go-=m " menu 
-    set go-=l " hide left scroll bar
+    set go-=l " hide left sroll bar
     set go-=L " hide left scroll bar in split
     set go-=R " hide right scroll bar
     set go-=r " hide right scroll bar in split
