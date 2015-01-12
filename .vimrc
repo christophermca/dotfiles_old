@@ -1,90 +1,114 @@
-set nocompatible
-source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
-behave mswin
-
-
 "============================================================================
 " Author: Christopher MCA
 " Version: 1.0 09/12/14 09:04
 "
-" Sections: 
-"   -> Colors & Fonts
-"   -> General
-"   -> VIM UI
-"       GUI Options
-"       Window Options
-"       STATUS bar + COMMAND LINE
-"       COLUMN RULER
-"       LINE NUMBERS
-"       MISC
-"        MOUSE
-"        KEYBOARD
-"        SPLIT CONTROLS
-"        SEARCHING
-"        FOLDING
-"   -> Plugins
-"       Pathogen
-"=======:=====================================================================
+" Sections:
+" // mapped key -> section
+" // -subsection
+"
+"  c -> Colors & Fonts
+"  g -> General
+"  u -> VIM UI
+"       - GUI Options
+"       - Window Options
+"       - STATUS bar + COMMAND LINE
+"       - COLUMN RULER
+"       - LINE NUMBERS
+"  m -> MISC
+"       - MOUSE
+"       - KEYBOARD
+"       - SPLIT CONTROLS
+"       - SEARCHING
+"       - FOLDING
+"  p -> Plugins
+"       - Pathogen
+"=============================================================================
 
-" INSTALL PATHOGEN
+" compatibility
+set nocp
+
+" install pathogen
 execute pathogen#infect()
-
+filetype plugin indent on
 "=====================================================================
-" SET COLORS and Fonts
+" set colors and fonts
 "=====================================================================
-    colorscheme jellybeans
+    set t_Co=256
     set background=dark
-    set guifont=Lucida_Console:h10:cDEFAULT
+    colorscheme jellybeans
+
+" chose font by gui
+ if has("gui_running")
+  if has("gui_gtk2")
+    set guifont=Inconsolata\ 12
+      elseif has("gui_macvim")
+    set guifont=Menlo\ Regular:h14
+      elseif has("gui_win32")
+    set guifont=Consolas:h10:w4:cANSI
+  endif
+endif
 
 "=====================================================================
-" GENERAL 
+" GENERAL
 "=====================================================================
 
-set ff=dos
+set ff=unix
 scriptencoding utf-8
 set encoding=utf-8
-syntax enable " enable syntax processing
-cd c:/localdev/m " home diretory
+syntax enable "enable syntax processing
 set shortmess+=I
 
-" **************** 
+" ****************
 " SPACES & TABS
-" **************** 
+" ****************
     set tabstop=4 " number of visual spaces per tab
     set shiftwidth=4
     set softtabstop=4   " number of spaces in tab when editing
     set expandtab " tabs are spaces
-    set listchars=tab:>-,trail:_,nbsp:.
+    set listchars=tab:>-,trail:-
     set list
+
 "=====================================================================
-"VIM UI 
+" VIM UI
 "=====================================================================
 set vb " set error flashing
 set noerrorbells " no beeping
 
-" **************** 
+" ****************
 " go: GUI OPTIONS
 " +: show
 " -: hide
-" **************** 
+" ****************
     set go-=T " toolbar
-    set go-=m " menu 
+    set go-=m " menu
     set go-=l " hide left sroll bar
     set go-=L " hide left scroll bar in split
     set go-=R " hide right scroll bar
     set go-=r " hide right scroll bar in split
 
-" **************** 
-" WINDOW options
-" **************** 
-set lines=50 columns=120 " window initSize
+" ****************
+" WINDOW size
+" ****************
+if has("gui_running")
+  " GUI is running or is about to start.
+  set lines=999 columns=999
+else
+  " This is console Vim.
+  if exists("+lines")
+    set lines=50
+  endif
+  if exists("+columns")
+    set columns=120
+  endif
+endif
+
+" for windows - sets the window to max size
 au GUIEnter * simalt ~x
 
-" **************** 
+" ****************
 " STATUS bar + COMMAND LINE
-" **************** 
-    set cursorline  
+" ****************
+    set cursorline
         highlight CursorLine guibg=gray17
         highlight Visual guibg=#333345
     filetype indent on "load filetype-specific indent files
@@ -92,7 +116,7 @@ au GUIEnter * simalt ~x
 
 if has('statusline')
     set laststatus=2
-    set statusline+=%{fugitive#statusline()}  
+    set statusline+=%{fugitive#statusline()} " git status (courtesy of fugitive)
     " Broken down into easily includeable segments
     set statusline=%<%f\                     " Filename
     set statusline+=%w%h%m%r                 " Options
@@ -102,23 +126,23 @@ if has('statusline')
 endif
 set showcmd " show command line in bottom bar
 set noruler " Show the ruler
-   
-" **************** 
+
+" ****************
 " COLUMN RULER
-" **************** 
+" ****************
     "set colorcolumn=120
-    " To tone down the coloring 
+    " To tone down the coloring
     " highlight ColorColumn  guibg=Gray12
-    
-" **************** 
+
+" ****************
 "LINE NUMBERS
-" **************** 
+" ****************
     set number " show line numbers
     set nuw=5 " number width to 6 makes things look a little neater
 
-" **************** 
+" ****************
 "MISC
-" **************** 
+" ****************
     set lazyredraw " redraw only when we need to
     "set showmatch " highlight matching [{()}]
     set nobackup       "no backup files
@@ -130,7 +154,7 @@ set noruler " Show the ruler
     "set spell " Spell checking on
     set hidden " Allow buffer switching without saving
     set confirm " confirm if you want to save
-    set tabpagemax=15 " Only show 15 page tabs 
+    set tabpagemax=15 " Only show 15 page tabs
     set showmode " Display the current mode
     set linespace=0 " No extra spaces between rows
     set nowrap " Do not wrap long lines
@@ -138,55 +162,56 @@ set noruler " Show the ruler
     " workaround for gvim screen redraw issues
     set ttyscroll=3
 
-" **************** 
+" ****************
 " MOUSE
-" **************** 
+" ****************
     set mouse=a " Automatically enable mouse usage
     set mousehide  " Hide the mouse cursor while typing
 
-" **************** 
-" KEYBOARD
-" **************** 
-    set backspace=indent,eol,start
-    " TABS
-    map  tn :tabn<CR> "next tab
-    map  tp :tabp<CR> "previous tab
-    map  <C-n> <C-t> :tabnew<CR> "new tab
-    map  <C-n> <C-w> :enew<CR> "new window
-    map  <C-s> :w<CR> 
-" **************** 
-" SPLIT CONTROLS
-" **************** 
-    nmap <C-h> <C-w>h
-    nmap <C-l> <C-w>l
-    nmap <C-k> <C-w>k
-    nmap <C-j> <C-w>j
-" **************** 
+" ****************
 " SEARCHING
-" **************** 
+" ****************
     set ic "ignorecase
     set incsearch " search as characters are entered
     set hlsearch " highlight matches
     " turn off search highlight
     nnoremap <leader><space> :nohlsearch<CR>
 
-" **************** 
+" ****************
 " FOLDING
-" **************** 
+" ****************
     set foldenable " enable folding
     set foldlevelstart=10 " open mast folds by default
     set foldnestmax=10 " 10 nested fold max
     set foldmethod=indent " fold based on indent level
 
+" ****************
+" KEYBOARD
+" ****************
+    set backspace=indent,eol,start
+    " TABS
+    map  tn :tabn<CR> "next tab
+    map  tp :tabp<CR> "previous tab
+    map  <C-n> <C-t> :tabnew<CR> "new tab
+    map  <C-n> <C-w> :enew<CR> "new window
+    map  <C-s> :w<CR>
+
+" ****************
+" SPLIT CONTROLS
+" ****************
+    nmap <C-h> <C-w>h
+    nmap <C-l> <C-w>l
+    nmap <C-k> <C-w>k
+    nmap <C-j> <C-w>j
+
 "=====================================================================
 " PlUGINS
 "=====================================================================
+
 " NERD TREE
 autocmd vimenter * NERDTree
 "autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 nnoremap <F5> :NERDTreeToggle<CR>
-
-
 
