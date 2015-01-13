@@ -1,9 +1,20 @@
 [user]
 	name = Christopher MCAdams
 	email = mca.christopher@gmail.com
-[core]
-	autocrlf = input
-[default]
-   push = simple
+[web]
+	browser = chrome
+[push]
+	default = simple
 [alias]
-    git pullr = pull --rebase
+    co = checkout
+    mismatch = ls-files -u
+    del = branch -D
+    remotedel = push origin --delete
+    pullr = pull --rebase
+[help]
+	browser = chrome
+[auto]
+	crlf = true
+[core]
+	fileMode = false
+	autocrlf = true
