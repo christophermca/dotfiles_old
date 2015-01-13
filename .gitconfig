@@ -3,5 +3,7 @@
 	email = mca.christopher@gmail.com
 [core]
 	autocrlf = input
+[default]
+   push = simple
 [alias]
     git pullr = pull --rebase
