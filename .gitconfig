@@ -1,0 +1,22 @@
+[user]
+	name = Christopher McAdams
+	email = cmcadams@cars.com
+[web]
+	browser = chrome
+[push]
+	default = simple
+[alias]
+    co = checkout
+    mismatch = ls-files -u
+    del = branch -D
+    remotedel = push origin --delete
+    pullr = pull --rebase
+[help]
+	browser = chrome
+[auto]
+	crlf = true
+[core]
+	fileMode = false
+	autocrlf = true
+[credential]
+	helper = !'C:\\Users\\cmcadams\\AppData\\Roaming\\GitCredStore\\git-credential-winstore.exe'
