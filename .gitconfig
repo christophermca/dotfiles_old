@@ -1,6 +1,6 @@
 [user]
-	name = Christopher McAdams
-	email = cmcadams@cars.com
+	name = Christopher MCAdams
+	email = mca.christopher@gmail.com
 [web]
 	browser = chrome
 [push]
@@ -18,5 +18,3 @@
 [core]
 	fileMode = false
 	autocrlf = true
-[credential]
-	helper = !'C:\\Users\\cmcadams\\AppData\\Roaming\\GitCredStore\\git-credential-winstore.exe'
