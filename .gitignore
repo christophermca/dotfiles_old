@@ -16,3 +16,6 @@
 #folders
 !.tmuxinator/
 !.vim/
+!.*md
+!.txt
+
