@@ -2,6 +2,9 @@ set -o vi
 EDITOR='vim'
 export EDITOR;
 source ~/.bin/tmuxinator.bash
+source ~/.bash-git-prompt/gitprompt.sh
+
+
 
 # aliases
 alias gst='git status'

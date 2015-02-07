@@ -1,5 +1,4 @@
-"============================================================================
-" Author: Christopher MCA
+"author: Christopher MCA
 " Version: 1.0 09/12/14 09:04
 "
 " Sections:
@@ -35,7 +34,7 @@ filetype plugin indent on
 "=====================================================================
     set t_Co=256
     set background=dark
-    colorscheme jellybeans
+    colorscheme molokai
 
 " chose font by gui
  if has("gui_running")
@@ -205,13 +204,6 @@ set noruler " Show the ruler
     nmap <C-k> <C-w>k
     nmap <C-j> <C-w>j
 
-    let g:tmux_navigator_no_mappings = 1
-
-    nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
-    nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
-    nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
-    nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-    nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
 "=====================================================================
 " PlUGINS
 "=====================================================================
