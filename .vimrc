@@ -34,7 +34,7 @@ filetype plugin indent on
 "=====================================================================
     set t_Co=256
     set background=dark
-    colorscheme molokai
+    colorscheme jellybeans
 
 " chose font by gui
  if has("gui_running")
@@ -52,7 +52,6 @@ endif
 "=====================================================================
 
 set ff=unix
-scriptencoding utf-8
 set encoding=utf-8
 syntax enable "enable syntax processing
 set shortmess+=I

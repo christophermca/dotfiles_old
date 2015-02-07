@@ -4,8 +4,6 @@ export EDITOR;
 source ~/.bin/tmuxinator.bash
 source ~/.bash-git-prompt/gitprompt.sh
 
-
-
 # aliases
 alias gst='git status'
 alias grea='git pull'
