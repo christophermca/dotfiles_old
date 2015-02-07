@@ -73,7 +73,8 @@ set shortmess+=I
 "=====================================================================
 set vb " set error flashing
 set noerrorbells " no beeping
-
+set splitbelow
+set splitright
 " ****************
 " go: GUI OPTIONS
 " +: show
@@ -204,6 +205,13 @@ set noruler " Show the ruler
     nmap <C-k> <C-w>k
     nmap <C-j> <C-w>j
 
+    let g:tmux_navigator_no_mappings = 1
+
+    nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+    nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+    nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+    nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+    nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
 "=====================================================================
 " PlUGINS
 "=====================================================================
