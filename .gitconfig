@@ -14,7 +14,7 @@
 [help]
 	browser = chrome
 [auto]
-	crlf = true
+	crlf = false
 [core]
 	fileMode = false
 	autocrlf = true
