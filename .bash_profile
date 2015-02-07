@@ -1,2 +1,2 @@
-eval "$(rbenv init -)"
-source ~/.bash-git-prompt/gitprompt.sh
+#eval "$(rbenv init -)"
+#source ~/.bash-git-prompt/gitprompt.sh
