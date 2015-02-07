@@ -17,4 +17,4 @@
 	crlf = false
 [core]
 	fileMode = false
-	autocrlf = true
+	autocrlf = input
