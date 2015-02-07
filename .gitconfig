@@ -1,20 +1,23 @@
 [user]
-	name = Christopher MCAdams
-	email = cmcadams@cars.com
+   name = Christopher MCAdams
+   email = cmcadams@cars.com
 [web]
-	browser = chrome
+   browser = chrome
 [push]
-	default = simple
+   default = simple
 [alias]
-    co = checkout
-    mismatch = ls-files -u
-    del = branch -D
-    remotedel = push origin --delete
-    pullr = pull --rebase
+   st = status
+   co = checkout
+   graph= 'git log --oneline --graph --abbrev-commit --pretty=format:"%Cgreen %h %Creset%s %n%an - %cr %n%n"'
+   mismatch = ls-files -u
+   del = branch -D
+   remotedel = push origin --delete
+   pullr = pull --rebase
 [help]
-	browser = chrome
-[auto]
-	crlf = false
+   browser = chrome
 [core]
-	fileMode = false
-	autocrlf = input
+   editory = "vim -f"
+   fileMode = false
+   autocrlf = false
+[credential]
+   helper = osxkeychain
