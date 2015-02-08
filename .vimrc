@@ -10,10 +10,10 @@
 "  u -> VIM UI
 "       - GUI Options
 "       - Window Options
-"       - STATUS bar + COMMAND LINE
-"       - COLUMN RULER
-"       - LINE NUMBERS
-"  m -> MISC
+"       - STATUS ba + COMMAN LIN
+"        COLUMN RULE
+"        LINE NUMBER
+"   -> MIS
 "       - MOUSE
 "       - KEYBOARD
 "       - SPLIT CONTROLS
@@ -29,12 +29,13 @@ set nocp
 " install pathogen
 execute pathogen#infect()
 filetype plugin indent on
+
 "=====================================================================
 " set colors and fonts
 "=====================================================================
     set t_Co=256
     set background=dark
-    colorscheme jellybeans
+    colorscheme distinguished
 
 " chose font by gui
  if has("gui_running")
@@ -208,9 +209,8 @@ set noruler " Show the ruler
 "=====================================================================
 
 " NERD TREE
-autocmd vimenter * NERDTree
+"autocmd vimenter * NERDTree
 "autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-nnoremap <F5> :NERDTreeToggle<CR>
-
+nnoremap <leader><tab>  :NERDTreeToggle<CR>
