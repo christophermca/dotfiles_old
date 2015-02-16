@@ -35,7 +35,7 @@ filetype plugin indent on
 "=====================================================================
     set t_Co=256
     set background=dark
-    colorscheme distinguished
+    colorscheme meta5
 
 " chose font by gui
  if has("gui_running")
@@ -52,10 +52,16 @@ endif
 " GENERAL
 "=====================================================================
 
+"fix slow escape in iterm2
+set ttimeout
+set ttimeoutlen=20
+set notimeout
+
 set ff=unix
 set encoding=utf-8
 syntax enable "enable syntax processing
 set shortmess+=I
+cd ~/localDev/
 
 " ****************
 " SPACES & TABS
@@ -175,7 +181,6 @@ set noruler " Show the ruler
     set incsearch " search as characters are entered
     set hlsearch " highlight matches
     " turn off search highlight
-    nnoremap <leader><space> :nohlsearch<CR>
 
 " ****************
 " FOLDING
@@ -189,20 +194,39 @@ set noruler " Show the ruler
 " KEYBOARD
 " ****************
     set backspace=indent,eol,start
-    " TABS
-    map  tn :tabn<CR> "next tab
-    map  tp :tabp<CR> "previous tab
-    map  <C-n> <C-t> :tabnew<CR> "new tab
-    map  <C-n> <C-w> :enew<CR> "new window
-    map  <C-s> :w<CR>
 
 " ****************
-" SPLIT CONTROLS
+" KEY MAPPINGS
 " ****************
-    nmap <C-h> <C-w>h
-    nmap <C-l> <C-w>l
-    nmap <C-k> <C-w>k
-    nmap <C-j> <C-w>j
+   " ****************
+   " GENERAL
+   " ****************
+   " ****************
+   " SEARCHING
+   " ****************
+       nnoremap <leader><space> :nohlsearch<CR>
+
+   " ****************
+   " KEYBOARD
+   " ****************
+       map  tn :tabn<CR> "next tab
+       map  tp :tabp<CR> "previous tab
+       map  <C-n> <C-t> :tabnew<CR> "new tab
+       map  <C-n> <C-w> :enew<CR> "new window
+       map  <C-s> :w<CR>
+
+   " ****************
+   " SPLIT CONTROLS
+   " ****************
+       nmap <C-h> <C-w>h
+       nmap <C-l> <C-w>l
+       nmap <C-k> <C-w>k
+       nmap <C-j> <C-w>j
+
+   " ****************
+   " NERDTREE
+   " ****************
+       map <leader><tab>  :NERDTreeToggle<CR>
 
 "=====================================================================
 " PlUGINS
@@ -213,4 +237,3 @@ set noruler " Show the ruler
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-nnoremap <leader><tab>  :NERDTreeToggle<CR>

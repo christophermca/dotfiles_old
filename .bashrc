@@ -1,6 +1,3 @@
-source ~/.bin/tmuxinator.bash
-source ~/.bash-git-prompt/gitprompt.sh
-
 # aliases
 alias gst='git status'
 alias grea='git pull'
@@ -11,4 +8,6 @@ alias graph='git log --oneline --graph --abbrev-commit --pretty=format:"%Cgreen 
 alias reb='git rebase'
 alias lcd='cd c:/localdev/'
 alias rebc='git rebase --continue'
-
+alias ngxS='sudo nginx'
+alias ngxK='sudo nginx -s stop'
+alias wcslog='tail -f -n 1000 /Applications/Oracle/WebCenter/Sites/11gR1/Sites/11.1.1.8.0/logs/sites.log'
