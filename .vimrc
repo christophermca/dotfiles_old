@@ -25,6 +25,8 @@
 
 " compatibility
 set nocp
+filetype on
+
 " install pathogen
 execute pathogen#infect()
 filetype plugin indent on
@@ -231,9 +233,18 @@ set noruler " Show the ruler
    " ****************
        map <leader><tab>  :NERDTreeToggle<CR>
 
+   " ****************
+   " CTRL P
+   " ****************
+      let g:ctrlp_map = '<c-p>'
+      let g:ctrlp_cmd = 'CtrlP ./'
+
 "=====================================================================
 " PlUGINS
 "=====================================================================
+
+" CTRL P
+set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 " NERD TREE
 "autocmd vimenter * NERDTree
