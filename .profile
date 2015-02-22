@@ -1,4 +1,3 @@
-set -o vi
 export PATH="/usr/local/bin:$HOME/.rbenv/bin:$PATH"
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
 

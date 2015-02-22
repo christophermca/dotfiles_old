@@ -25,7 +25,6 @@
 
 " compatibility
 set nocp
-
 " install pathogen
 execute pathogen#infect()
 filetype plugin indent on
@@ -201,6 +200,10 @@ set noruler " Show the ruler
    " ****************
    " GENERAL
    " ****************
+      nmap <tab>h :vert res -10<CR>
+      nmap <tab>l :vert res +10<CR>
+      nmap <tab>k :resize +10<CR>
+      nmap <tab>j :resize -10<CR>
    " ****************
    " SEARCHING
    " ****************
