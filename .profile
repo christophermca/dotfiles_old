@@ -1,5 +1,5 @@
-export PATH="$HOME/.rbenv/bin:$PATH"
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
+export PATH="$JAVA_HOME:usr/local/bin:$PATH"
 
 EDITOR='vim'
 export EDITOR;
