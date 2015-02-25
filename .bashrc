@@ -1,3 +1,7 @@
+# Browser path aliases for Karma-runner
+alias Chrome="/Applications/Google\ Chrome.app"
+alias Firefox="/Applications/FirefoxDeveloperEdition.app"
+
 # aliases
 alias gst='git status'
 alias grea='git pull'

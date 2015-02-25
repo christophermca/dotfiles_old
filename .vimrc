@@ -63,7 +63,7 @@ set encoding=utf-8
 syntax enable "enable syntax processing
 set shortmess+=I
 cd ~/localDev/
-
+set clipboard=unnamed
 " ****************
 " SPACES & TABS
 " ****************
@@ -206,6 +206,7 @@ set noruler " Show the ruler
       nmap <tab>l :vert res +10<CR>
       nmap <tab>k :resize +10<CR>
       nmap <tab>j :resize -10<CR>
+      "map <C-c> y:e ~/clipsongzboard<CR>P:w !pbcopy<CR><CR>:bdelete!<CR>
    " ****************
    " SEARCHING
    " ****************
