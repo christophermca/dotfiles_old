@@ -63,7 +63,7 @@ set encoding=utf-8
 syntax enable "enable syntax processing
 set shortmess+=I
 cd ~/localDev/
-set clipboard=unnamed
+"set clipboard=unnamed
 " ****************
 " SPACES & TABS
 " ****************
