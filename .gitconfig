@@ -8,11 +8,12 @@
 [alias]
    st = status
    co = checkout
-   graph= 'git log --oneline --graph --abbrev-commit --pretty=format:"%Cgreen %h %Creset%s %n%an - %cr %n%n"'
+   graph = 'git log --oneline --graph --abbrev-commit --pretty=format:"%Cgreen %h %Creset%s %n%an - %cr %n%n"'
    mismatch = ls-files -u
    del = branch -D
    remotedel = push origin --delete
    pullr = pull --rebase
+   b = branch
 [help]
    browser = chrome
 [core]

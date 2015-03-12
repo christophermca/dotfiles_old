@@ -23,12 +23,11 @@
 "       - Pathogen
 "=============================================================================
 
+source ~/.vundle
+
 " compatibility
 set nocp
 filetype on
-
-" install pathogen
-execute pathogen#infect()
 filetype plugin indent on
 
 "=====================================================================
