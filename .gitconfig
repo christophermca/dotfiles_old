@@ -20,5 +20,6 @@
    editory = "vim -f"
    fileMode = false
    autocrlf = false
+	excludesfile = /Users/chrismcadams/.gitignore_global
 [credential]
    helper = osxkeychain

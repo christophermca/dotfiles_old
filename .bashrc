@@ -11,3 +11,4 @@ alias rebc='git rebase --continue'
 alias ngxS='sudo nginx'
 alias ngxK='sudo nginx -s stop'
 alias wcslog='tail -f -n 1000 /Applications/Oracle/WebCenter/Sites/11gR1/Sites/11.1.1.8.0/logs/sites.log'
+alias copy="tr -d '\n' | pbcopy"
