@@ -21,6 +21,8 @@ Plugin 'gmarik/Vundle.vim'
    Plugin 'tpope/vim-surround'
    Plugin 'guns/xterm-color-table'
    Plugin 'vim-scripts/vim-stylus'
+   Plugin 'christophermca/meta5'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
