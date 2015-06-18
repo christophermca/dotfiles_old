@@ -19,7 +19,7 @@ Plugin 'gmarik/Vundle.vim'
    Plugin 'jelera/vim-javascript-syntax'
    Plugin 'vim-ruby/vim-ruby'
    Plugin 'tpope/vim-surround'
-   Plugin 'guns/xterm-color-table'
+   Plugin 'guns/xterm-color-table.vim'
    Plugin 'vim-scripts/vim-stylus'
    Plugin 'christophermca/meta5'
 
