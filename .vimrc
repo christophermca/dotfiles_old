@@ -66,11 +66,11 @@ set clipboard=unnamed
 " ****************
 " SPACES & TABS
 " ****************
-    set tabstop=3 " number of visual spaces per tab
-    set shiftwidth=3
-    set softtabstop=3   " number of spaces in tab when editing
+    set tabstop=4 " number of visual spaces per tab
+    set shiftwidth=4
+    set softtabstop=4   " number of spaces in tab when editing
     set expandtab " tabs are spaces
-    set listchars=tab:>-,trail:-
+    set listchars=tab:»¬,trail:·
     set list
 
 "=====================================================================
@@ -201,6 +201,7 @@ set noruler " Show the ruler
    " ****************
    " GENERAL
    " ****************
+      set autoread
       nmap <tab>h :vert res -10<CR>
       nmap <tab>l :vert res +10<CR>
       nmap <tab>k :resize +10<CR>
