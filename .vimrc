@@ -63,15 +63,29 @@ syntax enable "enable syntax processing
 set shortmess+=I
 cd ~/localDev/
 set clipboard=unnamed
+
 " ****************
 " SPACES & TABS
 " ****************
-    set tabstop=4 " number of visual spaces per tab
-    set shiftwidth=4
-    set softtabstop=4   " number of spaces in tab when editing
+    set tabstop=3 " number of visual spaces per tab
+    set shiftwidth=3
+    set softtabstop=3   " number of spaces in tab when editing
     set expandtab " tabs are spaces
     set listchars=tab:»¬,trail:·
     set list
+    "
+" ****************
+" SPECIFIC TABS VIA FILETYPE
+" ****************
+
+" HTML
+autocmd FileType html setlocal shiftwidth=4 tabstop=4
+
+" Stylus
+autocmd FileType styl setlocal shiftwidth=4 tabstop=4
+
+" Ruby
+autocmd FileType styl setlocal shiftwidth=2 tabstop=2
 
 "=====================================================================
 " VIM UI
