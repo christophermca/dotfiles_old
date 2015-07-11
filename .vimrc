@@ -1,5 +1,5 @@
 "author: Christopher MCA
-" Version: 1.0 09/12/14 09:04
+" Version: 1.0
 "
 " Sections:
 " // mapped key -> section
@@ -262,7 +262,12 @@ set noruler " Show the ruler
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 " NERD TREE
-"autocmd vimenter * NERDTree
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+"Open NERDTree at startup
+"   autocmd vimenter * NERDTree
+
+"Open NERDTree at if vim start with empth buffer
+"  autocmd StdinReadPre * let s:std_in=1
+"  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+"If NERDtree is the only buffer left open and you quit vim. Vim will close
+   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
