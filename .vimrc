@@ -73,19 +73,6 @@ set clipboard=unnamed
     set expandtab " tabs are spaces
     set listchars=tab:»¬,trail:·
     set list
-    "
-" ****************
-" SPECIFIC TABS VIA FILETYPE
-" ****************
-
-" HTML
-autocmd FileType html setlocal shiftwidth=4 tabstop=4
-
-" Stylus
-autocmd FileType styl setlocal shiftwidth=4 tabstop=4
-
-" Ruby
-autocmd FileType styl setlocal shiftwidth=2 tabstop=2
 
 "=====================================================================
 " VIM UI
