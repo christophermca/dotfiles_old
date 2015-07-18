@@ -56,6 +56,7 @@ set shortmess+=I
 set clipboard=unnamed
 filetype plugin indent on
 syntax enable "enable syntax processing
+autocmd! bufwritepost .vimrc source %
 
 "fix slow escape in iterm2
 set ttimeout
@@ -145,7 +146,6 @@ if has('statusline')
    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
 endif
 
-
 " ****************
 " COLUMN RULER
 " ****************
@@ -158,7 +158,6 @@ endif
 " ****************
 set number " show line numbers
 set nuw=5 " number width to 6 makes things look a little neater
-
 
 " ****************
 " MOUSE
@@ -211,8 +210,7 @@ set backspace=indent,eol,start
    map  <C-n><C-t> :tabnew<CR> "new tab
    map  <C-n> <C-w> :enew<CR> "new window
    nnoremap  <C-s> <ESC>:up<CR>
-   map  <leader>r :source $MYVIMRC<CR>
-   nnoremap <leader>sv :vsplit $MYVIMRC<CR>
+   nnoremap <leader>vr :vsplit $MYVIMRC<CR>
 
    " ****************
    " SPLIT CONTROLS

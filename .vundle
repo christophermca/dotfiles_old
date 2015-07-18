@@ -11,7 +11,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Keep Plugin commands between vundle#begin/end.
-   Plugin 'scrooloose/nerdtree'
+"   Plugin 'scrooloose/nerdtree'
    Plugin 'tpope/vim-fugitive'
    Plugin 'rking/ag.vim'
    Plugin 'kien/ctrlp.vim'
@@ -22,6 +22,7 @@ Plugin 'gmarik/Vundle.vim'
    Plugin 'guns/xterm-color-table.vim'
    Plugin 'vim-scripts/vim-stylus'
    Plugin 'christophermca/meta5'
+   Plugin 'kchmck/vim-coffee-script'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
