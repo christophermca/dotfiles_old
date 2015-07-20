@@ -224,6 +224,7 @@ set backspace=indent,eol,start
    " NERDTREE
    " ****************
    map <leader><tab>  :NERDTreeToggle<CR>
+   "map <leader><tab>  :Lexplore<CR>
 
    " ****************
    " CTRL P
