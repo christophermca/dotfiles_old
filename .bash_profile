@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Load .profile, containing login, non-bash related initializations.
 source ~/.profile
 
@@ -8,3 +10,6 @@ fi
 
 # Load .bashrc, containing non-login related bash initializations.
 source ~/.bashrc
+
+# Load .tmuxinator, containing tmuxinator logic
+source ~/bin/tmuxinator.bash

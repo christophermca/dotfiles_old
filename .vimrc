@@ -43,20 +43,26 @@ if has("gui_running")
       set guifont=Consolas:h10:w4:cANSI
    endif
 endif
-
 "=====================================================================
 " GENERAL
 "=====================================================================
+cd ~/Repos
+
 set ff=unix
 set encoding=utf-8
-
+let g:vim_json_syntax_conceal = 0
 set autoread
-cd ~/localDev/
-set shortmess+=I
 set clipboard=unnamed
+set shortmess+=I
+
 filetype plugin indent on
 syntax enable "enable syntax processing
+
+"when saving vimrc reload the source
 autocmd! bufwritepost .vimrc source %
+
+au BufRead,BufNewFile *.cson set ft=coffee
+au BufRead,BufNewFile *.json set filetype=json
 
 "fix slow escape in iterm2
 set ttimeout
@@ -90,7 +96,6 @@ set noswapfile     "no swap files
 set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
 set virtualedit=onemore " Allow for cursor beyond last character
 set history=1000 " Store a ton of history (default is 20)
-"set spell " Spell checking on
 set hidden " Allow buffer switching without saving
 set confirm " confirm if you want to save
 set tabpagemax=15 " Only show 15 page tabs
@@ -209,7 +214,7 @@ set backspace=indent,eol,start
    " ****************
    map  <C-n><C-t> :tabnew<CR> "new tab
    map  <C-n> <C-w> :enew<CR> "new window
-   nnoremap  <C-s> <ESC>:up<CR>
+   nnoremap  <leader>s :w<CR>
    nnoremap <leader>vr :vsplit $MYVIMRC<CR>
 
    " ****************
@@ -231,7 +236,7 @@ set backspace=indent,eol,start
    " ****************
    let g:ctrlp_map = '<c-p>'
    let g:ctrlp_cmd = 'CtrlP ./'
-
+   let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
 "=====================================================================
 " PlUGINS
 "=====================================================================
