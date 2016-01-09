@@ -5,6 +5,7 @@ export EDITOR;
 set -o vi
 
 # $PATH
+export PATH="./node_modules/.bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
 # rbenv
@@ -19,3 +20,5 @@ fi
 if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
    source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
 fi
+
+

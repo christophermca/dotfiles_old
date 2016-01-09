@@ -13,3 +13,7 @@ alias ngxS='sudo nginx'
 alias ngxK='sudo nginx -s stop'
 alias ngxR='sudo nginx -s reload'
 alias copy="tr -d '\n' | pbcopy"
+
+if [ -f "/Applications/Karabiner.app/Contents/Library/bin/karabiner" ]; then
+   alias karabiner='/Applications/Karabiner.app/Contents/Library/bin/karabiner'
+fi

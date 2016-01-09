@@ -1,24 +1,21 @@
 "author: Christopher MCA
 " Version: 1.0
 " Sections:
-" // mapped key -> section
-" // -subsection
 "
-"  c -> Colors & Fonts
-"  g -> General
-"  u -> VIM UI
+"  Colors & Fonts
+"  General
+"  VIM UI
 "       - GUI Options
 "       - Window Options
-"       - STATUS ba + COMMAN LIN
+"       - STATUS bar + COMMAN LINE
 "        COLUMN RULE
 "        LINE NUMBER
-"   -> MIS
 "       - MOUSE
 "       - KEYBOARD
 "       - SPLIT CONTROLS
 "       - SEARCHING
 "       - FOLDING
-"  p -> Plugins
+"  Plugins
 "       - Pathogen
 "=============================================================================
 source ~/.vundle
@@ -27,18 +24,19 @@ source ~/.vundle
 set nocp
 
 "=====================================================================
-" set colors and fonts
+" COLORS AND FONTS
 "=====================================================================
-set t_Co=256
+set t_Co=260
 set background=dark
 colorscheme meta5
+"set clipboard=unnamed
 
 " chose font by gui
 if has("gui_running")
    if has("gui_gtk2")
       set guifont=Inconsolata\ 12
    elseif has("gui_macvim")
-      set guifont=Menlo\ Regular:h14
+      set guifont=Menlo\ Regular:h12
    elseif has("gui_win32")
       set guifont=Consolas:h10:w4:cANSI
    endif
@@ -46,20 +44,20 @@ endif
 "=====================================================================
 " GENERAL
 "=====================================================================
-cd ~/Repos
-
+"cd ~/Repos
 set ff=unix
 set encoding=utf-8
-let g:vim_json_syntax_conceal = 0
-set autoread
-set clipboard=unnamed
+let g:vim_json_syntax_conceal=0
 set shortmess+=I
+set tw=80
+set formatoptions=tcq
 
 filetype plugin indent on
+set autoindent
 syntax enable "enable syntax processing
 
 "when saving vimrc reload the source
-autocmd! bufwritepost .vimrc source %
+"autocmd! bufwritepost .vimrc source %
 
 au BufRead,BufNewFile *.cson set ft=coffee
 au BufRead,BufNewFile *.json set filetype=json
@@ -69,30 +67,23 @@ set ttimeout
 set notimeout
 set ttimeoutlen=20
 
-" ****************
-" SPACES & TABS
-" ****************
-set tabstop=3 " number of visual spaces per tab
-set shiftwidth=3
-set softtabstop=3   " number of spaces in tab when editing
-set expandtab " tabs are spaces
-
-"show hidden chars
-set list
-set listchars=tab:»¬,trail:·
-
 "=====================================================================
 " VIM UI
 "=====================================================================
+" Error notification
 set vb " set error flashing
 set noerrorbells " no beeping
+
 set splitbelow
 set splitright
-set cursorline
-set lazyredraw " redraw only when we need to
+
+" Don't create backups
 set nobackup       "no backup files
 set nowritebackup  "only in case you don't want a backup file while editing
 set noswapfile     "no swap files
+
+set cursorline
+set lazyredraw " redraw only when we need to
 set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
 set virtualedit=onemore " Allow for cursor beyond last character
 set history=1000 " Store a ton of history (default is 20)
@@ -103,9 +94,8 @@ set showmode " Display the current mode
 set linespace=0 " No extra spaces between rows
 set nowrap " Do not wrap long lines
 set scrolloff=3 " Minimum lines to keep above and below cursor
-
-" workaround for gvim screen redraw issues
-set ttyscroll=3
+set ttyscroll=3 " workaround for gvim screen redraw issues
+au FocusGained,BufEnter * :silent! checktime
 
 " ****************
 " go: GUI OPTIONS
@@ -120,6 +110,18 @@ set go-=R " hide right scroll bar
 set go-=r " hide right scroll bar in split
 
 " ****************
+" SPACES & TABS
+" ****************
+set tabstop=3 " number of visual spaces per tab
+set shiftwidth=3
+set softtabstop=3   " number of spaces in tab when editing
+set expandtab " tabs are spaces
+
+"show hidden chars
+set list
+set listchars=tab:»¬,trail:·
+
+" ****************
 " WINDOW size
 " ****************
 if has("gui_running")
@@ -128,14 +130,16 @@ if has("gui_running")
 endif
 
 " for windows - sets the window to max size
-au GUIEnter * simalt ~x
+if has("gui_running")
+   if has("gui_win32")
+      au GUIEnter * simalt ~x
+   endif
+endif
 
 " ****************
-" STATUS bar + COMMAND LINE
+" STATUS BAR + COMMAND LINE
 " ****************
-
 set showcmd " show command line in bottom bar
-set noruler " Hide the ruler
 set wildmenu  " visual autocomplete for command menu
 
 highlight Visual guibg=#333345
@@ -143,12 +147,13 @@ highlight Visual guibg=#333345
 if has('statusline')
    set laststatus=2
    set statusline+=%{fugitive#statusline()} " git status (courtesy of fugitive)
+
    " Broken down into easily includeable segments
-   set statusline=%<%f\                     " Filename
-   set statusline+=%w%h%m%r                 " Options
-   set statusline+=\ [%{&ff}/%Y]            " Filetype
-   set statusline+=\ [%{getcwd()}]          " Current dir
-   set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+   set statusline=%f%<\                       " Filename
+   set statusline+=[%{&ff}/%Y]\               " Filetype
+   set statusline+=\[%{getcwd()}]%=           " Current dir
+   set statusline+=%w%h%m%r\                  " Options
+   set statusline+=%<%-14(%l,%c%V%)\ %p%%      " Right aligned file nav info ruler
 endif
 
 " ****************
@@ -174,6 +179,7 @@ set mousehide  " Hide the mouse cursor while typing
 " SEARCHING
 " ****************
 set ic "ignorecase
+set smartcase
 set incsearch " search as characters are entered
 set hlsearch " highlight matches
 
@@ -181,6 +187,7 @@ set hlsearch " highlight matches
 " FOLDING
 " ****************
 set foldenable " enable folding
+set foldlevel=0
 set foldlevelstart=10 " open mast folds by default
 set foldnestmax=10 " 10 nested fold max
 set foldmethod=indent " fold based on indent level
@@ -188,69 +195,134 @@ set foldmethod=indent " fold based on indent level
 " ****************
 " KEYBOARD
 " ****************
-set backspace=indent,eol,start
+   " ____GENERAL
+   set backspace=indent,eol,start
 
-" ****************
-" KEY MAPPINGS
-" ****************
-
-   " ****************
-   " GENERAL
-   " ****************
-
-   "Resizing
+   " ____Resizing
    nmap <tab>h :vert res -10<CR>
    nmap <tab>l :vert res +10<CR>
    nmap <tab>k :resize +10<CR>
    nmap <tab>j :resize -10<CR>
 
-   " ****************
-   " SEARCHING
-   " ****************
-   nnoremap <leader><space> :nohlsearch<CR>
+   " ____Leader mappings
+   "leader
+   map <Space> <Nop>
+   let mapleader = "\<Space>"
 
-   " ****************
-   " KEYBOARD
-   " ****************
-   map  <C-n><C-t> :tabnew<CR> "new tab
-   map  <C-n> <C-w> :enew<CR> "new window
-   nnoremap  <leader>s :w<CR>
-   nnoremap <leader>vr :vsplit $MYVIMRC<CR>
+   "Tab shortcuts
+      "new
+      nmap<leader>t :tabnew<CR>
 
-   " ****************
-   " SPLIT CONTROLS
-   " ****************
+      "close tab
+      nmap<leader>xt :tabc<CR>
+
+   "increment/decrement
+   nmap <leader>a <c-a>
+   nmap <leader>x <c-x>
+
+   "view and select buffers
+   nnoremap <leader>l :ls<CR>:b<space>
+
+   "quick change directory
+   "nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+
+   "JSON prettyify and validate
+   map <leader>jn :%!python3 -m json.tool<CR>
+
+   map <leader>de :'<,'>!python -m base64 -d<CR>
+
+   " searching
+   nnoremap \<leader> :nohlsearch<CR>
+
+      " ****************
+      " OS copy/paste
+      " ****************
+
+      "copy/paste to system clipboard
+      vmap <leader>y "+y
+      vmap <leader>yy "+yy
+      vmap <leader>Y "+Y
+      vmap <leader>yw "+yw
+      vmap <leader>yb "+yb
+      vmap <leader>D "+D
+      vmap <leader>p "+p
+      vmap <leader>P "+P
+
+      nmap <leader>y "+y<cr>
+      nmap <leader>yy "+yy<cr>
+      nmap <leader>Y "+Y<cr>
+      nmap <leader>yw "+yw<cr>
+      nmap <leader>yb "+yb<cr>
+      nmap <leader>D "+D<cr>
+      nmap <leader>p "+p<cr>
+      nmap <leader>P "+P<cr>
+
+      "AG - the silver searcher
+      map <leader>ag :Ag<space>
+
+      "save
+      map <Leader>w :w<CR>
+
+      "save+ reload vimrc
+      map <Leader>ws :w<CR> :so $MYVIMRC<CR>
+
+      "vimrc
+      nmap <leader>vr :vsplit $MYVIMRC<CR>
+
+   " Coffee
+      " Compile
+      nmap <leader>cc :CoffeeCompile<CR>
+
+   " ____SPLIT CONTROLS
    nmap <C-h> <C-w>h
    nmap <C-l> <C-w>l
    nmap <C-k> <C-w>k
    nmap <C-j> <C-w>j
 
-   " ****************
-   " NERDTREE
-   " ****************
-   map <leader><tab>  :NERDTreeToggle<CR>
-   "map <leader><tab>  :Lexplore<CR>
+   " ____Project tray
+      "map -  :NERDTreeToggle<CR>
+      "map -  :Explore <CR>
 
-   " ****************
    " CTRL P
-   " ****************
    let g:ctrlp_map = '<c-p>'
    let g:ctrlp_cmd = 'CtrlP ./'
    let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
+
+
+
+   " NETRW
+   "let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+   "let g:netrw_preview   = 1
+   "let g:netrw_liststyle = 3
+   "let g:netrw_banner=0
+   "let g:netrw_localrmdir='rm -r'
+   "set autochdir
+
+
 "=====================================================================
 " PlUGINS
 "=====================================================================
 
-" CTRL P
-set runtimepath^=~/.vim/bundle/ctrlp.vim
+   " CTRL P
+   set runtimepath^=~/.vim/bundle/ctrlp.vim
 
-" NERD TREE
-"Open NERDTree at startup
-"   autocmd vimenter * NERDTree
+   " NERD TREE
+   "Open NERDTree at startup
+   "   autocmd vimenter * NERDTree
 
-"Open NERDTree at if vim start with empth buffer
-"  autocmd StdinReadPre * let s:std_in=1
-"  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+   "Open NERDTree at if vim start with empth buffer
+   "  autocmd StdinReadPre * let s:std_in=1
+   "  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-"If NERDtree is the only buffer left open and you quit vim. Vim will close
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+   "If NERDtree is the only buffer left open and you quit vim. Vim will close
+
+   "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&
+      "b:NERDTreeType == \"primary") | q | endif
+
+"=====================================================================
+" MCA-HOMEGROWN
+"=====================================================================
+function! MultiChange(toinput)
+   let fromselectedinput = @/
+   substitute(%, l:fromselectedinput, a:toinput, "g")
+endfunction
