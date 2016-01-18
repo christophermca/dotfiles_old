@@ -44,13 +44,14 @@ endif
 "=====================================================================
 " GENERAL
 "=====================================================================
-"cd ~/Repos
+cd ~/Repos
 set ff=unix
 set encoding=utf-8
 let g:vim_json_syntax_conceal=0
 set shortmess+=I
 set tw=80
 set formatoptions=tcq
+set sua=".coffee,.js,.styl"
 
 filetype plugin indent on
 set autoindent
@@ -195,7 +196,12 @@ set foldmethod=indent " fold based on indent level
 " ****************
 " KEYBOARD
 " ****************
-   " ____GENERAL
+   " ____Leader mappings
+   "Leader
+   nnoremap <Space> <Nop>
+   map <Space> \
+
+   "___GENERAL
    set backspace=indent,eol,start
 
    " ____Resizing
@@ -204,61 +210,57 @@ set foldmethod=indent " fold based on indent level
    nmap <tab>k :resize +10<CR>
    nmap <tab>j :resize -10<CR>
 
-   " ____Leader mappings
-   "leader
-   map <Space> <Nop>
-   let mapleader = "\<Space>"
 
    "Tab shortcuts
       "new
-      nmap<leader>t :tabnew<CR>
+      nmap<Leader>t :tabnew<CR>
 
       "close tab
-      nmap<leader>xt :tabc<CR>
+      nmap<Leader>xt :tabc<CR>
 
    "increment/decrement
-   nmap <leader>a <c-a>
-   nmap <leader>x <c-x>
+   nmap <Leader>a <c-a>
+   nmap <Leader>x <c-x>
 
    "view and select buffers
-   nnoremap <leader>l :ls<CR>:b<space>
+   nnoremap <Leader>l :ls<CR>:b<space>
 
    "quick change directory
-   "nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+   "nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
 
    "JSON prettyify and validate
-   map <leader>jn :%!python3 -m json.tool<CR>
+   map <Leader>jn :%!python3 -m json.tool<CR>
 
-   map <leader>de :'<,'>!python -m base64 -d<CR>
+   map <Leader>de :'<,'>!python -m base64 -d<CR>
 
    " searching
-   nnoremap \<leader> :nohlsearch<CR>
+   nnoremap \<Leader> :nohlsearch<CR>
 
       " ****************
       " OS copy/paste
       " ****************
 
       "copy/paste to system clipboard
-      vmap <leader>y "+y
-      vmap <leader>yy "+yy
-      vmap <leader>Y "+Y
-      vmap <leader>yw "+yw
-      vmap <leader>yb "+yb
-      vmap <leader>D "+D
-      vmap <leader>p "+p
-      vmap <leader>P "+P
+      vmap <Leader>y "+y
+      vmap <Leader>yy "+yy
+      vmap <Leader>Y "+Y
+      vmap <Leader>yw "+yw
+      vmap <Leader>yb "+yb
+      vmap <Leader>D "+D
+      vmap <Leader>p "+p
+      vmap <Leader>P "+P
 
-      nmap <leader>y "+y<cr>
-      nmap <leader>yy "+yy<cr>
-      nmap <leader>Y "+Y<cr>
-      nmap <leader>yw "+yw<cr>
-      nmap <leader>yb "+yb<cr>
-      nmap <leader>D "+D<cr>
-      nmap <leader>p "+p<cr>
-      nmap <leader>P "+P<cr>
+      nmap <Leader>y "+y<cr>
+      nmap <Leader>yy "+yy<cr>
+      nmap <Leader>Y "+Y<cr>
+      nmap <Leader>yw "+yw<cr>
+      nmap <Leader>yb "+yb<cr>
+      nmap <Leader>D "+D<cr>
+      nmap <Leader>p "+p<cr>
+      nmap <Leader>P "+P<cr>
 
       "AG - the silver searcher
-      map <leader>ag :Ag<space>
+      map <Leader>ag :Ag<Space>
 
       "save
       map <Leader>w :w<CR>
@@ -267,11 +269,11 @@ set foldmethod=indent " fold based on indent level
       map <Leader>ws :w<CR> :so $MYVIMRC<CR>
 
       "vimrc
-      nmap <leader>vr :vsplit $MYVIMRC<CR>
+      nmap <Leader>vr :vsplit $MYVIMRC<CR>
 
    " Coffee
       " Compile
-      nmap <leader>cc :CoffeeCompile<CR>
+      nmap <Leader>cc :CoffeeCompile<CR>
 
    " ____SPLIT CONTROLS
    nmap <C-h> <C-w>h
