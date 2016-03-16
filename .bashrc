@@ -30,6 +30,10 @@ function bashrc() {
          copy  ............... copies output
          restartBash  ........ restarts bash from bash_profile as source
 
+      tmux
+      --------------
+         attach  ............... runs tmux attach
+
    ";
 };
 
@@ -48,6 +52,20 @@ alias ngxK='sudo nginx -s stop'
 alias ngxR='sudo nginx -s reload'
 alias copy="tr -d '\n' | pbcopy"
 alias restartBash="source ~/.bash_profile"
+
+attach() {
+  SESSION=$1
+  if [ $# -eq 0 ]
+  then
+    tmux ls
+    ASK="\n What session would you like to attach?"
+    echo -n ASK
+    read $SESSION
+  fi
+
+   $(tmux attach -t $SESSION)
+}
+
 
 if [ -f "/Applications/Karabiner.app/Contents/Library/bin/karabiner" ]; then
    alias karabiner='/Applications/Karabiner.app/Contents/Library/bin/karabiner'

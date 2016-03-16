@@ -2,7 +2,6 @@
 HISTCONTROL=ignoreboth
 EDITOR='vim'
 export EDITOR;
-set -o vi
 
 # $PATH
 export PATH="./node_modules/.bin:$PATH"

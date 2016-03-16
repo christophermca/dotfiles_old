@@ -1,6 +1,6 @@
 [user]
    name = Christopher MCAdams
-   email = mca.christopher@gmail.com
+   email = cmcadams@groupon.com
 [web]
    browser = chrome
 [push]
@@ -11,15 +11,21 @@
    graph = 'git log --oneline --graph --abbrev-commit --pretty=format:"%Cgreen %h %Creset%s %n%an - %cr %n%n"'
    mismatch = ls-files -u
    del = branch -D
-   remotedel = push origin --delete
+   remdel = push origin --delete
    pullr = pull --rebase
    b = branch
 [help]
    browser = chrome
 [core]
-   editory = "vim -f"
+	editory = vim
    fileMode = false
-   autocrlf = false
+	autocrlf = input
    excludesfile = /Users/chrismcadams/.gitignore_global
+	gitproxy = gitproxy for github
+	safecrlf = true
 [credential]
    helper = osxkeychain
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = true
