@@ -1,4 +1,4 @@
-"author: Christopher MCA
+" Author: Christopher MCA
 " Version: 1.0
 " Sections:
 "
@@ -11,7 +11,7 @@
 "       - COLUMN RULE
 "       - LINE NUMBER
 "       - MOUSE
-"       - KEYBOARD
+"       - KEYBOARD_AND_MAPPING
 "       - SPLIT CONTROLS
 "       - SEARCHING
 "       - FOLDING
@@ -31,7 +31,7 @@ set background=dark
 colorscheme meta5
 "set clipboard=unnamed
 
-" chose font by gui
+" choose font by gui
 if has("gui_running")
    if has("gui_gtk2")
       set guifont=Inconsolata\ 12
@@ -41,6 +41,7 @@ if has("gui_running")
       set guifont=Consolas:h10:w4:cANSI
    endif
 endif
+
 "=====================================================================
 " GENERAL
 "=====================================================================
@@ -50,24 +51,25 @@ let g:vim_json_syntax_conceal=0
 set shortmess+=I
 set tw=80
 set formatoptions=tcq
+set backspace=indent,eol,start
 
 " Node suffix help
-set sua=.coffee,.js,.styl
+set sua=.coffee,.js,.styl,.css
 
 filetype plugin indent on
 set autoindent
-syntax enable "enable syntax processing
+syntax enable " enable syntax processing
 
 "when saving vimrc reload the source
-augroup reload_vimrc " {
+augroup reload_vimrc
     autocmd!
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END " }
+augroup END
 
 au BufRead,BufNewFile *.cson set ft=coffee
 au BufRead,BufNewFile *.json set filetype=json
 
-"fix slow escape in iterm2
+" fix slow escape in iterm2
 set ttimeout
 set notimeout
 set ttimeoutlen=20
@@ -83,23 +85,23 @@ set splitbelow
 set splitright
 
 " Don't create backups
-set nobackup       "no backup files
-set nowritebackup  "only in case you don't want a backup file while editing
-set noswapfile     "no swap files
+set nobackup       " No backup files
+set nowritebackup  " Only in case you don't want a backup file while editing
+set noswapfile     " No swap files
 
 set cursorline
-set lazyredraw " redraw only when we need to
+set lazyredraw " Redraw only when we need to
 set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
 set virtualedit=onemore " Allow for cursor beyond last character
 set history=1000 " Store a ton of history (default is 20)
 set hidden " Allow buffer switching without saving
-set confirm " confirm if you want to save
+set confirm " Confirm if you want to save
 set tabpagemax=15 " Only show 15 page tabs
 set showmode " Display the current mode
 set linespace=0 " No extra spaces between rows
 set nowrap " Do not wrap long lines
 set scrolloff=3 " Minimum lines to keep above and below cursor
-set ttyscroll=3 " workaround for gvim screen redraw issues
+set ttyscroll=3 " Workaround for gvim screen redraw issues
 au FocusGained,BufEnter * :silent! checktime
 
 " ****************
@@ -107,34 +109,34 @@ au FocusGained,BufEnter * :silent! checktime
 " +: show
 " -: hide
 " ****************
-set go-=T " toolbar
-set go-=m " menu
-set go-=l " hide left sroll bar
-set go-=L " hide left scroll bar in split
-set go-=R " hide right scroll bar
-set go-=r " hide right scroll bar in split
+set go-=T " Toolbar
+set go-=m " Menu
+set go-=l " Hide left sroll bar
+set go-=L " Hide left scroll bar in split
+set go-=R " Hide right scroll bar
+set go-=r " Hide right scroll bar in split
 
 " ****************
 " SPACES & TABS
 " ****************
-set tabstop=2 " number of visual spaces per tab
+set tabstop=2 " Number of visual spaces per tab
 set shiftwidth=2
-set softtabstop=2   " number of spaces in tab when editing
-set expandtab " tabs are spaces
+set softtabstop=2 " Number of spaces in tab when editing
+set expandtab " Tabs are spaces
 
-"show hidden chars
+"Show hidden chars
 set list
 set listchars=tab:»¬,trail:·
 
 " ****************
-" WINDOW size
+" WINDOW SIZE
 " ****************
 if has("gui_running")
    " GUI is running or is about to start.
    set lines=999 columns=999
 endif
 
-" for windows - sets the window to max size
+" For windows - sets the window to max size
 if has("gui_running")
    if has("gui_win32")
       au GUIEnter * simalt ~x
@@ -144,29 +146,30 @@ endif
 " ****************
 " STATUS BAR + COMMAND LINE
 " ****************
-set showcmd " show command line in bottom bar
-set wildmenu  " visual autocomplete for command menu
+set showcmd " Show command line in bottom bar
+set wildmenu  " Visual autocomplete for command menu
 
 highlight Visual guibg=#333345
 
 if has('statusline')
    set laststatus=2
-   set statusline+=%{fugitive#statusline()} " git status (courtesy of fugitive)
+   set statusline+=%{fugitive#statusline()} " Git status (courtesy of fugitive)
 
    " Broken down into easily includeable segments
    set statusline=%f%<\                       " Filename
    set statusline+=[%{&ff}/%Y]\               " Filetype
    set statusline+=\[%{getcwd()}]%=           " Current dir
    set statusline+=%w%h%m%r\                  " Options
-   set statusline+=%<%-14(%l,%c%V%)\ %p%%      " Right aligned file nav info ruler
+   set statusline+=%<%-14(%l,%c%V%)\ %p%%     " Right aligned file nav info ruler
 endif
 
 " ****************
 " COLUMN RULER
 " ****************
-"set colorcolumn=120
+" set colorcolumn=120
+
 " To tone down the coloring
-" highlight ColorColumn  guibg=Gray12
+  " highlight ColorColumn  guibg=Gray12
 
 " ****************
 "LINE NUMBERS
@@ -183,34 +186,36 @@ set mousehide  " Hide the mouse cursor while typing
 " ****************
 " SEARCHING
 " ****************
-set ic "ignorecase
+set ic " Ignorecase
 set smartcase
-set incsearch " search as characters are entered
-set hlsearch " highlight matches
+set incsearch " Search as characters are entered
+set hlsearch " Highlight matches
 
 " ****************
 " FOLDING
 " ****************
-set foldenable " enable folding
-set foldmethod=indent " fold based on indent level
+set foldenable " Enable folding
+set foldmethod=indent " Fold based on indent level
 set foldlevel=99
-set foldlevelstart=10 " open mast folds by default
+set foldlevelstart=10 " Open mast folds by default
 set foldnestmax=10 " 10 nested fold max
 
 
 let g:SimpylFold_docstring_preview = 1
-"let g:SimpylFold_fold_docstring = 0
+" let g:SimpylFold_fold_docstring = 0
 
 " ****************
-" KEYBOARD
+" KEYBOARD_AND_MAPPING
 " ****************
    " ____Leader mappings
-   "Leader
+   " Leader
    nnoremap <Space> <Nop>
    let mapleader="\<Space>"
 
-   "__GENERAL
-   set backspace=indent,eol,start
+   " __ Directory
+   " Change directory to current edited files directory
+   nmap <Leader>cd :cd %:p:h<CR>
+
 
    " ____Resizing
    nmap <tab>h :vert res -10<CR>
@@ -219,36 +224,36 @@ let g:SimpylFold_docstring_preview = 1
    nmap <tab>j :resize -10<CR>
 
 
-   "Tab shortcuts
-      "new
-      nmap<Leader>t :tabnew<CR>
+   " Tab shortcuts
+      " New
+      nmap <Leader>t :tabnew<CR>
 
-      "close tab
-      nmap<Leader>xt :tabc<CR>
+      " Close tab
+      nmap <Leader>xt :tabc<CR>
 
-   "increment/decrement
+   " Increment/decrement
    nmap <Leader>a <c-a>
    nmap <Leader>x <c-x>
 
-   "view and select buffers
+   " View and select buffers
    nnoremap <Leader>l :ls<CR>:b<space>
 
-   "quick change directory
-   "nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
+   " Quick change directory
+     " nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
 
    "JSON prettyify and validate
    map <Leader>jn :%!python3 -m json.tool<CR>
 
    map <Leader>de :'<,'>!python -m base64 -d<CR>
 
-   " searching
+   " Searching
    nnoremap \<Leader> :nohlsearch<CR>
 
    " ****************
    " OS copy/paste
    " ****************
 
-   "copy/paste to system clipboard
+   " Copy/paste to system clipboard
    vmap <Leader>y "+y
    vmap <Leader>yy "+yy
    vmap <Leader>Y "+Y
@@ -267,17 +272,17 @@ let g:SimpylFold_docstring_preview = 1
    nmap <Leader>p "+p<cr>
    nmap <Leader>P "+P<cr>
 
-      "AG - the silver searcher
-      map <Leader>ag :Ag<Space>
+  " AG - the silver searcher
+  map <Leader>ag :Ag<Space>
 
-      "save
-      map <Leader>w :w<CR>
+  " Save
+  map <Leader>w :w<CR>
 
-      "save+ reload vimrc
-      map <Leader>ws w<CR> :so $MYVIMRC<CR>
+  " Save+ reload vimrc
+  map <Leader>ws w<CR> :so $MYVIMRC<CR>
 
-      "vimrc
-      nmap <Leader>vr :vsplit $MYVIMRC<CR>
+  " Vimrc
+  nmap <Leader>vr :vsplit $MYVIMRC<CR>
 
    " Coffee
       " Compile
@@ -300,12 +305,12 @@ let g:SimpylFold_docstring_preview = 1
 
 
    " NETRW
-   "let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
-   "let g:netrw_preview   = 1
-   "let g:netrw_liststyle = 3
-   "let g:netrw_banner=0
-   "let g:netrw_localrmdir='rm -r'
-   "set autochdir
+     "let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
+     "let g:netrw_preview   = 1
+     "let g:netrw_liststyle = 3
+     "let g:netrw_banner=0
+     "let g:netrw_localrmdir='rm -r'
+     "set autochdir
 
 
 "=====================================================================
@@ -328,22 +333,26 @@ let g:SimpylFold_docstring_preview = 1
    endif
 
    " NERD TREE
-   "Open NERDTree at startup
+   " Open NERDTree at startup
    "   autocmd vimenter * NERDTree
 
-   "Open NERDTree at if vim start with empth buffer
+   " Open NERDTree at if vim start with empth buffer
    "  autocmd StdinReadPre * let s:std_in=1
    "  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-   "If NERDtree is the only buffer left open and you quit vim. Vim will close
+   " If NERDtree is the only buffer left open and you quit vim. Vim will close
 
-   "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&
+   " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&
       "b:NERDTreeType == \"primary") | q | endif
 
 "=====================================================================
 " MCA-HOMEGROWN
 "=====================================================================
 function! MultiChange(toinput)
+   :norm *
    let fromselectedinput = @/
-   substitute(%, l:fromselectedinput, a:toinput, "g")
+     :%call setline(line('.'), substitute(getline('.'), l:fromselectedinput, a:toinput, "g"))
 endfunction
+
+command! -nargs=1  MultiChange :call MultiChange(<f-args>)
+nmap <Leader>mc :MultiChange<space>
