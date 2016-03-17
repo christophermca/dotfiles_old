@@ -2,14 +2,17 @@
 " Maintainer:   ChristopherMCA
 " Version:      1.0
 
-if exists("g:loaded_commentary") || &cp || v:version < 700
+if exists("g:loaded_viper") || &cp || v:version < 700
   finish
 endif
+
 let g:loaded_viper = 1
 let test_config = ./config
 
-function! Runtests()
+function! s:Runtests()
+  echo 'test_config'
   test_config.run
 
-command! -nargs=0  Runtests :call RunTests()
-nmap <Leader>vt :Runtests<CR>
+if !hasmapto('<Plug>Commentary') || maparg('gc','n') ==# ''
+  nmap gc  <Plug>Commentary
+endif
