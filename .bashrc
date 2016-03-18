@@ -58,8 +58,8 @@ attach() {
   if [ $# -eq 0 ]
   then
     tmux ls
-    ASK="\n What session would you like to attach?"
-    echo -n ASK
+    ASK="What session would you like to attach? "
+    echo -n $ASK
     read $SESSION
   fi
 

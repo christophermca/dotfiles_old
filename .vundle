@@ -27,7 +27,6 @@ Plugin 'gmarik/Vundle.vim'
    Plugin 'kien/ctrlp.vim'
    Plugin 'karlbright/qfdo.vim'
    Plugin 'jeetsukumaran/vim-filebeagle'
-   "Plugin 'scrooloose/nerdtree'
 
    " Syntax specific plugins
    Plugin 'vim-scripts/vim-stylus'
@@ -41,6 +40,10 @@ Plugin 'gmarik/Vundle.vim'
    " Utilities
    Plugin 'neilagabriel/vim-geeknote'
    Plugin 'guns/xterm-color-table.vim'
+
+   " HomeGrown
+   Plugin 'christophermca/viper'
+
 
 
 
