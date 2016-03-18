@@ -17,7 +17,7 @@ workrc() {
     mI  ................ Make Inspector
     mTD ................ Make Test-Dev
     mS  ................ Make Setup
-    cleanBreak ......... Runs make shrinkwrap setup test-unit
+    cleanBreak ......... DEPRICATED USE CLEANSTART: Runs make shrinkwrap setup test-unit
 
   TESTIUM
   --------------
@@ -28,6 +28,10 @@ workrc() {
     shrink ............. Runs npm shrinkwrap
 
   GRPN-CARD-UI
+  --------------
+    cleanStart ......... cleans enviroment
+
+  PULL
   --------------
     cleanStart ......... cleans enviroment
 
@@ -43,63 +47,72 @@ workrc() {
 
   ";
 }
-# Alias
-alias grst="git fetch --all && git reset --hard upstream/master"
-alias resa="gulp build && ps aux | grep node | awk '{print $2}' | xargs kill -9
+# NVM install
+export NVM_DIR="/users/cmcadams/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # this loads nvm
 
-&& tmux select-pane -L && !!"
+# Memcached
+ulimit -n 4096
+
+#### ALIAS
+alias grst="git fetch --all && git reset --hard upstream/master"
+alias clearTmux=" clear && tmux clear-history"
+alias runDebug="clearTmux && node debug core/worker-shim.js"
+alias cleanBreak="echo DEPRICATED: please use cleanStart instead"
+
+  # Make
+  alias mI="make inspector"
+  alias mTD="make test-dev"
+  alias mD="make dev"
+  alias mS="make setup"
+  alias shrink="npm run test-shrinkwrap || make shrinkwrap"
+
+#### FUNCTIONS
+
 function gup() {
-git stash save -a 'stashed during gup' 
-git co master
-git fetch --all
-git reset --hard upstream/master
-git push
-git co -
-git rebase master
-echo 'be sure to check stash'
+  git stash save -a 'stashed during gup' 
+  git co master
+  git fetch --all
+  git reset --hard upstream/master
+  git push
+  git co -
+  git rebase master
+  echo 'be sure to check stash'
 }
 
-alias cleanBreak"=make clean setup test-unit && make dev"
-
-# Make Alias
-alias mI="make inspector"
-alias mTD="make test-dev"
-alias mD="make dev"
-alias mS="make setup"
-alias shrink="npm run test-shrinkwrap || make shrinkwrap"
-alias runDebug=" clear && tmux clear-history && node debug core/worker-shim.js"
-
 function killPort() {
-USEDPORT=$(lsof -i $1);
+  USEDPORT=$(lsof -i $1);
 
-if [[ -n $USEDPORT ]];
-then
-  $(ps aux | grep node | awk '{print $2}' | xargs kill -9 > /dev/null 2>&1 &)
-fi
-
+  if [[ -n $USEDPORT ]];
+  then
+    echo 'killing port $1';
+    $(ps aux | grep node | awk '{print $2}' | xargs kill -9 > /dev/null 2>&1 &)
+    echo 'port $1 killed';
+  fi
 }
 
 function killDebug() {
-if [[ -n lsof -i :5858 ]];
-  killPort :5858
-  COL_BLUE="\x1b[34;01m"
-  echo -e $COL_BLUE'killed node debug';
-else
-  COL_BLUE="\x1b[34;01m"
-  echo -e $COL_BLUE'node debug is not running.';
-fi
+  if [[ -n $(lsof -i :5858) ]];
+  then
+    killPort :5858
+    COL_BLUE="\x1b[34;01m"
+    echo -e $COL_BLUE'killed node debug';
+  else
+    COL_BLUE="\x1b[34;01m"
+    echo -e $COL_BLUE'node debug is not running.';
+  fi
 }
 
-
 cleanStart() {
-
   if [[ "$PWD" = */grpn-card-ui ]];
   then
     rm -rf node_modules && npm install && gulp build server
+  elif [[ "$PWD" = */pull ]];
+  then
+    make clean setup test-unit && make dev
   else
     COL_BLUE="\x1b[34;01m"
-    echo -e $COL_BLUE'not in /grpn-card-ui';
-
+    echo -e $COL_BLUE'not in /grpn-card-ui or /pull';
   fi
 }
 
@@ -117,19 +130,11 @@ itg () {
 #alias for consistancy with ION
 alias mochalocal="itg"
 
-# nvm install
-export NVM_DIR="/users/cmcadams/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # this loads nvm
-
-# for memcached
-ulimit -n 4096
 
 function rebuild () {
-gulp build
-killPort :3070
-tmux select-pane -L
-make dev
-tmux select-pane -R
+  gulp build && killPort :3070
+  tmux send-keys "make dev" ; send-keys Enter
+  tmux select-pane -R
 }
 
 
