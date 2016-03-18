@@ -1,0 +1,135 @@
+#!/bin/sh
+
+#JAVA
+export JAVA_HOME=$(/usr/libexec/java_home)
+workrc() {
+  echo "
+  WORKRC
+  --------------
+
+  GIT
+  --------------
+    grst ............... Git ReSeTs git branch with upstream/master
+    gup  ............... Git UPdate
+
+  MAKE
+  --------------
+    mI  ................ Make Inspector
+    mTD ................ Make Test-Dev
+    mS  ................ Make Setup
+    cleanBreak ......... Runs make shrinkwrap setup test-unit
+
+  TESTIUM
+  --------------
+    itg  ................ Runs testium for one file
+
+  NPM
+  --------------
+    shrink ............. Runs npm shrinkwrap
+
+  GRPN-CARD-UI
+  --------------
+    cleanStart ......... cleans enviroment
+
+  NODE
+  --------------
+    runDebug ........... Runs node debug for pull
+    killDebug .......... Kill hanging node process on port :5858
+
+  Utilities
+  --------------
+  mov2Gif ........... convets .mov to gif takes two params (input, output)
+
+
+  ";
+}
+# Alias
+alias grst="git fetch --all && git reset --hard upstream/master"
+alias resa="gulp build && ps aux | grep node | awk '{print $2}' | xargs kill -9
+
+&& tmux select-pane -L && !!"
+function gup() {
+git stash save -a 'stashed during gup' 
+git co master
+git fetch --all
+git reset --hard upstream/master
+git push
+git co -
+git rebase master
+echo 'be sure to check stash'
+}
+
+alias cleanBreak"=make clean setup test-unit && make dev"
+
+# Make Alias
+alias mI="make inspector"
+alias mTD="make test-dev"
+alias mD="make dev"
+alias mS="make setup"
+alias shrink="npm run test-shrinkwrap || make shrinkwrap"
+alias runDebug=" clear && tmux clear-history && node debug core/worker-shim.js"
+
+function killPort() {
+USEDPORT=$(lsof -i $1);
+
+if [[ -n $USEDPORT ]];
+then
+  $(ps aux | grep node | awk '{print $2}' | xargs kill -9 > /dev/null 2>&1 &)
+fi
+
+}
+
+function killDebug() {
+if [[ -n lsof -i :5858 ]];
+  killPort :5858
+  COL_BLUE="\x1b[34;01m"
+  echo -e $COL_BLUE'killed node debug';
+else
+  COL_BLUE="\x1b[34;01m"
+  echo -e $COL_BLUE'node debug is not running.';
+fi
+}
+
+
+cleanStart() {
+
+  if [[ "$PWD" = */grpn-card-ui ]];
+  then
+    rm -rf node_modules && npm install && gulp build server
+  else
+    COL_BLUE="\x1b[34;01m"
+    echo -e $COL_BLUE'not in /grpn-card-ui';
+
+  fi
+}
+
+mov2Gif () {
+  INPUT=$1
+  OUTPUT=$2
+  ffmpeg -i $INPUT -s 600x400 -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > $OUTPUT
+}
+
+itg () {
+  FILE=$1
+  testium_launch=false PORT=3070 mocha $FILE
+}
+
+#alias for consistancy with ION
+alias mochalocal="itg"
+
+# nvm install
+export NVM_DIR="/users/cmcadams/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # this loads nvm
+
+# for memcached
+ulimit -n 4096
+
+function rebuild () {
+gulp build
+killPort :3070
+tmux select-pane -L
+make dev
+tmux select-pane -R
+}
+
+
