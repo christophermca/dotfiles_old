@@ -81,13 +81,13 @@ function gup() {
 }
 
 function killPort() {
-  USEDPORT=$(lsof -i $1);
+  PORT=$1
+  USEDPORT=$(lsof -i $PORT);
 
   if [[ -n $USEDPORT ]];
   then
-    echo 'killing port $1';
-    $(ps aux | grep node | awk '{print $2}' | xargs kill -9 > /dev/null 2>&1 &)
-    echo 'port $1 killed';
+    $(ps aux | grep node | awk "{print $2}" | xargs kill -9 > /dev/null 2>&1 &)
+    printf "Killed port $PORT";
   fi
 }
 
@@ -132,9 +132,9 @@ alias mochalocal="itg"
 
 
 function rebuild () {
-  gulp build && killPort :3070
-  tmux send-keys "make dev" ; send-keys Enter
-  tmux select-pane -R
+  gulp build
+  killPort :3070
+  tmux send-keys -t left "make dev" C-m
 }
 
 

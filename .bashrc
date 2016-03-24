@@ -55,18 +55,39 @@ alias restartBash="source ~/.bash_profile"
 
 attach() {
   SESSION=$1
+  BLUE=$(tput setaf 4)
+  NORMAL=$(tput sgr0)
+  
   if [ $# -eq 0 ]
   then
+    printf "${BLUE}list:________\n${NORMAL}";
     tmux ls
-    ASK="What session would you like to attach? "
-    echo -n $ASK
-    read $SESSION
+    printf "\n\nWhat session would you like to attach? " -n
+    read SESSION
   fi
-
-   $(tmux attach -t $SESSION)
+    echo $SESSION
+   $(tmux attach -d -t $SESSION)
 }
 
 
 if [ -f "/Applications/Karabiner.app/Contents/Library/bin/karabiner" ]; then
    alias karabiner='/Applications/Karabiner.app/Contents/Library/bin/karabiner'
 fi
+
+# _NOTES FOR TERMINAL COLORS_
+
+# BLACK=$(tput setaf 0)
+# RED=$(tput setaf 1)
+# GREEN=$(tput setaf 2)
+# YELLOW=$(tput setaf 3)
+# LIME_YELLOW=$(tput setaf 190)
+# POWDER_BLUE=$(tput setaf 153)
+# BLUE=$(tput setaf 4)
+# MAGENTA=$(tput setaf 5)
+# CYAN=$(tput setaf 6)
+# WHITE=$(tput setaf 7)
+# BRIGHT=$(tput bold)
+# NORMAL=$(tput sgr0)
+# BLINK=$(tput blink)
+# REVERSE=$(tput smso)
+# UNDERLINE=$(tput smul)
