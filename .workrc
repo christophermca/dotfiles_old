@@ -27,25 +27,24 @@ workrc() {
   --------------
     shrink ............. Runs npm shrinkwrap
 
-  GRPN-CARD-UI
-  --------------
-    cleanStart ......... cleans enviroment
-
-  PULL
-  --------------
-    cleanStart ......... cleans enviroment
-
   NODE
   --------------
     runDebug ........... Runs node debug for pull
     killDebug .......... Kill hanging node process on port :5858
 
-  Utilities
+  UTILITIES
   --------------
-  mov2Gif ........... convets .mov to gif takes two params (input, output)
+    mov2Gif ........... converts .mov to gif takes two params (input, output)
+    cleanStart ......... cleans environment for grpn-card-ui and pull
+    rebuild ......... rebuilds node module then restarts PULL. PULL must be to
+                      the left of node module.
 
-
-  ";
+  ALISES
+  --------------
+    rb ........... rebuild
+    grst ........... git reset
+    clearTmux ........... clears tmux
+  "
 }
 # NVM install
 export NVM_DIR="/users/cmcadams/.nvm"
@@ -57,7 +56,6 @@ ulimit -n 4096
 #### ALIAS
 alias grst="git fetch --all && git reset --hard upstream/master"
 alias clearTmux=" clear && tmux clear-history"
-alias runDebug="clearTmux && node debug core/worker-shim.js"
 alias cleanBreak="echo DEPRICATED: please use cleanStart instead"
 
   # Make
@@ -89,6 +87,11 @@ function killPort() {
     $(ps aux | grep node | awk "{print $2}" | xargs kill -9 > /dev/null 2>&1 &)
     printf "Killed port $PORT";
   fi
+}
+
+function runDebug() {
+  clearTmux
+  node debug core/worker-shim.js
 }
 
 function killDebug() {
