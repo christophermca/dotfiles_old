@@ -2,7 +2,9 @@
 " Maintainer:   ChristopherMCA
 " Version:      1.0
 
-if exists("g:loaded_viper") || &cp || v:version < 700
+if !exists("g:loaded_viper") || &cp || v:version < 700
+  let g:loaded_viper = 1
+else
   finish
 endif
 
@@ -17,3 +19,4 @@ endfunction
 if g:loaded_viper
     nnoremap <leader>[s :call <sid>Runtests()<CR>
 endif
+nnoremap <leader>v :call <sid>Runtests()<CR>
