@@ -7,12 +7,13 @@ if exists("g:loaded_viper") || &cp || v:version < 700
 endif
 
 let g:loaded_viper = 1
-let test_config = ./config
+let test_config = './config'
 
-function! s:Runtests()
+function! Runtests()
   echo 'test_config'
-  test_config.run
+endfunction
 
-if !hasmapto('<Plug>Commentary') || maparg('gc','n') ==# ''
-  nmap gc  <Plug>Commentary
+
+if g:loaded_viper
+    nnoremap <leader>[s :call <sid>Runtests()<CR>
 endif
