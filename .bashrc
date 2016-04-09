@@ -29,6 +29,7 @@ function bashrc() {
       --------------
          copy  ............... copies output
          restartBash  ........ restarts bash from bash_profile as source
+         psg ................. process grep
 
       tmux
       --------------
@@ -52,6 +53,7 @@ alias ngxK='sudo nginx -s stop'
 alias ngxR='sudo nginx -s reload'
 alias copy="tr -d '\n' | pbcopy"
 alias restartBash="source ~/.bash_profile"
+alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 
 attach() {
   SESSION=$1

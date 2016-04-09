@@ -42,7 +42,7 @@ Plugin 'gmarik/Vundle.vim'
    Plugin 'guns/xterm-color-table.vim'
 
    " HomeGrown
-   Plugin 'christophermca/viper'
+   "Plugin 'christophermca/viper'
 
 
 

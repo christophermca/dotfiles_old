@@ -348,11 +348,26 @@ let g:SimpylFold_docstring_preview = 1
 "=====================================================================
 " MCA-HOMEGROWN
 "=====================================================================
-function! MultiChange(toinput)
-   :norm *
-   let fromselectedinput = @/
-     :%call setline(line('.'), substitute(getline('.'), l:fromselectedinput, a:toinput, "g"))
+function! Subw(...)
+  if a:0 > 1
+    let @/ = a:1
+    let changeTo = a:2
+  else
+    :norm! *
+    let changeTo = a:1
+  endif
+
+  let fromOrigin = @/
+
+ :%call setline(line('.'), substitute(getline('.'), l:fromOrigin, l:changeTo, "g"))
 endfunction
 
-command! -nargs=1  MultiChange :call MultiChange(<f-args>)
-nmap <Leader>mc :MultiChange<space>
+command! -nargs=*  Subw :call Subw(<f-args>)
+nmap <Leader>xw :Subw<space>
+
+function! Subsw(fromOrigin, changeTo)
+ :%call setline(line('.'), substitute(getline('.'), a:fromOrigin, a:changeTo, "g"))
+endfunction
+
+command! -nargs=+  Subsw :call Subsw(<args>)
+nmap <Leader>xs :Subsw<space>

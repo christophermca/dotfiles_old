@@ -44,6 +44,7 @@ workrc() {
     rb ........... rebuild
     grst ........... git reset
     clearTmux ........... clears tmux
+    mochalocal........... runs itg
   "
 }
 # NVM install
@@ -54,9 +55,14 @@ export NVM_DIR="/users/cmcadams/.nvm"
 ulimit -n 4096
 
 #### ALIAS
+
+alias mochalocal="itg"
+
+# Git
 alias grst="git fetch --all && git reset --hard upstream/master"
 alias clearTmux=" clear && tmux clear-history"
 alias cleanBreak="echo DEPRICATED: please use cleanStart instead"
+alias rb="rebuild"
 
   # Make
   alias mI="make inspector"
@@ -84,8 +90,11 @@ function killPort() {
 
   if [[ -n $USEDPORT ]];
   then
-    $(ps aux | grep node | awk "{print $2}" | xargs kill -9 > /dev/null 2>&1 &)
-    printf "Killed port $PORT";
+    $(ps aux | grep node | awk "{print $2}" | xargs kill -2 > /dev/null 2>&1 &)
+  else
+    echo $1
+    COL_BLUE="\x1b[32;01m"
+    echo -e $COL_BLUE'Port' $PORT 'is open';
   fi
 }
 
@@ -107,7 +116,7 @@ function killDebug() {
 }
 
 cleanStart() {
-  if [[ "$PWD" = */grpn-card-ui ]];
+  if [[ "$PWD" = */grpn* ]];
   then
     rm -rf node_modules && npm install && gulp build server
   elif [[ "$PWD" = */pull ]];
@@ -115,7 +124,7 @@ cleanStart() {
     make clean setup test-unit && make dev
   else
     COL_BLUE="\x1b[34;01m"
-    echo -e $COL_BLUE'not in /grpn-card-ui or /pull';
+    echo -e $COL_BLUE'not in /grpn-* or /pull';
   fi
 }
 
@@ -129,10 +138,6 @@ itg () {
   FILE=$1
   testium_launch=false PORT=3070 mocha $FILE
 }
-
-#alias for consistancy with ION
-alias mochalocal="itg"
-
 
 function rebuild () {
   gulp build
