@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #JAVA
-export JAVA_HOME=$(/usr/libexec/java_home)
+export JAVA_HOME=$(/usr/libexec/java_home -v  1.8.0_77)
 workrc() {
   echo "
   WORKRC
@@ -94,7 +94,7 @@ function killPort() {
   else
     echo $1
     COL_BLUE="\x1b[32;01m"
-    echo -e $COL_BLUE'Port' $PORT 'is open';
+    echo -e $COL_BLUE'Port' $PORT 'not in use';
   fi
 }
 
@@ -122,9 +122,12 @@ cleanStart() {
   elif [[ "$PWD" = */pull ]];
   then
     make clean setup test-unit && make dev
+  elif [[ "$PWD" = */my_profile ]];
+  then
+    make clean setup test-unit && make dev
   else
     COL_BLUE="\x1b[34;01m"
-    echo -e $COL_BLUE'not in /grpn-* or /pull';
+    echo -e $COL_BLUE'not in /grpn-*, /pull, or /my_profile';
   fi
 }
 

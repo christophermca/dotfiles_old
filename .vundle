@@ -43,6 +43,7 @@ Plugin 'gmarik/Vundle.vim'
 
    " HomeGrown
    "Plugin 'christophermca/viper'
+   Plugin 'christophermca/subW'
 
 
 

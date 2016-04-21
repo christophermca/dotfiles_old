@@ -7,6 +7,11 @@ export EDITOR;
 export PATH="./node_modules/.bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
+# python
+export PROJECT_HOME=~/.virutalenv
+export PROJECT_HOME=~/pyve
+source /usr/local/bin/virtualenvwrapper.sh
+
 # rbenv
 eval "$(rbenv init -)"
 

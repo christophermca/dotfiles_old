@@ -17,12 +17,11 @@
 [help]
    browser = chrome
 [core]
-	editory = vim
-   fileMode = false
-	autocrlf = input
-   excludesfile = /Users/chrismcadams/.gitignore_global
-	gitproxy = gitproxy for github
-	safecrlf = true
+  editory = vim
+  fileMode = false
+  autocrlf = input
+  excludesfile = /Users/chrismcadams/.gitignore_global
+  gitproxy = gitproxy for github
 [credential]
    helper = osxkeychain
 [diff]
