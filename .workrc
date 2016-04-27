@@ -116,25 +116,18 @@ function killDebug() {
 }
 
 cleanStart() {
-  if [[ "$PWD" = */grpn* ]];
+  COL_BLUE="\x1b[34;01m"
+  if type "npm" > /dev/null;
   then
+    echo -e $COL_BLUE'running cleanStart...';
     rm -rf node_modules && npm install && gulp build server
-  elif [[ "$PWD" = */pull ]];
+  elif type "make" > /dev/null;
   then
-    make clean setup test-unit && make dev
-  elif [[ "$PWD" = */my_profile ]];
-  then
+    echo -e $COL_BLUE'running cleanStart...';
     make clean setup test-unit && make dev
   else
-    COL_BLUE="\x1b[34;01m"
-    echo -e $COL_BLUE'not in /grpn-*, /pull, or /my_profile';
+    echo -e $COL_BLUE'not in /grpn-* or /pull';
   fi
-}
-
-mov2Gif () {
-  INPUT=$1
-  OUTPUT=$2
-  ffmpeg -i $INPUT -s 600x400 -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > $OUTPUT
 }
 
 itg () {

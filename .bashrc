@@ -51,6 +51,7 @@ alias rebc='git rebase --continue'
 alias ngxS='sudo nginx'
 alias ngxK='sudo nginx -s stop'
 alias ngxR='sudo nginx -s reload'
+
 alias copy="tr -d '\n' | pbcopy"
 alias restartBash="source ~/.bash_profile"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
@@ -59,7 +60,7 @@ attach() {
   SESSION=$1
   BLUE=$(tput setaf 4)
   NORMAL=$(tput sgr0)
-  
+
   if [ $# -eq 0 ]
   then
     printf "${BLUE}list:________\n${NORMAL}";
@@ -67,6 +68,7 @@ attach() {
     printf "\n\nWhat session would you like to attach? " -n
     read SESSION
   fi
+
     echo $SESSION
    $(tmux attach -d -t $SESSION)
 }
