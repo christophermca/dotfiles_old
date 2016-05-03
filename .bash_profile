@@ -54,5 +54,5 @@ fi
 source ~/.bashrc
 
 # Load .tmuxinator, containing tmuxinator logic
-source ~/bin/tmuxinator.bash
+source ~/.bin/tmuxinator.bash
 export PATH="$PYENV_ROOT/bin:$PATH"
