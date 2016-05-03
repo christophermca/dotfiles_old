@@ -74,14 +74,12 @@ alias rb="rebuild"
 #### FUNCTIONS
 
 function gup() {
-  git stash save -a 'stashed during gup' 
   git co master
   git fetch --all
   git reset --hard upstream/master
   git push
   git co -
   git rebase master
-  echo 'be sure to check stash'
 }
 
 function killPort() {

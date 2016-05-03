@@ -20,6 +20,7 @@
   editory = vim
   fileMode = false
   autocrlf = input
+  safecrlf = false
   excludesfile = /Users/chrismcadams/.gitignore_global
   gitproxy = gitproxy for github
 [credential]
