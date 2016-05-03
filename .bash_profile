@@ -10,10 +10,6 @@ if [ ! -L "$HOME/.bashrc" ]; then
   ln -s ~/Repos/dotfiles/.bashrc ~/.bashrc
 fi
 
-if [ ! -L "$HOME/.workrc" ]; then
-  ln -s ~/Repos/dotfiles/.workrc ~/.workrc
-fi
-
 if [ ! -L "$HOME/.inputrc" ]; then
   ln -s ~/Repos/dotfiles/.inputrc ~/.inputrc
 fi
