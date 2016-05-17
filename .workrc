@@ -83,33 +83,30 @@ function killPort() {
 }
 
 function runDebug() {
-  if tmux > 2>/dev/null;then
+  if type "tmux" > /dev/null; then
     clearTmux
-  fi
-  
-    node debug core/worker-shim.js
+  fi;
+
+  node debug core/worker-shim.js
 }
 
 function killDebug() {
-if [[ $(lsof -i :5858) ]];
-  then
+if [[ $(lsof -i :5858) ]]; then
     killPort 5858
     COL_BLUE="\x1b[34;01m"
     echo -e $COL_BLUE'killed node debug';
   else
     COL_BLUE="\x1b[34;01m"
     echo -e $COL_BLUE'node debug is not running.';
-  fi
+fi
 }
 
 cleanStart() {
   COL_BLUE="\x1b[34;01m"
-  if type "npm" > /dev/null;
-  then
+  if type "npm" > /dev/null; then
     echo -e $COL_BLUE'running cleanStart...';
     rm -rf node_modules && npm install && gulp build server
-  elif type "make" > /dev/null;
-  then
+  elif type "make" > /dev/null; then
     echo -e $COL_BLUE'running cleanStart...';
     make clean setup test-unit && make dev
   else
