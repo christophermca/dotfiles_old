@@ -1,39 +1,47 @@
 #!/bin/bash
 function bashrc() {
    echo "
-   BASHRC
-   --------------
+  BASHRC
+  --------------
 
-      ALIASES
-      --------------
+  ALIASES
+  --------------
 
-      GIT
-      --------------
-         gst ............... git status
-         grea  ............. git pull
-         gwr  .............. git commit -am
-         co  ............... git checkout
-         cob  .............. git checkout -b
-         graph  ............ git graph
-         reb  .............. git rebase
-         rebi  ............. git rebase -i
-         rebc  ............. git rebase --continue
+    GIT
+    --------------
+    gst .............. git status
+    grea ............. git pull
+    gwr .............. git commit -am
+    co ............... git checkout
+    cob .............. git checkout -b
+    graph ............ git graph
+    reb .............. git rebase
+    rebi ............. git rebase -i
+    rebc ............. git rebase --continue
+    rem  ............. alias for remaster
+    grst ............. git ReSeTs git branch with upstream/master
 
-      NGINX
-      --------------
-         ngxS  ............... sudo nginx
-         ngxK  ............... sudo nginx -s stop
-         ngxR  ............... sudo nginx -s reload
+    NGINX
+    --------------
+    ngxS  ............ sudo nginx
+    ngxK  ............ sudo nginx -s stop
+    ngxR  ............ sudo nginx -s reload
 
-      BASH
-      --------------
-         copy  ............... copies output
-         restartBash  ........ restarts bash from bash_profile as source
-         psg ................. process grep
+    BASH
+    --------------
+    copy  ............ copies output
+    restartBash  ..... restarts bash from bash_profile as source
+    psg .............. process grep
 
-      tmux
-      --------------
-         attach  ............... runs tmux attach
+  FUNCTIONS
+  --------------
+    GIT
+    --------------
+    remaster ......... Function git rebase upstream master
+
+    TMUX
+    --------------
+    attach  ......... runs tmux attach
 
    ";
 };
@@ -41,8 +49,8 @@ function bashrc() {
 
 # aliases
 alias gst='git status'
-alias grea='git pull'
-alias gwr='git commit -am'
+alias gpu='git pull'
+alias gw='git commit -am'
 alias co='git checkout'
 alias cob='git checkout -b'
 alias graph='git log --oneline --graph --abbrev-commit --pretty=format:"%Cgreen %h %Creset%s %n%an - %cr %n%n"'
@@ -51,6 +59,7 @@ alias rebc='git rebase --continue'
 alias ngxS='sudo nginx'
 alias ngxK='sudo nginx -s stop'
 alias ngxR='sudo nginx -s reload'
+alias rem='remaster'
 
 alias copy="tr -d '\n' | pbcopy"
 alias restartBash="source ~/.bash_profile"
@@ -73,6 +82,14 @@ attach() {
    $(tmux attach -d -t $SESSION)
 }
 
+function remaster() {
+  git co master
+  git fetch --all
+  git reset --hard upstream/master
+  git push
+  git co -
+  git rebase master
+}
 
 if [ -f "/Applications/Karabiner.app/Contents/Library/bin/karabiner" ]; then
    alias karabiner='/Applications/Karabiner.app/Contents/Library/bin/karabiner'

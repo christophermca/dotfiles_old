@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #JAVA
 export JAVA_HOME=$(/usr/libexec/java_home -v  1.8.0_77)
@@ -6,11 +6,6 @@ workrc() {
   echo "
   WORKRC
   --------------
-
-  GIT
-  --------------
-    grst ............... Git ReSeTs git branch with upstream/master
-    gup  ............... Git UPdate
 
   MAKE
   --------------
@@ -73,22 +68,13 @@ alias rb="rebuild"
 
 #### FUNCTIONS
 
-function gup() {
-  git co master
-  git fetch --all
-  git reset --hard upstream/master
-  git push
-  git co -
-  git rebase master
-}
-
 function killPort() {
   PORT=$1
-  USEDPORT=$(lsof -i $PORT);
+  USEDPORT=$(lsof -i :$PORT);
 
   if [[ -n $USEDPORT ]];
   then
-    $(ps aux | grep node | awk "{print $2}" | xargs kill -2 > /dev/null 2>&1 &)
+    $(ps aux | grep node | awk "{print $2}" | xargs kill -9 > /dev/null 2>&1 &)
   else
     echo $1
     COL_BLUE="\x1b[32;01m"
@@ -97,14 +83,17 @@ function killPort() {
 }
 
 function runDebug() {
-  clearTmux
-  node debug core/worker-shim.js
+  if tmux > 2>/dev/null;then
+    clearTmux
+  fi
+  
+    node debug core/worker-shim.js
 }
 
 function killDebug() {
-  if [[ -n $(lsof -i :5858) ]];
+if [[ $(lsof -i :5858) ]];
   then
-    killPort :5858
+    killPort 5858
     COL_BLUE="\x1b[34;01m"
     echo -e $COL_BLUE'killed node debug';
   else
@@ -138,5 +127,3 @@ function rebuild () {
   killPort :3070
   tmux send-keys -t left "make dev" C-m
 }
-
-
