@@ -16,7 +16,7 @@ fi
 
 # Checks for vim dot files/folders
 if [ ! -L "$HOME/.vim" ]; then
-  ln -s ~/Repos/dotfiles/.vim/ ~/.vim
+  ln -s ~/Repos/dotfiles/.vim/ ~/.vim/
 fi
 
 if [ ! -L "$HOME/.vimrc" ]; then
@@ -38,21 +38,28 @@ if [ ! -L "$HOME/.tmux.conf" ]; then
 fi
 
 if [ ! -L "$HOME/.tmuxinator" ]; then
-  ln -s ~/Repos/dotfiles/.tmuxinator ~/.tmuxinator
+  ln -s ~/Repos/dotfiles/.tmuxinator/ ~/.tmuxinator/
 fi
 
+# Load .bashrc, containing non-login related bash initializations.
+source ~/.bashrc
 
 # Load .profile, containing login, non-bash related initializations.
 source ~/.profile
+
+# Load .cdtrc, containing only work related bash config and initializations.
+if [ -f "$HOME/.cdtrc" ]; then
+   source ~/.cdtrc
+fi
 
 # Load .workrc, containing only work related bash config and initializations.
 if [ -f "$HOME/.workrc" ]; then
    source ~/.workrc
 fi
 
-# Load .bashrc, containing non-login related bash initializations.
-source ~/.bashrc
-
 # Load .tmuxinator, containing tmuxinator logic
-source ~/.bin/tmuxinator.bash
+if [ -f "$HOME/.bin/tmuxinator.bash" ]; then
+  source ~/.bin/tmuxinator.bash
+fi
+
 export PATH="$PYENV_ROOT/bin:$PATH"

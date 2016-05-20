@@ -1,0 +1,42 @@
+# ~/.tmuxinator/develop.yml
+
+name: develop
+root: ~/Repos
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: logs
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t develop
+
+#1: test- (2 panes) [181x90] [layout 04b1,181x90,0,0[181x44,0,0,0,181x45,0,45,6]] @0
+#2: develop* (2 panes) [181x90] [layout 3eb6,181x90,0,0[181x69,0,0,3,181x20,0,70,5]] @3 (active)
+windows:
+  - test:
+      layout: 04b1,181x90,0,0[181x44,0,0,0,181x45,0,45,6]
+      panes:
+        - #empty
+        - #empty
+  - develop:
+      layout: 3eb6,181x90,0,0[181x69,0,0,3,181x20,0,70,5]
+      panes:
+         - vim
+         - #empty
