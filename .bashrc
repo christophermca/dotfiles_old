@@ -77,7 +77,6 @@ attach() {
       read SESSION
     fi
 
-      echo $SESSION
      $(tmux attach -d -t $SESSION)
   fi
 }

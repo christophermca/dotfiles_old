@@ -12,6 +12,7 @@
    mismatch = ls-files -u
    del = branch -D
    remdel = push origin --delete
+   updel = push upstream --delete
    pullr = pull --rebase
    b = branch
 [help]

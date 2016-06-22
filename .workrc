@@ -42,6 +42,11 @@ workrc() {
     mochalocal........... runs itg
   "
 }
+
+#Color Highlighting
+COL_BLUE="$(tput setaf 6)"
+NORMAL=$(tput sgr0)
+
 # NVM install
 export NVM_DIR="/users/cmcadams/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # this loads nvm
@@ -77,8 +82,7 @@ function killPort() {
     $(ps aux | grep node | awk "{print $2}" | xargs kill -9 > /dev/null 2>&1 &)
   else
     echo $1
-    COL_BLUE="\x1b[32;01m"
-    echo -e $COL_BLUE'Port' $PORT 'not in use';
+    echo -e "${COL_BLUE} Port ${PORT} not in use";
   fi
 }
 
@@ -87,30 +91,32 @@ function runDebug() {
     clearTmux
   fi;
 
-  node debug core/worker-shim.js
+  if [ -a core/worker-shim.js ]; then
+    node debug core/worker-shim.js
+  else
+    node debug
+  fi
 }
 
 function killDebug() {
+
 if [[ $(lsof -i :5858) ]]; then
     killPort 5858
-    COL_BLUE="\x1b[34;01m"
-    echo -e $COL_BLUE'killed node debug';
+    echo -e "${COL_BLUE}killed node debug${NORMAL}";
   else
-    COL_BLUE="\x1b[34;01m"
-    echo -e $COL_BLUE'node debug is not running.';
+    echo -e "${COL_BLUE}node debug is not running${NORMAL}";
 fi
 }
 
 cleanStart() {
-  COL_BLUE="\x1b[34;01m"
-  if type "npm" > /dev/null; then
-    echo -e $COL_BLUE'running cleanStart...';
+  if [ type "npm" ] > /dev/null && !(type "make"); then
+    echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
     rm -rf node_modules && npm install && gulp build server
   elif type "make" > /dev/null; then
-    echo -e $COL_BLUE'running cleanStart...';
+    echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
     make clean setup test-unit && make dev
   else
-    echo -e $COL_BLUE'not in /grpn-* or /pull';
+    echo -e "${COL_BLUE}not in /grpn-* or /pull${NORMAL}";
   fi
 }
 
@@ -121,6 +127,6 @@ itg () {
 
 function rebuild () {
   gulp build
-  killPort :3070
+  killPort 3070
   tmux send-keys -t left "make dev" C-m
 }

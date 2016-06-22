@@ -17,7 +17,7 @@ export PATH="$HOME/bin:$PATH"
 # rbenv
 eval "$(rbenv init -)"
 
-# bash_completion
+# git bash_completion
 if [ -f `brew --prefix`/etc/bash_completion ]; then
    . `brew --prefix`/etc/bash_completion
 fi

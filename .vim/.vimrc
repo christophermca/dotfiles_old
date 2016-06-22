@@ -29,8 +29,6 @@ set nocp
 set t_Co=260
 set background=dark
 colorscheme meta5
-"set clipboard=unnamed
-
 " choose font by gui
 if has("gui_running")
    if has("gui_gtk2")
@@ -170,13 +168,13 @@ endif
 
 " To tone down the coloring
   " highlight ColorColumn  guibg=Gray12
-
+ 
 " ****************
 "LINE NUMBERS
 " ****************
 set number " show line numbers
-set nuw=5 " number width to 6 makes things look a little neater
-
+set nuw=3 " number width to 6 makes things look a little neater
+set relativenumber
 " ****************
 " MOUSE
 " ****************
@@ -199,7 +197,6 @@ set foldmethod=indent " Fold based on indent level
 set foldlevel=99
 set foldlevelstart=10 " Open mast folds by default
 set foldnestmax=10 " 10 nested fold max
-
 
 let g:SimpylFold_docstring_preview = 1
 " let g:SimpylFold_fold_docstring = 0
@@ -226,7 +223,7 @@ let g:SimpylFold_docstring_preview = 1
 
    " Tab shortcuts
       " New
-      nmap <Leader>t :tabnew<CR>
+      nmap <Leader>nt :tabnew<CR>
 
       " Close tab
       nmap <Leader>xt :tabc<CR>
@@ -272,11 +269,13 @@ let g:SimpylFold_docstring_preview = 1
    nmap <Leader>p "+p<cr>
    nmap <Leader>P "+P<cr>
 
+   nmap <Leader>cp :let @+ = expand("%")<cr>
+
   " AG - the silver searcher
   map <Leader>ag :Ag<Space>
 
   " Save
-  map <Leader>w :w<CR>
+  map <Leader>zz :w<CR>
 
   " Save+ reload vimrc
   map <Leader>ws w<CR> :so $MYVIMRC<CR>
