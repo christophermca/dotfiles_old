@@ -275,7 +275,7 @@ let g:SimpylFold_docstring_preview = 1
   map <Leader>ag :Ag<Space>
 
   " Save
-  map <Leader>zz :w<CR>
+  map <Leader>wr :w<CR>
 
   " Save+ reload vimrc
   map <Leader>ws w<CR> :so $MYVIMRC<CR>

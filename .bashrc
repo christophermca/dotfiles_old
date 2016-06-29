@@ -82,13 +82,22 @@ attach() {
 }
 
 function remaster() {
-  git co master
+  CURRENTBRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+  if [ ${CURRENTBRANCH} != 'master' ]; then
+     git co master
+  fi
+
   git fetch --all
   git reset --hard upstream/master
   git push
-  git co -
-  git rebase master
-}
+
+   if [[ ${CURRENTBRANCH} != 'master' ]]; then
+     git co -
+     git rebase master
+   fi
+
+ }
 
 if [ -f "/Applications/Karabiner.app/Contents/Library/bin/karabiner" ]; then
    alias karabiner='/Applications/Karabiner.app/Contents/Library/bin/karabiner'
