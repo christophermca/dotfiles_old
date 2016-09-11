@@ -3,11 +3,6 @@ HISTCONTROL=ignoreboth
 EDITOR='vim'
 export EDITOR;
 
-# $PATH
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin"
-export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-export PATH="./node_modules/.bin:$PATH"
-export PATH="$HOME/bin:$PATH"
 
 # python
 #export PROJECT_HOME=~/.virutalenv

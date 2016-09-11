@@ -10,9 +10,7 @@ function bashrc() {
     GIT
     --------------
     gst .............. git status
-    grea ............. git pull
-    gwr .............. git commit -am
-    co ............... git checkout
+    gw ..............  git commit -am
     graph ............ git graph
     reb .............. git rebase
     rebi ............. git rebase -i
@@ -36,7 +34,7 @@ function bashrc() {
   --------------
     GIT
     --------------
-    remaster ......... Function git rebase upstream master
+    remaster ......... function git rebase upstream master
 
     TMUX
     --------------
@@ -50,7 +48,6 @@ function bashrc() {
 alias gst='git status'
 alias gpu='git pull'
 alias gw='git commit -am'
-alias co='git checkout'
 alias graph='git log --oneline --graph --abbrev-commit --pretty=format:"%Cgreen %h %Creset%s %n%an - %cr %n%n"'
 alias reb='git rebase'
 alias rebc='git rebase --continue'
@@ -65,39 +62,52 @@ alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 
 attach() {
   if type "tmux" > /dev/null; then
+
     SESSION=$1
-    BLUE=$(tput setaf 4)
+    GREEN=$(tput setaf 2)
     NORMAL=$(tput sgr0)
 
-    if [ $# -eq 0 ]
-    then
-      printf "${BLUE}list:________\n${NORMAL}";
-      tmux ls
-      printf "\n\nWhat session would you like to attach? " -n
-      read SESSION
-    fi
+    if [ $# -eq 0 ]; then
+      tmux ls >> /dev/null 2>&1
+      if [ $? -eq 0 ]; then
+        printf "${GREEN}list:________\n${NORMAL}";
+        tmux ls
+        printf "\n\nWhat session would you like to attach? " -n
+        read SESSION
+        $(tmux attach -d -t $SESSION)
 
-     $(tmux attach -d -t $SESSION)
+      else
+        printf "${GREEN}No sessions created\n${NORMAL}"
+      fi
+
+    else
+      if [ $? -ne 0 ]; then
+        printf "ERR: Could not find session \`${SESSION}\`\n"
+      else
+        $(tmux attach -d -t $SESSION)
+      fi
+    fi
   fi
 }
 
 function remaster() {
   CURRENTBRANCH=$(git rev-parse --abbrev-ref HEAD)
 
+  git fetch --all
+
   if [ ${CURRENTBRANCH} != 'master' ]; then
-     git co master
+    git co master
+    git reset --hard upstream/master
+    git push origin master
+    git co -
+    git rebase master
+
+  else
+    git reset --hard upstream/master
+
   fi
 
-  git fetch --all
-  git reset --hard upstream/master
-  git push
-
-   if [[ ${CURRENTBRANCH} != 'master' ]]; then
-     git co -
-     git rebase master
-   fi
-
- }
+}
 
 if [ -f "/Applications/Karabiner.app/Contents/Library/bin/karabiner" ]; then
    alias karabiner='/Applications/Karabiner.app/Contents/Library/bin/karabiner'
@@ -110,8 +120,8 @@ fi
 # GREEN=$(tput setaf 2)
 # YELLOW=$(tput setaf 3)
 # LIME_YELLOW=$(tput setaf 190)
-# POWDER_BLUE=$(tput setaf 153)
-# BLUE=$(tput setaf 4)
+# POWDER_BLUE=$(tput setaf 154)
+# BLUE=$(tput setaf 5)
 # MAGENTA=$(tput setaf 5)
 # CYAN=$(tput setaf 6)
 # WHITE=$(tput setaf 7)

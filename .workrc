@@ -63,6 +63,7 @@ alias grst="git fetch --all && git reset --hard upstream/master"
 alias clearTmux=" clear && tmux clear-history"
 alias cleanBreak="echo DEPRICATED: please use cleanStart instead"
 alias rb="rebuild"
+alias server="make dev"
 
   # Make
   alias mI="make inspector"
