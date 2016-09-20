@@ -316,14 +316,6 @@ set nocp
 "     nnoremap kk <nop>
 "     nnoremap ll <nop>
 "
-     " NETRW
-       "let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
-       "let g:netrw_preview   = 1
-       "let g:netrw_liststyle = 3
-       "let g:netrw_banner=0
-       "let g:netrw_localrmdir='rm -r'
-       "set autochdir
-
 
 "=====================================================================
 " PlUGINS configs
@@ -343,19 +335,6 @@ set nocp
                    \   'fallback': 'find %s -type f | head -' . g:ctrlp_max_files
                    \ }
    endif
-
-   " NERD TREE
-   " Open NERDTree at startup
-   "   autocmd vimenter * NERDTree
-
-   " Open NERDTree at if vim start with empth buffer
-   "  autocmd StdinReadPre * let s:std_in=1
-   "  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-   " If NERDtree is the only buffer left open and you quit vim. Vim will close
-
-   " autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&
-      "b:NERDTreeType == \"primary") | q | endif
 
 "HomeGrown
 nnoremap <Leader>xw :SubW<space>
