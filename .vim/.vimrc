@@ -168,7 +168,7 @@ set nocp
   " COLUMN RULER
   " ****************
     augroup vimrc_autocmds
-      autocmd BufEnter * highlight OverLength ctermbg=91
+      autocmd BufEnter * highlight OverLength ctermbg=0
       autocmd BufEnter * match OverLength /\%80v.*/
     augroup END
 
