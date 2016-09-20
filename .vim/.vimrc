@@ -280,7 +280,12 @@ set nocp
      nmap <Leader>cp :let @+ = expand("%")<cr>
 
     " AG - the silver searcher
-    map <Leader>ag :Ag<Space>
+    if executable('ag')
+      let g:ackprg = 'ag --vimgrep'
+    endif
+
+    map <Leader>ag <Leader>ac
+    map <Leader>ac :Ack<Space>
 
     " Save
     map <Leader>wr :w<CR>

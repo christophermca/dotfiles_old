@@ -23,7 +23,7 @@ Plugin 'gmarik/Vundle.vim'
  Plugin 'mattn/emmet-vim'
 
  " Searching
- Plugin 'rking/ag.vim'
+ Plugin 'mileszs/ack.vim'
  Plugin 'kien/ctrlp.vim'
  Plugin 'karlbright/qfdo.vim'
  Plugin 'jeetsukumaran/vim-filebeagle'
