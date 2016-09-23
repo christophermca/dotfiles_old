@@ -57,7 +57,7 @@ alias ngxR='sudo nginx -s reload'
 alias rem='remaster'
 
 alias copy="tr -d '\n' | pbcopy"
-alias restartBash="source ~/.bash_profile"
+alias restartBash="source ~/.bash_profile && reset"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 
 attach() {
@@ -75,16 +75,15 @@ attach() {
         printf "\n\nWhat session would you like to attach? " -n
         read SESSION
         $(tmux attach -d -t $SESSION)
-
       else
         printf "${GREEN}No sessions created\n${NORMAL}"
       fi
 
     else
       if [ $? -ne 0 ]; then
-        printf "ERR: Could not find session \`${SESSION}\`\n"
-      else
         $(tmux attach -d -t $SESSION)
+      else
+        printf "ERR: Could not find session \`${SESSION}\`\n"
       fi
     fi
   fi
