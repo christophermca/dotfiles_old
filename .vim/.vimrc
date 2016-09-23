@@ -17,7 +17,10 @@
 "       - FOLDING
 "  Plugins
 "=============================================================================
-source ~/.vundle
+" Vim >= 7.0 specific colors
+if !has('packages')
+  source ~/.vundle
+endif
 
 " compatibility
 set nocp
@@ -43,7 +46,6 @@ set nocp
 " GENERAL
 "=====================================================================
   set fileformat=unix
-  set encoding=utf-8
   let g:vim_json_syntax_conceal=0
   set shortmess+=I
   set textwidth=80
@@ -54,8 +56,8 @@ set nocp
   set suffixesadd=.coffee,.js,.styl,.css
 
   filetype plugin indent on
-  set autoindent
   syntax enable " enable syntax processing
+  set autoindent
 
   "when saving vimrc reload the source
   augroup reload_vimrc
@@ -78,9 +80,9 @@ set nocp
     set visualbell " set error flashing
     set noerrorbells " no beeping
 
-    " how to split
-      set splitbelow
-      set splitright
+  " how to split
+    set splitbelow
+    set splitright
 
   " backups
     set nobackup       " No backup files
@@ -168,7 +170,6 @@ set nocp
   " COLUMN RULER
   " ****************
     augroup vimrc_autocmds
-      autocmd BufEnter * highlight OverLength ctermbg=0
       autocmd BufEnter * match OverLength /\%80v.*/
     augroup END
 
