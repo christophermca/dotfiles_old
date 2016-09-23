@@ -115,9 +115,9 @@ cleanStart() {
     rm -rf node_modules && npm install && gulp build server
   elif type "make" > /dev/null; then
     echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
-    make clean setup test-unit && make dev
+    make clean setup assets test-client
   else
-    echo -e "${COL_BLUE}not in /grpn-* or /pull${NORMAL}";
+    echo -e "${COL_BLUE}not in /grpn-* or a Skelator app${NORMAL}";
   fi
 }
 
