@@ -2,20 +2,20 @@
 " Version: 1.0
 " Sections:
 "
-"  Colors & Fonts
-"  General
-"  VIM UI
-"       - GUI Options
-"       - Window Options
-"       - STATUS bar & COMMAND LINE
-"       - COLUMN RULE
-"       - LINE NUMBER
-"       - MOUSE
-"       - KEYBOARD_AND_MAPPING
-"       - SPLIT CONTROLS
-"       - SEARCHING
-"       - FOLDING
-"  Plugins
+" Colors & Fonts
+" General
+" VIM UI
+" - GUI Options
+" - Window Options
+" - STATUS bar & COMMAND LINE
+" - COLUMN RULE
+" - LINE NUMBER
+" - MOUSE
+" - KEYBOARD_AND_MAPPING
+" - SPLIT CONTROLS
+" - SEARCHING
+" - FOLDING
+" Plugins
 "=============================================================================
 " Vim >= 7.0 specific colors
 if !has('packages')
@@ -85,14 +85,14 @@ set nocp
     set splitright
 
   " backups
-    set nobackup       " No backup files
-    set nowritebackup  " Only in case you don't want a backup file while editing
-    set noswapfile     " No swap files
+    set nobackup " No backup files
+    set nowritebackup " Only in case you don't want a backup file while editing
+    set noswapfile " No swap files
 
   " Config
     set cursorline
     set lazyredraw " Redraw only when we need to
-    set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
+    set viewoptions=folds,options,cursor,unix,slash " Better Unixg<CR>Windows compatibility
     set virtualedit=all " Allow for cursor beyond last character
     set history=1000 " Store a ton of history (default is 20)
     set hidden " Allow buffer switching without saving
@@ -150,7 +150,7 @@ set nocp
   " STATUS BAR + COMMAND LINE
   " ****************
     set showcmd " Show command line in bottom bar
-    set wildmenu  " Visual autocomplete for command menu
+    set wildmenu " Visual autocomplete for command menu
 
     highlight Visual guibg=#333345
 
@@ -159,24 +159,25 @@ set nocp
        set statusline+=%{fugitive#statusline()} " Git status (courtesy of fugitive)
 
        " Broken down into easily includeable segments
-       set statusline=%f%<\                       " Filename
-       set statusline+=[%{&ff}/%Y]\               " Filetype
-       set statusline+=\[%{getcwd()}]%=           " Current dir
-       set statusline+=%w%h%m%r\                  " Options
-       set statusline+=%<%-14(%l,%c%V%)\ %p%%     " Right aligned file nav info ruler
+       set statusline=%f%<\ " Filename
+       set statusline+=[%{&ff}/%Y]\ " Filetype
+       set statusline+=\[%{getcwd()}]%= " Current dir
+       set statusline+=%w%h%m%r\ " Options
+       set statusline+=%<%-14(%l,%c%V%)\ %p%% " Right aligned file nav info ruler
     endif
 
   " ****************
   " COLUMN RULER
   " ****************
     augroup vimrc_autocmds
+      hi OverLength ctermfg=NONE ctermbg=17
       autocmd BufEnter * match OverLength /\%80v.*/
     augroup END
 
 " set colorcolumn=120
 
   " To tone down the coloring
-    " highlight ColorColumn  guibg=Gray12
+    " highlight ColorColumn guibg=Gray12
 
   " ****************
   "LINE NUMBERS
@@ -188,7 +189,7 @@ set nocp
   " MOUSE
   " ****************
     set mouse=a " Automatically enable mouse usage
-    set mousehide  " Hide the mouse cursor while typing
+    set mousehide " Hide the mouse cursor while typing
 
   " ****************
   " SEARCHING
@@ -288,8 +289,15 @@ set nocp
     map <Leader>ag <Leader>ac
     map <Leader>ac :Ack<Space>
 
-    " Save
+    " Saving
+    function! Respace()
+      :%s#\S\zs\s\+# #ge
+      :%s#\s\+$##ge
+      :nohlsearch
+    endfunction
+
     map <Leader>wr :w<CR>
+    autocmd BufWritePre . call Respace()
 
     " Save+ reload vimrc
     map <Leader>ws w<CR> :so $MYVIMRC<CR>
@@ -307,21 +315,10 @@ set nocp
      nmap <C-k> <C-w>k
      nmap <C-j> <C-w>j
 
-     " ____Project tray
-        "map -  :NERDTreeToggle<CR>
-        "map -  :Explore <CR>
-
      " ____CTRL P
      let g:ctrlp_map = '<c-p>'
      let g:ctrlp_cmd = 'CtrlP ./'
      let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
-
-     " Taylored hardmode
-"     nnoremap jj <nop>
-"     nnoremap hh <nop>
-"     nnoremap kk <nop>
-"     nnoremap ll <nop>
-"
 
 "=====================================================================
 " PlUGINS configs
@@ -335,13 +332,14 @@ set nocp
    " Optimize file searching
    if has("unix")
        let g:ctrlp_user_command = {
-                   \   'types': {
-                   \       1: ['.git/', 'cd %s && git ls-files']
-                   \   },
-                   \   'fallback': 'find %s -type f | head -' . g:ctrlp_max_files
+                   \ 'types': {
+                   \ 1: ['.git/', 'cd %s && git ls-files']
+                   \ },
+                   \ 'fallback': 'find %s -type f | head -' . g:ctrlp_max_files
                    \ }
    endif
 
 "HomeGrown
+nnoremap <leader>v :call Viper()<CR>
 nnoremap <Leader>xw :SubW<space>
 nnoremap <Leader>xs :SubSW<space>
