@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #JAVA
-export JAVA_HOME=$(/usr/libexec/java_home -v  1.8.0_77)
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0_77)
 workrc() {
   echo "
   WORKRC
@@ -9,14 +9,14 @@ workrc() {
 
   MAKE
   --------------
-    mI  ................ Make Inspector
+    mI ................ Make Inspector
     mTD ................ Make Test-Dev
-    mS  ................ Make Setup
+    mS ................ Make Setup
     cleanBreak ......... DEPRICATED USE CLEANSTART: Runs make shrinkwrap setup test-unit
 
   TESTIUM
   --------------
-    itg  ................ Runs testium for one file
+    itg ................ Runs testium for one file
 
   NPM
   --------------
@@ -43,13 +43,18 @@ workrc() {
   "
 }
 
+# Checks for bash dot files
+if [ ! -L "$HOME/Repos/deal/.git/hooks/pre-commit" ]; then
+  ln -s ~/scripts/pre-commit ~/Repos/deal/.git/hooks/pre-commit
+fi
+
 #Color Highlighting
 COL_BLUE="$(tput setaf 6)"
 NORMAL=$(tput sgr0)
 
 # NVM install
 export NVM_DIR="/users/cmcadams/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # this loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # this loads nvm
 
 # Memcached
 ulimit -n 4096
@@ -59,7 +64,7 @@ ulimit -n 4096
 alias mochalocal="itg"
 
 # Git
-alias grst="git fetch --all && git reset --hard upstream/master"
+alias grst="git fetch --all && git reset --hard FETCH_HEAD"
 alias clearTmux=" clear && tmux clear-history"
 alias cleanBreak="echo DEPRICATED: please use cleanStart instead"
 alias rb="rebuild"

@@ -291,8 +291,8 @@ set nocp
 
     " Saving
     function! Respace()
-      :%s#\S\zs\s\+# #ge
-      :%s#\s\+$##ge
+      :%s#\w\zs\s\+\ze\w#\s#ge "Spacing between words
+      :%s#\s\+$##ge "Spacing at EOL
       :nohlsearch
     endfunction
 

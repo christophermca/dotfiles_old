@@ -71,7 +71,7 @@ attach() {
       tmux ls >> /dev/null 2>&1
       if [ $? -eq 0 ]; then
         printf "${GREEN}list:________\n${NORMAL}";
-        tmux ls
+        tmux ls -F '#{session_name}'
         printf "\n\nWhat session would you like to attach? " -n
         read SESSION
         $(tmux attach -d -t $SESSION)
