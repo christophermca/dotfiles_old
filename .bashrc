@@ -95,10 +95,10 @@ function remaster() {
   git fetch --all
 
   if [ ${CURRENTBRANCH} != 'master' ]; then
-    git co master
+    git checkout master
     git reset --hard upstream/master
     git push origin master
-    git co -
+    git checkout -
     git rebase master
 
   else

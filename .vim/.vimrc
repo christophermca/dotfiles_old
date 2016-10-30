@@ -107,7 +107,7 @@ set nocp
 
     " auto load file
     set autoread
-    augroup FocusGained,BufEnter * :silent! checktime
+    au CursorHold * checktime
   " ****************
   " go: GUI OPTIONS
   " +: show
@@ -291,16 +291,13 @@ set nocp
 
     " Saving
     function! Respace()
-      :%s#\w\zs\s\+\ze\w#\s#ge "Spacing between words
+      :%s#\w\zs\s\+\ze\w# #ge "Spacing between words
       :%s#\s\+$##ge "Spacing at EOL
       :nohlsearch
     endfunction
 
     map <Leader>wr :w<CR>
-    autocmd BufWritePre . call Respace()
-
-    " Save+ reload vimrc
-    map <Leader>ws w<CR> :so $MYVIMRC<CR>
+    autocmd BufWritePre * :silent! :call Respace()
 
     " Vimrc
     nmap <Leader>vr :vsplit $MYVIMRC<CR>
@@ -315,6 +312,17 @@ set nocp
      nmap <C-k> <C-w>k
      nmap <C-j> <C-w>j
 
+     " netrw
+     function! OpenView()
+       if isdirectory(expand('%:h'))
+         :Ex %:h
+       else
+         :Ex .
+       endif
+     endfunction
+
+     nnoremap - :call OpenView()<CR>
+
      " ____CTRL P
      let g:ctrlp_map = '<c-p>'
      let g:ctrlp_cmd = 'CtrlP ./'
@@ -323,6 +331,13 @@ set nocp
 "=====================================================================
 " PlUGINS configs
 "=====================================================================
+   " NETRW
+     let g:netrw_list_hide  = '\(^\|\s\s\)\zs\.\S\+'
+     let g:netrw_preview    = 1
+     let g:netrw_liststyle  = 0
+     let g:netrw_banner     = 0
+     let g:netrw_localrmdir='rm -r'
+     let g:netrw_bufsettings="noma nomod nonu nobl nowrap ro rnu"
 
    " CTRL P
    set runtimepath^=~/.vim/bundle/ctrlp.vim
