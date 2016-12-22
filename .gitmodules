@@ -1,0 +1,9 @@
+[submodule "subW"]
+	path = subW
+	url = https://github.com/christophermca/subW.git
+[submodule "viper"]
+	path = viper
+	url = https://github.com/christophermca/viper.git
+[submodule "meta5"]
+	path = meta5
+	url = https://github.com/christophermca/meta5.git
