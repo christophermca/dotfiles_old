@@ -1,22 +1,14 @@
-" viper.vim - A test runner runner
-" Maintainer:   ChristopherMCA
-" Version:      1.0
-
-if !exists("g:loaded_viper") || v:version < 700
-  let g:loaded_viper = 1
-else
+if(exists('g:loaded_viper') && g:loaded_viper) || version < 700
   finish
 endif
 
 let g:loaded_viper = 1
-let test_config = './config'
+let config = './config'
 
-function! Runtests()
-  echo 'test_config'
+function! Viper()
+  echo config
+  echo 'echo echo echo echo echo'
 endfunction
 
+command! Viper :call Viper()
 
-if g:loaded_viper
-  nnoremap <leader>[s :call <sid>Runtests()<CR>
-endif
-nnoremap <leader>v :call <sid>Runtests()<CR>
