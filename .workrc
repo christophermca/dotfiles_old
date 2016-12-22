@@ -6,6 +6,7 @@ workrc() {
   echo "
   WORKRC
   --------------
+  .workrc .............. alias for $HOME/.workrc
 
   MAKE
   --------------
@@ -20,37 +21,34 @@ workrc() {
 
   NPM
   --------------
-    shrink ............. Runs npm shrinkwrap
+  shrink ............. Runs npm shrinkwrap
 
   NODE
   --------------
-    runDebug ........... Runs node debug for pull
-    killDebug .......... Kill hanging node process on port :5858
+  startDebug ...........Starts node Debugger for itier app
+  runDebug ........... Runs node debug
+  killDebug .......... Kill hanging node process on port :5858
 
   UTILITIES
   --------------
-    mov2Gif ........... converts .mov to gif takes two params (input, output)
-    cleanStart ......... cleans environment for grpn-card-ui and pull
-    rebuild ......... rebuilds node module then restarts PULL. PULL must be to
+  mov2Gif ........... converts .mov to gif takes two params (input, output)
+  rebuild ........... rebuilds node module then restarts PULL. PULL must be to
                       the left of node module.
 
   ALISES
   --------------
-    rb ........... rebuild
-    clearTmux ........... clears tmux
-    mochalocal........... runs itg
+  rb ........... rebuild
+  db ........... startDebug
+  kd ........... killDebug
+  clearTmux ........... clears tmux
+  mochalocal ........... runs itg
   "
 }
 
 # Checks for bash dot files
 if [ ! -L "$HOME/Repos/deal/.git/hooks/pre-commit" ]; then
-  ln -s ~/scripts/pre-commit ~/Repos/deal/.git/hooks/pre-commit
+  ln -s -i $HOME/scripts/pre-commit $HOME/Repos/deal/.git/hooks/pre-commit
 fi
-
-if [ ! -L "$HOME/Repos/deal/.git/hooks/pre-push" ]; then
-  ln -s ~/scripts/pre-commit ~/Repos/deal/.git/hooks/pre-commit
-fi
-
 
 #Color Highlighting
 COL_BLUE="$(tput setaf 6)"
@@ -64,14 +62,16 @@ export NVM_DIR="/users/cmcadams/.nvm"
 ulimit -n 4096
 
 #### ALIAS
-
+alias .workrc='vim $HOME/.workrc'
 alias mochalocal="itg"
+alias db="startDebug"
+alias kd="killDebug"
 
 # Git
 alias clearTmux=" clear && tmux clear-history"
 alias cleanBreak="echo DEPRICATED: please use cleanStart instead"
 alias rb="rebuild"
-alias server="make dev"
+alias server="make reloader"
 
   # Make
   alias mI="make inspector"
@@ -82,20 +82,23 @@ alias server="make dev"
 
 #### FUNCTIONS
 
-function killPort() {
-  PORT=$1
-  USEDPORT=$(lsof -i :$PORT);
+killPort() {
+  if (( $# == 1  )); then
+    local PORT=$1
+    local readonly USEDPORT=$(lsof -i :$PORT);
 
-  if [[ -n $USEDPORT ]];
-  then
-    $(ps aux | grep node | awk "{print $2}" | xargs kill -9 > /dev/null 2>&1 &)
+      if [[ -n $USEDPORT ]];
+      then
+        $(ps -eo pid,command | ag [n]ode | awk "{print $2}" | xargs kill -9 > /dev/null 2>&1 &)
+      else
+        echo -e "${COL_BLUE} Port ${PORT} not in use";
+      fi
   else
-    echo $1
-    echo -e "${COL_BLUE} Port ${PORT} not in use";
+    echo "Usage: killPort <pid>"
   fi
 }
 
-function runDebug() {
+runDebug() {
   if type "tmux" > /dev/null; then
     clearTmux
   fi;
@@ -107,7 +110,7 @@ function runDebug() {
   fi
 }
 
-function killDebug() {
+killDebug() {
 
 if [[ $(lsof -i :5858) ]]; then
     killPort 5858
@@ -117,21 +120,33 @@ if [[ $(lsof -i :5858) ]]; then
 fi
 }
 
+startDebug() {
+  killDebug
+  runDebug
+}
+
 cleanStart() {
-  if [ type "npm" ] > /dev/null && !(type "make"); then
-    echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
-    rm -rf node_modules && npm install && gulp build server
-  elif type "make" > /dev/null; then
-    echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
-    make clean setup assets test-client
+  if (($# > 0)); then
+    if [[$1 -eq "-d"]]; then
+      npm cache clean && make clean setup assets dev
+    fi
   else
-    echo -e "${COL_BLUE}not in /grpn-* or a Skelator app${NORMAL}";
+    if ((type "npm" && !type "make")) > dev/null; then
+      echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
+      rm -rf node_modules && npm install && gulp build server
+    elif type "make" > /dev/null; then
+      echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
+      npm cache clean && make clean setup assets
+    else
+      echo -e "${COL_BLUE}not in /grpn-* or a Skelator app${NORMAL}";
+    fi
   fi
 }
 
 itg () {
-  FILE=$1
-  testium_launch=false PORT=3070 mocha $FILE
+  local FILE=$1
+  #testium_launch=false PORT=3070 mocha $FILE
+  mocha $FILE
 }
 
 function rebuild () {

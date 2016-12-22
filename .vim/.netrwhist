@@ -1,3 +1,3 @@
 let g:netrw_dirhistmax  =10
 let g:netrw_dirhist_cnt =1
-let g:netrw_dirhist_1='/Users/cmcadams/Repos/dotfiles/.vim'
+let g:netrw_dirhist_1='/Users/cmcadams/.vim/pack/colorschemes/opt/meta5/colors'

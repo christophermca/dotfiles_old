@@ -1,8 +1,9 @@
 #!/bin/bash
-function bashrc() {
+bashrc() {
    echo "
   BASHRC
   --------------
+  .bashrc .............. alias for $HOME/.bashrc
 
   ALIASES
   --------------
@@ -45,6 +46,7 @@ function bashrc() {
 
 
 # aliases
+alias .bashrc='vim $HOME/.bashrc'
 alias gst='git status'
 alias gpu='git pull'
 alias gw='git commit -am'
@@ -63,9 +65,9 @@ alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 attach() {
   if type "tmux" > /dev/null; then
 
-    SESSION=$1
-    GREEN=$(tput setaf 2)
-    NORMAL=$(tput sgr0)
+    local SESSION=$1
+    local readonly GREEN=$(tput setaf 2)
+    local readonly NORMAL=$(tput sgr0)
 
     if [ $# -eq 0 ]; then
       tmux ls >> /dev/null 2>&1
@@ -89,17 +91,17 @@ attach() {
   fi
 }
 
-function remaster() {
-  CURRENTBRANCH=$(git rev-parse --abbrev-ref HEAD)
+remaster() {
+  local readonly CURRENTBRANCH=$(git rev-parse --abbrev-ref HEAD)
 
   git fetch --all
 
-  if [ ${CURRENTBRANCH} != 'master' ]; then
+  if [ $CURRENTBRANCH != 'master' ]; then
     git checkout master
     git reset --hard upstream/master
     git push origin master
-    git checkout -
-    git rebase master
+    git checkout $CURRENTBRANCH
+    git pull --rebase upstream master
 
   else
     git reset --hard upstream/master
