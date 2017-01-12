@@ -12,13 +12,13 @@ set background=dark
 let colors_name = "speyside"
 " Mode {{{
 if has("gui_running")
-" "TODO add gui values
+"TODO add gui values
 else
     let s:mode = 'cterm'
 endif
 "}}}
 "}}}
- "Font Styles  {{{
+ "Font Styles {{{
   let s:b = 'bold'
   let s:i = 'italic'
   let s:in = 'inverse'
@@ -53,14 +53,16 @@ endif
     let s:white = '15'
     let s:black = '16'
     let s:dkGray = '235'
+    let s:dkGray2 = '239'
     let s:dkGray1 = '233'
     let s:gray = '244'
     let s:gray1= '253'
     let s:gray2 = '242'
   "}}}
   "special {{{
-    let s:purple_comment = '67'
+    let s:purple_comment = '68'
     let s:purple_todo = '57'
+    let s:lineNR = '144'
     let s:statusLine_green= '158'
     let s:diff1 = '46'
     let s:diff2 = '22'
@@ -90,10 +92,10 @@ endif
   let s:purple0 = '105'
   let s:purple1 = '99'
   let s:purple3 = '12'
-  let s:purple3 = '111'
   let s:purple4 = '153'
   let s:purple5 = '146'
   let s:purple6 = '135'
+  let s:purple7 = '111'
   "}}}
   "warm {{{
   let s:warm0 = '214'
@@ -105,135 +107,141 @@ endif
 " }}}
 ""}}}
 "{{{ Build Color Strings
-exe "let s:fg_NONE = ' ".s:mode."fg=".s:none  ."'"
-exe "let s:bg_NONE = ' ".s:mode."bg=".s:none  ."'"
+exe "let s:fg_NONE = ' ".s:mode."fg=".s:none ."'"
+exe "let s:bg_NONE = ' ".s:mode."bg=".s:none ."'"
 
-exe "let s:fg_diff_add = ' ".s:mode."fg=".s:diff1  ."'"
-exe "let s:bg_diff_add = ' ".s:mode."bg=".s:diff2  ."'"
+exe "let s:fg_diff_add = ' ".s:mode."fg=".s:diff1 ."'"
+exe "let s:bg_diff_add = ' ".s:mode."bg=".s:diff2 ."'"
 
-exe "let s:fg_diff_del = ' ".s:mode."fg=".s:diff3  ."'"
-exe "let s:bg_diff_del = ' ".s:mode."bg=".s:diff4  ."'"
+exe "let s:fg_diff_del = ' ".s:mode."fg=".s:diff3 ."'"
+exe "let s:bg_diff_del = ' ".s:mode."bg=".s:diff4 ."'"
 
-exe "let s:fg_difftxt = ' ".s:mode."fg=".s:diff5  ."'"
-exe "let s:bg_difftxt = ' ".s:mode."bg=".s:diff6  ."'"
+exe "let s:fg_difftxt = ' ".s:mode."fg=".s:diff5 ."'"
+exe "let s:bg_difftxt = ' ".s:mode."bg=".s:diff6 ."'"
 
-exe "let s:fg_spell_bad = ' ".s:mode."fg=".s:diff3  ."'"
-exe "let s:bg_spell_bad = ' ".s:mode."bg=".s:diff4  ."'"
+exe "let s:fg_spell_bad = ' ".s:mode."fg=".s:diff3 ."'"
+exe "let s:bg_spell_bad = ' ".s:mode."bg=".s:diff4 ."'"
 
-exe "let s:fg_spell_cap = ' ".s:mode."fg=".s:diff1  ."'"
-exe "let s:bg_spell_cap = ' ".s:mode."bg=".s:diff2  ."'"
+exe "let s:fg_spell_cap = ' ".s:mode."fg=".s:diff1 ."'"
+exe "let s:bg_spell_cap = ' ".s:mode."bg=".s:diff2 ."'"
 
-exe "let s:bg_spell_local = ' ".s:mode."bg=".s:spell1  ."'"
+exe "let s:bg_spell_local = ' ".s:mode."bg=".s:spell1 ."'"
 
-exe "let s:bg_spell_rare = ' ".s:mode."bg=".s:warm2  ."'"
+exe "let s:bg_spell_rare = ' ".s:mode."bg=".s:warm2 ."'"
 
 "base
-exe "let s:fg_norm = ' ".s:mode."fg=".s:norm_fg_base  ."'"
-exe "let s:bg_norm = ' ".s:mode."bg=".s:norm_bg_base  ."'"
+exe "let s:fg_norm = ' ".s:mode."fg=".s:norm_fg_base ."'"
+exe "let s:bg_norm = ' ".s:mode."bg=".s:norm_bg_base ."'"
 
-exe "let s:fg_white = ' ".s:mode."fg=".s:white  ."'"
-exe "let s:bg_white = ' ".s:mode."bg=".s:white  ."'"
+exe "let s:fg_white = ' ".s:mode."fg=".s:white ."'"
+exe "let s:bg_white = ' ".s:mode."bg=".s:white ."'"
 
-exe "let s:fg_black = ' ".s:mode."fg=".s:black  ."'"
-exe "let s:bg_black = ' ".s:mode."bg=".s:black  ."'"
+exe "let s:fg_lineNR = ' ".s:mode."fg=".s:lineNR ."'"
+exe "let s:bg_lineNR = ' ".s:mode."bg=".s:lineNR ."'"
 
-exe "let s:fg_dkGray = ' ".s:mode."fg=".s:dkGray  ."'"
-exe "let s:bg_dkGray = ' ".s:mode."bg=".s:dkGray  ."'"
+exe "let s:fg_black = ' ".s:mode."fg=".s:black ."'"
+exe "let s:bg_black = ' ".s:mode."bg=".s:black ."'"
 
-exe "let s:fg_dkGray1 = ' ".s:mode."fg=".s:dkGray1  ."'"
+exe "let s:fg_dkGray = ' ".s:mode."fg=".s:dkGray ."'"
+exe "let s:bg_dkGray = ' ".s:mode."bg=".s:dkGray ."'"
+
+exe "let s:fg_dkGray1 = ' ".s:mode."fg=".s:dkGray1 ."'"
 exe "let s:bg_dkGray1 = ' ".s:mode."bg=".s:dkGray1 ."'"
 
-exe "let s:fg_gray = ' ".s:mode."fg=".s:gray  ."'"
-exe "let s:bg_gray = ' ".s:mode."bg=".s:gray  ."'"
+exe "let s:fg_dkGray2 = ' ".s:mode."fg=".s:dkGray2 ."'"
+exe "let s:bg_dkGray2 = ' ".s:mode."bg=".s:dkGray2 ."'"
 
-exe "let s:fg_gray1 = ' ".s:mode."fg=".s:gray1  ."'"
-exe "let s:bg_gray1 = ' ".s:mode."bg=".s:gray1  ."'"
+exe "let s:fg_gray = ' ".s:mode."fg=".s:gray ."'"
+exe "let s:bg_gray = ' ".s:mode."bg=".s:gray ."'"
 
-exe "let s:fg_gray2 = ' ".s:mode."fg=".s:gray2  ."'"
-exe "let s:bg_gray2 = ' ".s:mode."bg=".s:gray2  ."'"
+exe "let s:fg_gray1 = ' ".s:mode."fg=".s:gray1 ."'"
+exe "let s:bg_gray1 = ' ".s:mode."bg=".s:gray1 ."'"
+
+exe "let s:fg_gray2 = ' ".s:mode."fg=".s:gray2 ."'"
+exe "let s:bg_gray2 = ' ".s:mode."bg=".s:gray2 ."'"
 
 
 "Blue
-exe "let s:fg_ltBlue0 = ' ".s:mode."fg=".s:ltBlue0  ."'"
-exe "let s:bg_ltBlue0= ' ".s:mode."bg=".s:ltBlue0  ."'"
+exe "let s:fg_ltBlue0 = ' ".s:mode."fg=".s:ltBlue0 ."'"
+exe "let s:bg_ltBlue0= ' ".s:mode."bg=".s:ltBlue0 ."'"
 
-exe "let s:fg_ltBlue1 = ' ".s:mode."fg=".s:ltBlue1  ."'"
-exe "let s:bg_ltBlue1= ' ".s:mode."bg=".s:ltBlue1  ."'"
+exe "let s:fg_ltBlue1 = ' ".s:mode."fg=".s:ltBlue1 ."'"
+exe "let s:bg_ltBlue1= ' ".s:mode."bg=".s:ltBlue1 ."'"
 
-exe "let s:fg_ltBlue2 = ' ".s:mode."fg=".s:ltBlue2  ."'"
-exe "let s:bg_ltBlue2= ' ".s:mode."bg=".s:ltBlue2  ."'"
+exe "let s:fg_ltBlue2 = ' ".s:mode."fg=".s:ltBlue2 ."'"
+exe "let s:bg_ltBlue2= ' ".s:mode."bg=".s:ltBlue2 ."'"
 
-exe "let s:fg_blue1 = ' ".s:mode."fg=".s:blue1  ."'"
-exe "let s:bg_blue1= ' ".s:mode."bg=".s:blue1  ."'"
+exe "let s:fg_blue1 = ' ".s:mode."fg=".s:blue1 ."'"
+exe "let s:bg_blue1= ' ".s:mode."bg=".s:blue1 ."'"
 
-exe "let s:fg_blue2 = ' ".s:mode."fg=".s:blue2  ."'"
-exe "let s:bg_blue2= ' ".s:mode."bg=".s:blue2  ."'"
+exe "let s:fg_blue2 = ' ".s:mode."fg=".s:blue2 ."'"
+exe "let s:bg_blue2= ' ".s:mode."bg=".s:blue2 ."'"
 
-exe "let s:fg_dkBlue = ' ".s:mode."fg=".s:dkBlue  ."'"
-exe "let s:bg_dkBlue = ' ".s:mode."bg=".s:dkBlue  ."'"
+exe "let s:fg_dkBlue = ' ".s:mode."fg=".s:dkBlue ."'"
+exe "let s:bg_dkBlue = ' ".s:mode."bg=".s:dkBlue ."'"
 
 
   "Green {{{
-  exe "let s:fg_green1 = ' ".s:mode."fg=".s:green1  ."'"
-  exe "let s:bg_green1 = ' ".s:mode."bg=".s:green1  ."'"
+  exe "let s:fg_green1 = ' ".s:mode."fg=".s:green1 ."'"
+  exe "let s:bg_green1 = ' ".s:mode."bg=".s:green1 ."'"
 
-  exe "let s:fg_green2 = ' ".s:mode."fg=".s:green2  ."'"
-  exe "let s:bg_green2 = ' ".s:mode."bg=".s:green2  ."'"
+  exe "let s:fg_green2 = ' ".s:mode."fg=".s:green2 ."'"
+  exe "let s:bg_green2 = ' ".s:mode."bg=".s:green2 ."'"
 
-  exe "let s:fg_green3 = ' ".s:mode."fg=".s:green3  ."'"
-  exe "let s:bg_green3= ' ".s:mode."bg=".s:green3  ."'"
+  exe "let s:fg_green3 = ' ".s:mode."fg=".s:green3 ."'"
+  exe "let s:bg_green3= ' ".s:mode."bg=".s:green3 ."'"
 
-  exe "let s:fg_green4 = ' ".s:mode."fg=".s:green4  ."'"
-  exe "let s:bg_green4= ' ".s:mode."bg=".s:green4  ."'"
+  exe "let s:fg_green4 = ' ".s:mode."fg=".s:green4 ."'"
+  exe "let s:bg_green4= ' ".s:mode."bg=".s:green4 ."'"
 
-  exe "let s:fg_green4 = ' ".s:mode."fg=".s:green4  ."'"
-  exe "let s:bg_green4= ' ".s:mode."bg=".s:green4  ."'"
+  exe "let s:fg_green4 = ' ".s:mode."fg=".s:green4 ."'"
+  exe "let s:bg_green4= ' ".s:mode."bg=".s:green4 ."'"
 
-  exe "let s:fg_statusLine_green = ' ".s:mode."fg=".s:statusLine_green  ."'"
-  exe "let s:bg_statusLine_green= ' ".s:mode."bg=".s:statusLine_green  ."'"
+  exe "let s:fg_statusLine_green = ' ".s:mode."fg=".s:statusLine_green ."'"
+  exe "let s:bg_statusLine_green= ' ".s:mode."bg=".s:statusLine_green ."'"
   "}}}
 
   "Purple {{{
-  exe "let s:fg_purple_todo = ' ".s:mode."fg=".s:purple_todo  ."'"
-  exe "let s:bg_purple_todo = ' ".s:mode."bg=".s:purple_todo  ."'"
+  exe "let s:fg_purple_todo = ' ".s:mode."fg=".s:purple_todo ."'"
+  exe "let s:bg_purple_todo = ' ".s:mode."bg=".s:purple_todo ."'"
 
-  exe "let s:fg_purple_comment = ' ".s:mode."fg=".s:purple_comment  ."'"
-  exe "let s:bg_purple_comment = ' ".s:mode."bg=".s:purple_comment  ."'"
+  exe "let s:fg_purple_comment = ' ".s:mode."fg=".s:purple_comment ."'"
+  exe "let s:bg_purple_comment = ' ".s:mode."bg=".s:purple_comment ."'"
 
-  exe "let s:fg_purple0 = ' ".s:mode."fg=".s:purple0  ."'"
-  exe "let s:bg_purple0 = ' ".s:mode."bg=".s:purple0  ."'"
+  exe "let s:fg_purple0 = ' ".s:mode."fg=".s:purple0 ."'"
+  exe "let s:bg_purple0 = ' ".s:mode."bg=".s:purple0 ."'"
 
-  exe "let s:fg_purple1 = ' ".s:mode."fg=".s:purple1  ."'"
-  exe "let s:bg_purple1 = ' ".s:mode."bg=".s:purple1  ."'"
+  exe "let s:fg_purple1 = ' ".s:mode."fg=".s:purple1 ."'"
+  exe "let s:bg_purple1 = ' ".s:mode."bg=".s:purple1 ."'"
 
-  exe "let s:fg_purple3 = ' ".s:mode."fg=".s:purple3  ."'"
-  exe "let s:bg_purple3 = ' ".s:mode."bg=".s:purple3  ."'"
+  exe "let s:fg_purple3 = ' ".s:mode."fg=".s:purple3 ."'"
+  exe "let s:bg_purple3 = ' ".s:mode."bg=".s:purple3 ."'"
 
-  exe "let s:fg_purple4 = ' ".s:mode."fg=".s:purple4  ."'"
-  exe "let s:bg_purple4 = ' ".s:mode."bg=".s:purple4  ."'"
+  exe "let s:fg_purple4 = ' ".s:mode."fg=".s:purple4 ."'"
+  exe "let s:bg_purple4 = ' ".s:mode."bg=".s:purple4 ."'"
 
-  exe "let s:fg_purple5 = ' ".s:mode."fg=".s:purple5  ."'"
-  exe "let s:bg_purple5 = ' ".s:mode."bg=".s:purple5  ."'"
+  exe "let s:fg_purple5 = ' ".s:mode."fg=".s:purple5 ."'"
+  exe "let s:bg_purple5 = ' ".s:mode."bg=".s:purple5 ."'"
 
-  exe "let s:fg_purple6 = ' " s:mode."fg=".s:purple6  ."'"
-  exe "let s:bg_purple6 = ' ".s:mode."bg=".s:purple6  ."'"
+  exe "let s:fg_purple6 = ' " s:mode."fg=".s:purple6 ."'"
+  exe "let s:bg_purple6 = ' ".s:mode."bg=".s:purple6 ."'"
   "}}}
 
   "Warm {{{
-  exe "let s:fg_warm0 = ' ".s:mode."fg=".s:warm0  ."'"
-  exe "let s:bg_warm0 = ' ".s:mode."bg=".s:warm0  ."'"
+  exe "let s:fg_warm0 = ' ".s:mode."fg=".s:warm0 ."'"
+  exe "let s:bg_warm0 = ' ".s:mode."bg=".s:warm0 ."'"
 
-  exe "let s:fg_warm1 = ' ".s:mode."fg=".s:warm1  ."'"
-  exe "let s:bg_warm1 = ' ".s:mode."bg=".s:warm1  ."'"
+  exe "let s:fg_warm1 = ' ".s:mode."fg=".s:warm1 ."'"
+  exe "let s:bg_warm1 = ' ".s:mode."bg=".s:warm1 ."'"
 
-  exe "let s:fg_warm2 = ' ".s:mode."fg=".s:warm2  ."'"
-  exe "let s:bg_warm2 = ' ".s:mode."bg=".s:warm2  ."'"
+  exe "let s:fg_warm2 = ' ".s:mode."fg=".s:warm2 ."'"
+  exe "let s:bg_warm2 = ' ".s:mode."bg=".s:warm2 ."'"
 
-  exe "let s:fg_warm3 = ' ".s:mode."fg=".s:warm3  ."'"
-  exe "let s:bg_warm3 = ' ".s:mode."bg=".s:warm3  ."'"
+  exe "let s:fg_warm3 = ' ".s:mode."fg=".s:warm3 ."'"
+  exe "let s:bg_warm3 = ' ".s:mode."bg=".s:warm3 ."'"
 
-  exe "let s:fg_warm4 = ' ".s:mode."fg=".s:warm4  ."'"
-  exe "let s:bg_warm4 = ' ".s:mode."bg=".s:warm4  ."'"
+  exe "let s:fg_warm4 = ' ".s:mode."fg=".s:warm4 ."'"
+  exe "let s:bg_warm4 = ' ".s:mode."bg=".s:warm4 ."'"
   "}}}
 "}}}
 "}}}
@@ -247,6 +255,7 @@ exe "let s:bg_dkBlue = ' ".s:mode."bg=".s:dkBlue  ."'"
   exe "hi MatchParen" .s:fg_warm4 .s:bg_NONE .s:sty_b
   exe "hi Special" .s:fg_ltBlue0
   exe "hi TabLineFill" s:bg_norm
+  exe "hi vimUserFunc" s:fg_black
 "
   "{{{ Folds
    exe "hi Folded" .s:bg_dkGray
@@ -259,12 +268,12 @@ exe "let s:bg_dkBlue = ' ".s:mode."bg=".s:dkBlue  ."'"
   exe "hi StatusLineNC" .s:fg_gray2 .s:bg_statusLine_green .s:sty_su
   "}}}
   "{{{ Line Number & Cursor
-  exe "hi LineNr" .s:fg_dkGray .s:bg_gray .s:sty_b
+  exe "hi LineNr" .s:fg_lineNR .s:bg_dkGray2
   exe "hi CursorLine" .s:bg_dkGray
   exe "hi CursorLineNr" .s:fg_ltBlue1 .s:bg_dkGray
   "}}}
   "{{{ Pmenu
-  exe "hi Pmenu"  .s:fg_white .s:bg_gray .s:sty_n
+  exe "hi Pmenu" .s:fg_white .s:bg_gray .s:sty_n
   exe "hi PmenuThumb" s:bg_norm
   exe "hi PmenuSel" .s:fg_ltBlue1 .s:bg_dkGray
   "}}}

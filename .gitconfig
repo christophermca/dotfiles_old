@@ -25,7 +25,7 @@
   excludesfile = /Users/chrismcadams/.gitignore_global
   gitproxy = gitproxy for github
 [credential]
-   helper = osxkeychain
+	helper = osxkeychain
 [diff]
 	tool = vimdiff
 [difftool]

@@ -1,5 +1,5 @@
 let g:netrw_dirhistmax  =10
 let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/Users/cmcadams/.vim/pack/colorschemes/opt/meta5/colors'
-let g:netrw_dirhist_2='/Users/cmcadams/Repos/dotfiles/.vim/pack/colorschemes/opt/meta5'
-let g:netrw_dirhist_3='/Users/cmcadams/Repos/dotfiles/.vim/pack/mca/start/viper'
+let g:netrw_dirhist_1='/Users/cmcadams/Repos/dotfiles/.vim/pack/mca/start/ctrlp.vim'
+let g:netrw_dirhist_2='/Users/cmcadams/Repos/dotfiles/.vim/pack/mca/start'
+let g:netrw_dirhist_3='/Users/cmcadams/Repos/dotfiles/.vim/pack/mca/start/ctrlp.vim'

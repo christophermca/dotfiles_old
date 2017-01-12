@@ -1,7 +1,6 @@
 #!/bin/bash
-
-#JAVA
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0_77)
+# SETUP {{{
+# TOC {{{
 workrc() {
   echo "
   WORKRC
@@ -37,13 +36,16 @@ workrc() {
 
   ALISES
   --------------
-  rb ........... rebuild
+  rebl ........... rebuild
   db ........... startDebug
   kd ........... killDebug
   clearTmux ........... clears tmux
   mochalocal ........... runs itg
   "
 }
+#}}}
+#JAVA
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0_77)
 
 # Checks for bash dot files
 if [ ! -L "$HOME/Repos/deal/.git/hooks/pre-commit" ]; then
@@ -60,8 +62,8 @@ export NVM_DIR="/users/cmcadams/.nvm"
 
 # Memcached
 ulimit -n 4096
-
-#### ALIAS
+#}}}
+# ALIASES {{{
 alias .workrc='vim $HOME/.workrc'
 alias mochalocal="itg"
 alias db="startDebug"
@@ -79,11 +81,11 @@ alias server="make reloader"
   alias mD="make dev"
   alias mS="make setup"
   alias shrink="npm run test-shrinkwrap || make shrinkwrap"
-
-#### FUNCTIONS
-
+#}}}
+# FUNCTIONS {{{
+# HELPER {{{
 killPort() {
-  if (( $# == 1  )); then
+  if (( $# == 1 )); then
     local PORT=$1
     local readonly USEDPORT=$(lsof -i :$PORT);
 
@@ -98,6 +100,37 @@ killPort() {
   fi
 }
 
+cleanStart() {
+  if (($# > 0)); then
+    if [[$1 -eq "-d"]]; then
+      npm cache clean && make clean setup assets dev
+    fi
+  else
+    if ((type "npm" && !type "make")) > dev/null; then
+      echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
+      rm -rf node_modules && npm install && gulp build server
+    elif ((type "make")) > /dev/null; then
+      echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
+      npm cache clean && make clean setup assets
+    else
+      echo -e "${COL_BLUE}not in /grpn-* or a Skelator app${NORMAL}";
+    fi
+  fi
+}
+
+itg () {
+  local FILE=$1
+  #testium_launch=false PORT=3070 mocha $FILE
+  mocha $FILE
+}
+
+function rebuild () {
+  gulp build
+  killPort 3070
+  tmux send-keys -t left "make dev" C-m
+}
+#}}}
+# DEBUG {{{
 runDebug() {
   if type "tmux" > /dev/null; then
     clearTmux
@@ -124,33 +157,61 @@ startDebug() {
   killDebug
   runDebug
 }
+#}}}
+#{{{ RELEASE
+prepRelease() {
+  DATE=$(date +'%Y%m%d')
+  echo -e "${COL_BLUE}running cleanRelease...${NORMAL}";
+  git checkout master;
+  git fetch --all;
+  git reset --hard upstream/master;
+  git push origin master;
+  npm cache clean && make clean setup assets;
+  git checkout -b "shrinkwrap-${DATE}";
+  make shrinkwrap;
+  git commit -am "new shrinkwrap for release ${DATE}";
+  git push origin "shrinkwrap-${DATE}";
+  echo -e "${COL_BLUE}Open a PR https://github.groupondev.com/funnel/deal/pulls${NORMAL}";
+  echo -e "${COL_BLUE}Once PR is merged run command:${NORMAL} buildRelease";
+}
 
-cleanStart() {
-  if (($# > 0)); then
-    if [[$1 -eq "-d"]]; then
-      npm cache clean && make clean setup assets dev
-    fi
+buildRelease() {
+  read -p "Create Release Candidate? [y/n] " response
+  if [[ $response =~ ([yY]) ]]; then
+    echo -e "${COL_BLUE}CREATING RELEASE BRANCH ${NORMAL}";
+    _buildReleaseCandidate
   else
-    if ((type "npm" && !type "make")) > dev/null; then
-      echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
-      rm -rf node_modules && npm install && gulp build server
-    elif type "make" > /dev/null; then
-      echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
-      npm cache clean && make clean setup assets
-    else
-      echo -e "${COL_BLUE}not in /grpn-* or a Skelator app${NORMAL}";
-    fi
+    echo 'nevermind then'
   fi
 }
 
-itg () {
-  local FILE=$1
-  #testium_launch=false PORT=3070 mocha $FILE
-  mocha $FILE
+tagRelease() {
+  DATE=$(date +'%Y.%m.%d_%H%M')
+  git tag "deal-${DATE}"
 }
 
-function rebuild () {
-  gulp build
-  killPort 3070
-  tmux send-keys -t left "make dev" C-m
+_buildReleaseCandidate() {
+  git fetch --all
+  DATE=$(date +'%Y.%m.%d_%H%M')
+  git co master
+  git reset --hard FETCH_HEAD
+  git branch -D release
+  git checkout -b release
+  tagRelease
+  prompt -p "shall I deploy the release branch? [y/n]" response
+  if [[ $response =~ ([yY]) ]]; then
+    _deployRelease
+  else
+    echo -e "${COL_BLUE}DID NOT DEPLOY${NORMAL}";
+  fi
 }
+
+_deployRelease() {
+  echo -e "${COL_BLUE}DEPLOYING RELEASE${NORMAL}";
+  git push -uf upstream release
+  git push origin --tags
+  git push upstream --tags
+}
+#}}}
+
+# vim: set fdm=marker:
