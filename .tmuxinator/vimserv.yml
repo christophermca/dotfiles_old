@@ -1,6 +1,6 @@
-# ~/.tmuxinator/vimsev.yml
+# ~/.tmuxinator/vimserv.yml
 
-name: vimsev
+name: vimserv
 root: ~/Repos/deal
 
 # Optional tmux socket
@@ -15,7 +15,7 @@ root: ~/Repos/deal
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
 
-# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# Change the command to call tmux. This can be used by derivatives/wrappers like byobu.
 # tmux_command: byobu
 
 # Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
@@ -28,7 +28,7 @@ root: ~/Repos/deal
 # attach: false
 
 # Runs after everything. Use it to attach to tmux with custom options etc.
-# post: tmux -CC attach -t vimsev
+# post: tmux -CC attach -t vimserv
 
 windows:
   - shell:

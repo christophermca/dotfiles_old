@@ -75,61 +75,86 @@ alias cleanBreak="echo DEPRICATED: please use cleanStart instead"
 alias rb="rebuild"
 alias server="make reloader"
 
-  # Make
-  alias mI="make inspector"
-  alias mTD="make test-dev"
-  alias mD="make dev"
-  alias mS="make setup"
-  alias shrink="npm run test-shrinkwrap || make shrinkwrap"
+# Make
+alias mI="make inspector"
+alias mTD="make test-dev"
+alias mD="make dev"
+alias mS="make setup"
+alias shrink="npm run test-shrinkwrap || make shrinkwrap"
 #}}}
 # FUNCTIONS {{{
-# HELPER {{{
-killPort() {
-  if (( $# == 1 )); then
-    local PORT=$1
-    local readonly USEDPORT=$(lsof -i :$PORT);
+  # HELPER {{{
 
-      if [[ -n $USEDPORT ]];
-      then
-        $(ps -eo pid,command | ag [n]ode | awk "{print $2}" | xargs kill -9 > /dev/null 2>&1 &)
+    reviewPullRequest() {
+      if (( $# == 1)); then
+        PR_NUM=$1
+        checkUntracked="$(git ls-files --others --exclude-standard)"
+        checkBranchState="$(git diff-index HEAD && git diff-index --cached HEAD)"
+        $(test -z "$checkBranchState" && test -z "$checkUntracked")
+
+        if (($? > 0)); then
+          echo 'stashing changes'
+          $(git stash save --no-keep-index --include-untracked "Saving To Check PR #${PR_NUM}")
+          if (($? > 0)); then
+            echo 'failed to stash changes, stopping process'
+          else
+            git co -b "PR-${PR_NUM}"
+            git fetch upstream refs/pull/${PR_NUM}/merge
+            git reset --hard FETCH_HEAD
+          fi
+        fi
       else
-        echo -e "${COL_BLUE} Port ${PORT} not in use";
+        echo "${COL_BLUE}Usage: reviewPullRequest <Pull Request Number>${NORMAL}"
       fi
-  else
-    echo "Usage: killPort <pid>"
-  fi
-}
 
-cleanStart() {
-  if (($# > 0)); then
-    if [[$1 -eq "-d"]]; then
-      npm cache clean && make clean setup assets dev
-    fi
-  else
-    if ((type "npm" && !type "make")) > dev/null; then
-      echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
-      rm -rf node_modules && npm install && gulp build server
-    elif ((type "make")) > /dev/null; then
-      echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
-      npm cache clean && make clean setup assets
+   }
+
+  killPort() {
+    if (( $# == 1 )); then
+      local PORT=$1
+      local readonly USEDPORT=$(lsof -i :$PORT);
+
+        if [[ -n $USEDPORT ]];
+        then
+          $(ps -eo pid,command | ag [n]ode | awk "{print $2}" | xargs kill -9 > /dev/null 2>&1 &)
+        else
+          echo -e "${COL_BLUE} Port ${PORT} not in use";
+        fi
     else
-      echo -e "${COL_BLUE}not in /grpn-* or a Skelator app${NORMAL}";
+      echo "${COL_BLUE}Usage: killPort <pid>${NORMAL}"
     fi
-  fi
-}
+  }
 
-itg () {
-  local FILE=$1
-  #testium_launch=false PORT=3070 mocha $FILE
-  mocha $FILE
-}
+  cleanStart() {
+    if (($# > 0 )); then
+      if [[$1 -eq "-d"]]; then
+        npm cache clean && make clean setup assets dev
+      fi
+    else
+      if command -v npm && ! command -v make > /dev/null; then
+        echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
+        rm -rf node_modules && npm install && gulp build server
+      elif command -v make > /dev/null; then
+        echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
+        npm cache clean && make clean setup assets
+      else
+        echo -e "${COL_BLUE}not in /grpn-* or a Skelator app${NORMAL}";
+      fi
+    fi
+  }
 
-function rebuild () {
-  gulp build
-  killPort 3070
-  tmux send-keys -t left "make dev" C-m
-}
-#}}}
+  itg () {
+    local FILE=$1
+    #testium_launch=false PORT=3070 mocha $FILE
+    mocha $FILE
+  }
+
+  function rebuild () {
+    gulp build
+    killPort 3070
+    tmux send-keys -t left "make dev" C-m
+  }
+  #}}}
 # DEBUG {{{
 runDebug() {
   if type "tmux" > /dev/null; then
@@ -214,4 +239,4 @@ _deployRelease() {
 }
 #}}}
 
-# vim: set fdm=marker:
+# vim: fdm=marker foldlevelstart=0 foldlevel=0
