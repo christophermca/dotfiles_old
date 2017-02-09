@@ -35,22 +35,27 @@ set autoindent
   set notimeout
   set ttimeoutlen=20
 "}}}
-" auto {{{
-autocmd BufWritePre * :silent! :call Respace()
-set autoread
-autocmd CursorHold * checktime
-augroup vimrc_autocmds
-  hi OverLength ctermfg=NONE ctermbg=17
-  autocmd BufEnter * match OverLength /\%80v.*/
-augroup END
-augroup reload_vimrc
-  autocmd!
-  autocmd bufwritepost $myvimrc source $myvimrc
-augroup end
+  " auto commands {{{
+  autocmd BufWritePre * :silent! :call <SID>Respace()
+  set autoread
 
-augroup bufread,bufnewfile *.cson set filetype=coffee
-augroup bufread,bufnewfile *.json set filetype=json
-"}}}
+  augroup checkfileupdate
+    autocmd WinEnter * :silent :checktime
+  augroup END
+
+  augroup vimrc_autocmds
+    hi OverLength ctermfg=NONE ctermbg=17
+    autocmd BufEnter * match OverLength /\%80v.*/
+  augroup END
+
+  augroup reload_vimrc
+    autocmd!
+    autocmd bufwritepost $myvimrc source $myvimrc
+  augroup end
+
+  augroup bufread,bufnewfile *.cson set filetype=coffee
+  augroup bufread,bufnewfile *.json set filetype=json
+  "}}}
 "}}}
 " COLORS AND FONTS {{{
 "=====================================================================
@@ -177,6 +182,7 @@ set foldenable " Enable folding
 set foldlevel=99
 set foldlevelstart=10 " Open mast folds by default
 set foldnestmax=10 " 10 nested fold max
+set foldmethod=syntax
 
 let g:SimpylFold_docstring_preview = 1
 "}}}
@@ -272,10 +278,13 @@ nmap <C-j> <C-w>j
 nnoremap - :call OpenView()<CR>
 "}}}
 " {{{ FUNCTIONS
-function! Respace()
-   :%s#\S\zs\s\+\ze\S# #ge|'' "Spacing between words
-   :%s#\s\+$##ge|'' "Spacing at EOL
-   :nohlsearch
+function! <SID>Respace()
+   let l = line(".")
+   let c = col(".")
+   %s#\S\zs\s\s\ze\S# #ge "Double spaces
+   %s#\s\+$##ge "Spacing at EOL
+   nohlsearch
+   call cursor(l, c)
 endfunction
 
 function! ToggleColorEdit()
@@ -338,4 +347,4 @@ nnoremap <Leader>xw :SubW<space>
 nnoremap <Leader>xs :SubSW<space>
 "}}}
 
-" vim: fdm=marker:
+" vim: fdm=marker foldminlines=1
