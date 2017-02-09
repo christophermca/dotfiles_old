@@ -45,67 +45,70 @@ endif
   "Screen Background Colors {{{
     let s:norm_bg_dark ='234'
     let s:norm_bg_base ='237'
-    let s:norm_bg_light ='247'
+    let s:norm_bg_light ='251'
     let s:norm_fg_base = '255'
   "}}}
   "Colors {{{
-  " mono {{{
-    let s:white = '15'
-    let s:black = '16'
-    let s:dkGray = '235'
-    let s:dkGray2 = '239'
-    let s:dkGray1 = '233'
-    let s:gray = '244'
-    let s:gray1= '253'
-    let s:gray2 = '242'
-  "}}}
-  "special {{{
-    let s:purple_comment = '68'
-    let s:purple_todo = '57'
-    let s:lineNR = '144'
-    let s:statusLine_green= '158'
-    let s:diff1 = '46'
-    let s:diff2 = '22'
-    let s:diff3 = '9'
-    let s:diff4 = '52'
-    let s:diff5 = '10'
-    let s:diff6 = '239'
+    " Dark & Base {{{
+      " mono {{{
+        let s:white = '15'
+        let s:black = '16'
+        let s:dkGray = '235'
+        let s:dkGray2 = '239'
+        let s:dkGray1 = '233'
+        let s:gray = '244'
+        let s:gray1= '253'
+        let s:gray2 = '242'
+      "}}}
+      "special {{{
+        let s:purple_comment = '68'
+        let s:purple_todo = '57'
+        let s:lineNR = '144'
+        let s:statusLine_green= '158'
+        let s:diff1 = '46'
+        let s:diff2 = '22'
+        let s:diff3 = '9'
+        let s:diff4 = '52'
+        let s:diff5 = '10'
+        let s:diff6 = '239'
 
-    let s:spell1 = '20'
+        let s:spell1 = '20'
+      "}}}
+      "{{{ green
+        let s:ltGreen2 = '119'
+        let s:green1= '84'
+        let s:green2= '40'
+        let s:green3= '71'
+        let s:green4= '48'
+      "}}}
+      "blue {{{
+      let s:ltBlue0 = '39'
+      let s:ltBlue1 = '87'
+      let s:ltBlue2 = '195'
+      let s:dkBlue = '19'
+      let s:blue1 = '27'
+      let s:blue2 = '33'
+      "}}}
+      "purple {{{
+      let s:purple0 = '105'
+      let s:purple1 = '99'
+      let s:purple3 = '12'
+      let s:purple4 = '153'
+      let s:purple5 = '146'
+      let s:purple6 = '135'
+      let s:purple7 = '111'
+      "}}}
+      "warm {{{
+      let s:warm0 = '214'
+      let s:warm1 = '190'
+      let s:warm2 = '222'
+      let s:warm3 = '202'
+      let s:warm4 = '222'
+      "}}}
+    " }}}
+    " }}}
   "}}}
-  "{{{ green
-    let s:ltGreen2 = '119'
-    let s:green1= '84'
-    let s:green2= '40'
-    let s:green3= '71'
-    let s:green4= '48'
-  "}}}
-  "blue {{{
-  let s:ltBlue0 = '39'
-  let s:ltBlue1 = '87'
-  let s:ltBlue2 = '195'
-  let s:dkBlue = '19'
-  let s:blue1 = '27'
-  let s:blue2 = '33'
-  "}}}
-  "purple {{{
-  let s:purple0 = '105'
-  let s:purple1 = '99'
-  let s:purple3 = '12'
-  let s:purple4 = '153'
-  let s:purple5 = '146'
-  let s:purple6 = '135'
-  let s:purple7 = '111'
-  "}}}
-  "warm {{{
-  let s:warm0 = '214'
-  let s:warm1 = '190'
-  let s:warm2 = '222'
-  let s:warm3 = '202'
-  let s:warm4 = '222'
-  "}}}
-" }}}
-""}}}
+"}}}
 "{{{ Build Color Strings
 exe "let s:fg_NONE = ' ".s:mode."fg=".s:none ."'"
 exe "let s:bg_NONE = ' ".s:mode."bg=".s:none ."'"
@@ -244,7 +247,6 @@ exe "let s:bg_dkBlue = ' ".s:mode."bg=".s:dkBlue ."'"
   exe "let s:bg_warm4 = ' ".s:mode."bg=".s:warm4 ."'"
   "}}}
 "}}}
-"}}}
 "SET Highlights {{{
   exe "hi Normal" .s:fg_norm .s:bg_norm
   exe "hi Visual" .s:fg_black .s:bg_ltBlue1
@@ -255,7 +257,6 @@ exe "let s:bg_dkBlue = ' ".s:mode."bg=".s:dkBlue ."'"
   exe "hi MatchParen" .s:fg_warm4 .s:bg_NONE .s:sty_b
   exe "hi Special" .s:fg_ltBlue0
   exe "hi TabLineFill" s:bg_norm
-  exe "hi vimUserFunc" s:fg_black
 "
   "{{{ Folds
    exe "hi Folded" .s:bg_dkGray
@@ -296,25 +297,43 @@ exe "let s:bg_dkBlue = ' ".s:mode."bg=".s:dkBlue ."'"
     exe "hi Operator" .s:fg_green2
 
   "}}}
-  "{{{ Identifier
-    exe "hi Identifier" .s:fg_green4
-    exe "hi Function" .s:fg_green1 s:sty_b
+"{{{ Identifier
+  exe "hi Identifier" .s:fg_green4
+  exe "hi Function" .s:fg_green1 s:sty_b
 
-  "}}}
+"}}}
   "{{{ Constant
     exe "hi Constant" .s:fg_green1
-    exe "hi String" .s:fg_purple3
+    exe "hi String" .s:fg_purple0 .s:b
   "}}}
-  "{{{ Messaging
-  exe "hi Todo" .s:fg_warm2 .s:bg_purple_todo .s:sty_b
-  exe "hi Comment" .s:fg_purple_comment .s:sty_b
-  "}}}
-  "{{{ Colorscheme Functions
-  " TODO create functions to change `Normal` color contrast
-  "}}}
+"{{{ Messaging
+exe "hi Todo" .s:fg_warm2 .s:bg_purple_todo .s:sty_b
+exe "hi Comment" .s:fg_purple_comment .s:sty_b
+"}}}
   "{{{ Ruby
   exe "hi rubyDefine" .s:fg_green1 s:sty_b
   "}}}
+"}}}
+"Colorscheme Functions {{{
+let s:luminosity = 0
+
+function! ChangeBackground()
+
+  let backgroundList = [s:norm_bg_dark, s:norm_bg_base, s:norm_bg_light]
+  let background = get(backgroundList, s:luminosity, s:norm_bg_base)
+  exe "let s:new_bg = ' ".s:mode."bg=".background ."'"
+
+  exe "hi Normal" .s:new_bg
+
+  if s:luminosity >= 3
+    let s:luminosity = 0
+  else
+    let s:luminosity += 1
+  endif
+
+
+endfunction
+nmap <Leader>[] :call ChangeBackground()<CR>
 "}}}
 "{{{ License
 " Copyright (c) 2016 ChristopherMCA
@@ -337,6 +356,5 @@ exe "let s:bg_dkBlue = ' ".s:mode."bg=".s:dkBlue ."'"
 " OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 " THE SOFTWARE.
 "
-" vim: set fdm=marker:
+" vim: fdm=marker foldlevelstart=0 foldlevel=0
 "}}}
-
