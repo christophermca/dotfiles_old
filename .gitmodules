@@ -7,3 +7,6 @@
 [submodule "meta5"]
 	path = meta5
 	url = https://github.com/christophermca/meta5.git
+[submodule ".vim/pack/mca/opt/ultisnips"]
+	path = .vim/pack/mca/opt/ultisnips
+	url = https://github.com/SirVer/ultisnips.git

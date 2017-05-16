@@ -92,21 +92,23 @@ attach() {
 }
 
 remaster() {
-  local readonly CURRENTBRANCH=$(git rev-parse --abbrev-ref HEAD)
+  local readonly CURRENTBRANCH=$(git symbolic-ref --short HEAD)
 
   git fetch --all
 
-  if [ $CURRENTBRANCH != 'master' ]; then
-    git checkout master
-    git reset --hard upstream/master
-    git push origin master
-    git checkout $CURRENTBRANCH
-    git pull --rebase upstream master
+  if [[ -n "$CURRENTBRANCH" ]]; then
+    if [[ "$CURRENTBRANCH" != "master" ]]; then
+      git checkout master
+      git reset --hard upstream/master
+      git push origin master
+      git checkout $CURRENTBRANCH
+      git pull --rebase upstream master
 
-  else
-    git reset --hard upstream/master
+    else
+      git reset --hard upstream/master
 
-  fi
+    fi
+fi
 
 }
 

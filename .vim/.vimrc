@@ -179,10 +179,10 @@ set magic
 " folding {{{
 " ****************
 set foldenable " Enable folding
-set foldlevel=99
-set foldlevelstart=10 " Open mast folds by default
-set foldnestmax=10 " 10 nested fold max
 set foldmethod=syntax
+set foldlevel=99
+"set foldlevelstart=10 " Open mast folds by default
+"set foldnestmax=10 " 10 nested fold max
 
 let g:SimpylFold_docstring_preview = 1
 "}}}
@@ -257,7 +257,6 @@ nmap <Leader>cp :let @+ = expand("%")<cr>
 map <Leader>ag :Ack<Space>
 
 " Saving
-
 map <Leader>wr :w<CR>
 
 " Vimrc
@@ -281,7 +280,7 @@ nnoremap - :call OpenView()<CR>
 function! <SID>Respace()
    let l = line(".")
    let c = col(".")
-   %s#\S\zs\s\s\ze\S# #ge "Double spaces
+   "%s#\S\zs\s\s\ze\S# #ge "Double spaces
    %s#\s\+$##ge "Spacing at EOL
    nohlsearch
    call cursor(l, c)
