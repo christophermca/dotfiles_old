@@ -5,8 +5,14 @@
 	path = viper
 	url = https://github.com/christophermca/viper.git
 [submodule "meta5"]
-	path = meta5
+	path = ./.vim/pack/colorschemes/opt/meta5
 	url = https://github.com/christophermca/meta5.git
+[submodule "speyside"]
+	path = speyside
+	url = https://github.com/christophermca/speyside.git
 [submodule ".vim/pack/mca/opt/ultisnips"]
 	path = .vim/pack/mca/opt/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
+[submodule "indentLine"]
+	path = .vim/pack/mca/opt/indentLine
+	url = https://github.com/Yggdroot/indentLine
