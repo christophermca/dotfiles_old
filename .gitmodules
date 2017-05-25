@@ -4,12 +4,6 @@
 [submodule "viper"]
 	path = viper
 	url = https://github.com/christophermca/viper.git
-[submodule "speyside"]
-	path = speyside
-	url = https://github.com/christophermca/speyside.git
 [submodule ".vim/pack/mca/opt/ultisnips"]
 	path = .vim/pack/mca/opt/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
-[submodule "indentLine"]
-	path = .vim/pack/mca/opt/indentLine
-	url = https://github.com/Yggdroot/indentLine
