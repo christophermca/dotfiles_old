@@ -4,9 +4,6 @@
 [submodule "viper"]
 	path = viper
 	url = https://github.com/christophermca/viper.git
-[submodule "meta5"]
-	path = ./.vim/pack/colorschemes/opt/meta5
-	url = https://github.com/christophermca/meta5.git
 [submodule "speyside"]
 	path = speyside
 	url = https://github.com/christophermca/speyside.git
