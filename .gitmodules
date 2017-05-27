@@ -1,6 +1,3 @@
-[submodule "subW"]
-	path = subW
-	url = https://github.com/christophermca/subW.git
 [submodule "viper"]
 	path = viper
 	url = https://github.com/christophermca/viper.git
