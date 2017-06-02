@@ -15,8 +15,8 @@ if [ ! -L "$HOME/.inputrc" ]; then
 fi
 
 # Checks for vim dot files/folders
-if [ ! -L "$HOME/.vim" ]; then
-  ln -s ~/Repos/dotfiles/.vim/ ~/.vim/
+if [ ! -d "$HOME/.vim" ]; then
+  ln -s ~/Repos/dotfiles/.vim/ ~/
 fi
 
 if [ ! -L "$HOME/.vimrc" ]; then
@@ -37,8 +37,8 @@ if [ ! -L "$HOME/.tmux.conf" ]; then
   ln -s ~/Repos/dotfiles/.tmux.conf ~/.tmux.conf
 fi
 
-if [ ! -L "$HOME/.tmuxinator" ]; then
-  ln -s ~/Repos/dotfiles/.tmuxinator/ ~/.tmuxinator/
+if [ ! -d "$HOME/.tmuxinator" ]; then
+  ln -s ~/Repos/dotfiles/.tmuxinator/ ~/
 fi
 
 # Load .bashrc, containing non-login related bash initializations.
