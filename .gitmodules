@@ -10,9 +10,9 @@
 [submodule ".vim/pack/mca/start/YouCompleteMe"]
 	path = .vim/pack/mca/start/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
-[submodule ".vim/pack/mca/start/ack"]
+[submodule ".vim/pack/mca/start/ack.vim"]
 	path = .vim/pack/mca/start/ack.vim
-	url = https://github.com/petdance/ack2.git
+	url = https://github.com/mileszs/ack.vim.git
 [submodule ".vim/pack/mca/start/ctrlp.vim"]
 	path = .vim/pack/mca/start/ctrlp.vim
 	url = https://github.com/kien/ctrlp.vim.git
