@@ -4,3 +4,57 @@
 [submodule ".vim/pack/mca/start/ultisnips"]
 	path = .vim/pack/mca/start/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
+[submodule ".vim/pack/mca/start/SimpylFold"]
+	path = .vim/pack/mca/start/SimpylFold
+	url = https://github.com/tmhedberg/SimpylFold.git
+[submodule ".vim/pack/mca/start/YouCompleteMe"]
+	path = .vim/pack/mca/start/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule ".vim/pack/mca/start/ack"]
+	path = .vim/pack/mca/start/ack.vim
+	url = https://github.com/petdance/ack2.git
+[submodule ".vim/pack/mca/start/ctrlp.vim"]
+	path = .vim/pack/mca/start/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim.git
+[submodule ".vim/pack/mca/start/emmet-vim"]
+	path = .vim/pack/mca/start/emmet-vim
+	url = https://github.com/mattn/emmet-vim.git
+[submodule ".vim/pack/mca/start/omnisharp-vim"]
+	path = .vim/pack/mca/start/omnisharp-vim
+	url = https://github.com/OmniSharp/omnisharp-vim.git
+[submodule ".vim/pack/mca/start/syntastic"]
+	path = .vim/pack/mca/start/syntastic
+	url = https://github.com/vim-syntastic/syntastic.git
+[submodule ".vim/pack/mca/start/vim-coffee-script"]
+	path = .vim/pack/mca/start/vim-coffee-script
+	url = https://github.com/kchmck/vim-coffee-script.git
+[submodule ".vim/pack/mca/start/vim-commentary"]
+	path = .vim/pack/mca/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
+[submodule ".vim/pack/mca/start/vim-dispatch"]
+	path = .vim/pack/mca/start/vim-dispatch
+	url = https://github.com/tpope/vim-dispatch.git
+[submodule ".vim/pack/mca/start/vim-flake8"]
+	path = .vim/pack/mca/start/vim-flake8
+	url = https://github.com/nvie/vim-flake8.git
+[submodule ".vim/pack/mca/start/vim-fugitive"]
+	path = .vim/pack/mca/start/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule ".vim/pack/mca/start/vim-surround"]
+	path = .vim/pack/mca/start/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule ".vim/pack/mca/start/vim-json"]
+	path = .vim/pack/mca/start/vim-json
+	url = https://github.com/elzr/vim-json.git
+[submodule ".vim/pack/mca/start/vim-mustache-handlebars"]
+	path = .vim/pack/mca/start/vim-mustache-handlebars
+	url = https://github.com/mustache/vim-mustache-handlebars.git
+[submodule ".vim/pack/mca/start/vim-ruby"]
+	path = .vim/pack/mca/start/vim-ruby
+	url = https://github.com/vim-ruby/vim-ruby.git
+[submodule ".vim/pack/mca/start/vim-stylus"]
+	path = .vim/pack/mca/start/vim-stylus
+	url = https://github.com/vim-scripts/vim-stylus.git
+[submodule ".vim/pack/mca/start/xterm-color-table"]
+	path = .vim/pack/mca/start/xterm-color-table.vim
+	url = https://github.com/guns/xterm-color-table.vim.git
