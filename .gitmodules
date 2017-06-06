@@ -1,6 +1,6 @@
 [submodule "viper"]
 	path = viper
 	url = https://github.com/christophermca/viper.git
-[submodule ".vim/pack/mca/opt/ultisnips"]
+[submodule ".vim/pack/mca/start/ultisnips"]
 	path = .vim/pack/mca/start/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
