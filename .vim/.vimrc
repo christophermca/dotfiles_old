@@ -92,7 +92,7 @@ set noswapfile " No swap files
 "}}}
 " general {{{
 set cursorline
-set lazyredraw " Redraw only when we need to
+"set lazyredraw " Redraw only when we need to
 set viewoptions=folds,options,cursor,unix,slash " Better Unix Windows compatibility
 set virtualedit=all " Allow for cursor beyond last character
 set history=1000 " Store a ton of history (default is 20)
@@ -346,8 +346,8 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
 "HomeGrown

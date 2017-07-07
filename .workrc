@@ -54,6 +54,7 @@ fi
 
 #Color Highlighting
 COL_BLUE="$(tput setaf 6)"
+COL_RED="$(tput setaf 1)"
 NORMAL=$(tput sgr0)
 
 # NVM install
@@ -127,20 +128,28 @@ alias shrink="npm run test-shrinkwrap || make shrinkwrap"
 
   cleanStart() {
     if (($# > 0 )); then
+      #TODO fix flag
       if [[$1 -eq "-d"]]; then
-        npm cache clean && make clean setup assets dev
+        echo -e "${COL_BLUE}running cleanStart {start server}...${NORMAL}";
+        # npm cache clean && make clean setup assets dev
       fi
+
     else
-      if command -v npm && ! command -v make > /dev/null; then
+
+      if  command -v npm && ! command -v make > /dev/null; then
         echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
-        rm -rf node_modules && npm install && gulp build server
+        $(rm -rf node_modules && npm install && gulp build server)
+      elif command -v yarn > /dev/null; then
+        echo -e "${COL_BLUE}running cleanStart {yarn}...${NORMAL}";
+        make clean setup assets
       elif command -v make > /dev/null; then
-        echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
-        npm cache clean && make clean setup assets
+        echo -e "${COL_BLUE}running cleanStart {npm}...${NORMAL}";
+        $(npm cache clean && make clean setup assets)
       else
-        echo -e "${COL_BLUE}not in /grpn-* or a Skelator app${NORMAL}";
+        echo -e "${COL_RED}[ERR] ${COL_BLUE}Cannot determine strategy to clean project${NORMAL}";
       fi
     fi
+
   }
 
   itg () {
