@@ -136,12 +136,14 @@ alias shrink="npm run test-shrinkwrap || make shrinkwrap"
 
     else
 
-      if  command -v npm && ! command -v make > /dev/null; then
+      if command -v npm && ! command -v make > /dev/null; then
         echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
         $(rm -rf node_modules && npm install && gulp build server)
       elif command -v yarn > /dev/null; then
         echo -e "${COL_BLUE}running cleanStart {yarn}...${NORMAL}";
-        make clean setup assets
+        #TODO yarn cache clean call; fails when called in this script
+        yarn cache clean;
+        make clean setup assets;
       elif command -v make > /dev/null; then
         echo -e "${COL_BLUE}running cleanStart {npm}...${NORMAL}";
         $(npm cache clean && make clean setup assets)
@@ -171,7 +173,7 @@ runDebug() {
   fi;
 
   if [ -a core/worker-shim.js ]; then
-    node debug core/worker-shim.js
+    node debug core/worker-shim.js;
   else
     node debug
   fi
@@ -247,5 +249,5 @@ _deployRelease() {
   git push upstream --tags
 }
 #}}}
-
-# vim: fdm=marker foldlevelstart=0 foldlevel=0
+#}}}
+# vim: fdm=marker foldlevelstart=1 foldlevel=0

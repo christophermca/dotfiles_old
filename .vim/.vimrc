@@ -280,7 +280,6 @@ nnoremap - :call OpenView()<CR>
 function! <SID>Respace()
    let l = line(".")
    let c = col(".")
-   "%s#\S\zs\s\s\ze\S# #ge "Double spaces
    %s#\s\+$##ge "Spacing at EOL
    nohlsearch
    call cursor(l, c)
@@ -315,7 +314,6 @@ endif
 
 
 " NETRW
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_preview = 1
 let g:netrw_liststyle = 0
 let g:netrw_banner = 0

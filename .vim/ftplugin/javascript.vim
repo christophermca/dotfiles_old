@@ -1,6 +1,3 @@
-setlocal shiftwidth=4
-setlocal tabstop=4
-setlocal softtabstop=4
-
+syntax region foldBraces start=/{/ end=/}/ transparent fold keepend extend
 setlocal foldmethod=syntax
 setlocal foldlevel=1
