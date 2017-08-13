@@ -307,24 +307,25 @@ endfunction
 " }}}
 " PLUGINS CONFIGS {{{
 "=====================================================================
-" AG - the silver searcher
+" AG - the silver searcher {{{
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
-
-
-" NETRW
+" }}}
+"
+" NETRW {{{
 let g:netrw_preview = 1
 let g:netrw_liststyle = 0
 let g:netrw_banner = 0
 let g:netrw_localrmdir='rm -r'
 let g:netrw_bufsettings="noma nomod nonu nobl nowrap ro rnu"
-
-" CTRL P
+" }}}
+"
+" CTRL P {{{
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP ./'
 let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
-"
+
 " Set the max files
 let g:ctrlp_max_files = 10000
 
@@ -337,18 +338,13 @@ let g:ctrlp_user_command = {
   \ 'fallback': 'find %s -type f | head -' . g:ctrlp_max_files
   \ }
 endif
+"}}}
 
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"Async Linting Engine{{{
+let g:ale_lint_on_text_changed = 'never'
+"}}}
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
-"HomeGrown
+"HomeGrown {{{
 nnoremap <leader>v :call Viper()<CR>
 nnoremap <Leader>xw :SubW<space>
 nnoremap <Leader>xs :SubSW<space>

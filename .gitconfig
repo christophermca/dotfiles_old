@@ -11,8 +11,8 @@
    graph = 'git log --oneline --graph --abbrev-commit --pretty=format:"%Cgreen %h %Creset%s %n%an - %cr %n%n"'
    mismatch = ls-files -u
    del = branch -D
-   remdel = push origin --delete
-   updel = push upstream --delete
+   remdel = push origin --no-verify --delete
+   updel = push upstream --no-verify --delete
    pullr = pull --rebase
    b = branch
 [help]
