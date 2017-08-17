@@ -1,6 +1,6 @@
-# ~/.tmuxinator/layout2.yml
+# ~/.tmuxinator/vt.yml
 
-name: layout2
+name: vt
 root: ~/Repos/deal
 
 # Optional tmux socket
@@ -28,7 +28,7 @@ root: ~/Repos/deal
 # attach: false
 
 # Runs after everything. Use it to attach to tmux with custom options etc.
-# post: tmux -CC attach -t layout2
+# post: tmux -CC attach -t vt
 
 windows:
   - editor:
