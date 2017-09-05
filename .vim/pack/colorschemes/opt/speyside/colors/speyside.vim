@@ -1,33 +1,40 @@
 " Author: 'Christopher MCA'
-" Site: https:/github.com/christophermca/speyside
-" Version: 0.00.1
+" Site: https:/github.com/christophermca/speyside " Version: 0.00.1
+let dict = {}
 
 
-"{{{ Colorscheme Setup
+" Colorscheme Setup {{{
 highlight clear
 if exists("syntax_on")
   syntax reset
 endif
 set background=dark
 let colors_name = "speyside"
-" Mode {{{
 if has("gui_running")
 "TODO add gui values
+  echom 'not compatiable with gui'
 else
-    let s:mode = 'cterm'
+  let s:mode = 'cterm'
 endif
+
+if !exists("s:mode")
+  echom 's:mode not set'
+  let s:mode = 'cterm'
+endif
+
+
 "}}}
-"}}}
- "Font Styles {{{
-  let s:b = 'bold'
-  let s:i = 'italic'
-  let s:in = 'inverse'
-  let s:none = 'NONE'
-  let s:r = 'reverse'
-  let s:s = 'standout'
-  let s:u = 'underline'
-  "
-  "Build Style Strings {{{
+" Highlight Styles {{{
+ "Variables {{{
+    let s:b = 'bold'
+    let s:i = 'italic'
+    let s:in = 'inverse'
+    let s:none = 'NONE'
+    let s:r = 'reverse'
+    let s:s = 'standout'
+    let s:u = 'underline'
+  "}}}
+  " Build Style Strings {{{
     exe "let s:sty_b = ' " .s:mode."=".s:b"'"
     exe "let s:sty_i = ' " .s:mode."=".s:i"'"
     exe "let s:sty_in = ' " .s:mode."=".s:in"'"
@@ -38,7 +45,7 @@ endif
     exe "let s:sty_u = ' " .s:mode."=".s:u"'"
   "}}}
 "}}}
-"Color Palette {{{
+" Color Palette {{{
 " GUI {{{
 "}}}
 "Terminal {{{
@@ -49,8 +56,8 @@ endif
     let s:norm_fg_base = '255'
   "}}}
   "Colors {{{
-    " Dark & Base {{{
-      " mono {{{
+    " Base {{{
+      " monochromatic {{{
         let s:white = '15'
         let s:black = '16'
         let s:dkGray = '235'
@@ -247,7 +254,8 @@ exe "let s:bg_dkBlue = ' ".s:mode."bg=".s:dkBlue ."'"
   exe "let s:bg_warm4 = ' ".s:mode."bg=".s:warm4 ."'"
   "}}}
 "}}}
-"SET Highlights {{{
+"SET Highlights (Default) {{{
+function! s:Default()
   exe "hi Normal" .s:fg_norm .s:bg_norm
   exe "hi Visual" .s:fg_black .s:bg_ltBlue1
   exe "hi Type" .s:fg_purple4
@@ -313,27 +321,56 @@ exe "hi Comment" .s:fg_purple_comment .s:sty_b
   "{{{ Ruby
   exe "hi rubyDefine" .s:fg_green1 s:sty_b
   "}}}
+endfunction
+:call <SID>Default()
 "}}}
+" Color Overrides {{{
+  " LIGHT {{{
+  " {name, foreground(fg), background(bg), style}
+    "let s:LightOverrides = [ {'name':'Normal', 'fg':'fg_black'} ]
+    let path = expand("%:h" . "/color-overrides/light-overrides.vim")
+
+
+  "}}}
+"}}}
+
 "Colorscheme Functions {{{
-let s:luminosity = 0
+if !exists('dict.speysideLuminosity')
+  let dict["speysideLuminosity"] = 0
+endif
 
-function! ChangeBackground()
-
-  let backgroundList = [s:norm_bg_dark, s:norm_bg_base, s:norm_bg_light]
-  let background = get(backgroundList, s:luminosity, s:norm_bg_base)
-  exe "let s:new_bg = ' ".s:mode."bg=".background ."'"
-
-  exe "hi Normal" .s:new_bg
-
-  if s:luminosity >= 3
-    let s:luminosity = 0
+function! Luminance() dict
+  if self["speysideLuminosity"] >= 2
+    let self["speysideLuminosity"] = 0
   else
-    let s:luminosity += 1
+    let self["speysideLuminosity"] += 1
   endif
 
+  :call <SID>Overrides()
 
 endfunction
-nmap <Leader>[] :call ChangeBackground()<CR>
+nmap <Leader>[] :call Luminance()<CR>
+
+function! s:Overrides() dict
+  let backgroundList = [s:norm_bg_dark, s:norm_bg_light]
+  let background = get(backgroundList, self["speysideLuminosity"], s:norm_bg_base)
+  exe "let s:new_bg = ' ".s:mode."bg=".background ."'"
+  exe "hi Normal" .s:new_bg
+
+  if self["speysideLuminosity"] == 1
+    :call <SID>Default()
+    ":call <SID>OverrideDefault(s:LightOverrides)
+  endif
+endfunction
+
+function! s:OverrideDefault(overrides)
+  for object in a:overrides
+    let l:overrideObject = object
+    let buildString = "'hi " .l:overrideObject.name ."'". " "  "s:".l:overrideObject.fg
+    echom buildString
+    "exe "hi Normal" .s:fg_norm .s:bg_norm
+  endfor
+endfunction
 "}}}
 "{{{ License
 " Copyright (c) 2016 ChristopherMCA
