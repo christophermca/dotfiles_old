@@ -57,10 +57,6 @@ COL_BLUE="$(tput setaf 6)"
 COL_RED="$(tput setaf 1)"
 NORMAL=$(tput sgr0)
 
-# NVM install
-export NVM_DIR="/users/cmcadams/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # this loads nvm
-
 # Memcached
 ulimit -n 4096
 #}}}
@@ -74,7 +70,6 @@ alias kd="killDebug"
 alias clearTmux=" clear && tmux clear-history"
 alias cleanBreak="echo DEPRICATED: please use cleanStart instead"
 alias rb="rebuild"
-alias server="make reloader"
 
 # Make
 alias mI="make inspector"
@@ -173,7 +168,7 @@ runDebug() {
   fi;
 
   if [ -a core/worker-shim.js ]; then
-    node debug core/worker-shim.js;
+    NODE_ENV=test node debug core/worker-shim.js;
   else
     node debug
   fi

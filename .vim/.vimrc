@@ -307,12 +307,21 @@ endfunction
 " }}}
 " PLUGINS CONFIGS {{{
 "=====================================================================
+"
+"{{{ Speyside - Coloscheme
+if !exists('g:SpeysideLuminosity')
+  let g:SpeysideLuminosity = 1
+endif
+
+"}}}}
+
+
 " AG - the silver searcher {{{
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 " }}}
-"
+
 " NETRW {{{
 let g:netrw_preview = 1
 let g:netrw_liststyle = 0
@@ -320,7 +329,7 @@ let g:netrw_banner = 0
 let g:netrw_localrmdir='rm -r'
 let g:netrw_bufsettings="noma nomod nonu nobl nowrap ro rnu"
 " }}}
-"
+
 " CTRL P {{{
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP ./'
@@ -342,7 +351,13 @@ endif
 
 "Async Linting Engine{{{
 let g:ale_lint_on_text_changed = 'never'
-"}}}
+
+" Edit Error and Warning highlighting
+let g:ale_sign_warning='●'
+hi ALEErrorSign ctermfg=red ctermbg=none
+
+let g:ale_sign_error='●'
+hi ALEWarningSign ctermfg=yellow ctermbg=none"}}}
 
 "HomeGrown {{{
 nnoremap <leader>v :call Viper()<CR>
