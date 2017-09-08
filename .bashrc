@@ -59,7 +59,7 @@ alias ngxR='sudo nginx -s reload'
 alias rem='remaster'
 
 alias copy="tr -d '\n' | pbcopy"
-alias restartBash="source ~/.bash_profile && reset"
+alias restartBash="reset && source ~/.bash_profile"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 
 attach() {
@@ -100,13 +100,11 @@ remaster() {
     if [[ "$CURRENTBRANCH" != "master" ]]; then
       git checkout master
       git reset --hard upstream/master
-      git push origin master
+      git push origin master --no-verify
       git checkout $CURRENTBRANCH
       git pull --rebase upstream master
-
     else
       git reset --hard upstream/master
-
     fi
 fi
 
@@ -129,7 +127,3 @@ fi
 # BLINK=$(tput blink)
 # REVERSE=$(tput smso)
 # UNDERLINE=$(tput smul)
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
