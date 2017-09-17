@@ -1,7 +1,7 @@
 " Author: 'Christopher MCA'
 " Site: https:/github.com/christophermca/speyside
-" Version: 0.00.1
-g:speysidePalette = {}
+" Version: 0.00.3
+let g:speysidePalette = {}
 
 
 "{{{ Colorscheme Setup
@@ -44,8 +44,8 @@ endif
 "}}}
 "Terminal {{{
   "Screen Background Colors {{{
-    let speysidePalette['norm_bg_dark'] = '234'
-    let speysidePalette['norm_bg_base'] = '237'
+    let g:speysidePalette['norm_bg_dark'] = '234'
+    let g:speysidePalette['norm_bg_base'] = '237'
     let s:norm_bg_dark ='234'
     let s:norm_bg_base ='237'
     let s:norm_bg_light ='251'

@@ -163,12 +163,13 @@ alias shrink="npm run test-shrinkwrap || make shrinkwrap"
   #}}}
 # DEBUG {{{
 runDebug() {
-  if type "tmux" > /dev/null; then
-    clearTmux
-  fi;
+
+   if type "tmux" > /dev/null; then
+     clearTmux
+   fi;
 
   if [ -a core/worker-shim.js ]; then
-    NODE_ENV=test node debug core/worker-shim.js;
+    node debug core/worker-shim.js;
   else
     node debug
   fi
@@ -185,6 +186,14 @@ fi
 }
 
 startDebug() {
+
+  echo '$1: '$1
+  if [$1 == '-t']; then
+    NODE_ENV=test
+  else
+    NODE_ENV=
+  fi
+
   killDebug
   runDebug
 }
