@@ -1,21 +1,22 @@
 " Author: 'Christopher MCA'
 " Site: https:/github.com/christophermca/speyside
 " Version: 0.00.3
-let g:speysidePalette = {}
-
 
 "{{{ Colorscheme Setup
+
 highlight clear
 if exists("syntax_on")
   syntax reset
 endif
+
 set background=dark
 let colors_name = "speyside"
+
 " Mode {{{
 if has("gui_running")
 "TODO add gui values
 else
-    let s:mode = 'cterm'
+  let s:mode = 'cterm'
 endif
 "}}}
 "}}}
@@ -44,8 +45,6 @@ endif
 "}}}
 "Terminal {{{
   "Screen Background Colors {{{
-    let g:speysidePalette['norm_bg_dark'] = '234'
-    let g:speysidePalette['norm_bg_base'] = '237'
     let s:norm_bg_dark ='234'
     let s:norm_bg_base ='237'
     let s:norm_bg_light ='251'
@@ -259,7 +258,7 @@ exe "let s:bg_dkBlue = ' ".s:mode."bg=".s:dkBlue ."'"
   exe "hi Conditional" .s:green2 .s:sty_b
   exe "hi MatchParen" .s:fg_warm4 .s:bg_NONE .s:sty_b
   exe "hi Special" .s:fg_ltBlue0
-  exe "hi TabLineFill" s:bg_norm
+  exe "hi TabLineFill" .s:bg_norm
 "
   "{{{ Folds
    exe "hi Folded" .s:bg_dkGray
@@ -318,24 +317,30 @@ exe "hi Comment" .s:fg_purple_comment .s:sty_b
   "}}}
 "}}}
 "Colorscheme Functions {{{
-let g:speysideLuminosity = 0
-function! ChangeBackground()
+if !exists('g:SpeysideLuminosity')
+  let g:SpeysideLuminosity = 0
+endif
 
-  let backgroundList = [s:norm_bg_dark, s:norm_bg_base, s:norm_bg_light]
-  let background = get(backgroundList, g:speysideLuminosity, s:norm_bg_base)
-  exe "let s:new_bg = ' ".s:mode."bg=".background ."'"
+if !exists('*ToggleLuminance')
+  function! ToggleLuminance() abort
+    let backgroundList = [s:norm_bg_dark, s:norm_bg_light]
+    let background = get(backgroundList, g:SpeysideLuminosity, s:norm_bg_base)
+    " exe "let s:new_bg = ' ".s:mode."bg=".background ."'"
+    " exe "hi Normal" .s:new_bg
 
-  exe "hi Normal" .s:new_bg
+    call speyside#main#UpdateLuminance()
+    call speyside#main#UpdateColors(s:mode, background)
+  endfunction
+endif
 
-  if g:speysideLuminosity >= 3
-    let g:speysideLuminosity = 0
-  else
-    let g:speysideLuminosity += 1
-  endif
 
-endfunction
-
-nmap <Leader>[] :call ChangeBackground()<CR>
+if !hasmapto('<Plug>Speyside') && maparg('gs','n') ==# ''
+  nnoremap <Plug>Speyside :<C-U>call ToggleLuminance()<CR>
+  xmap gs  <Plug>Speyside
+  vmap gs  <Plug>Speyside
+  nmap gs  <Plug>Speyside
+  omap gs  <Plug>Speyside
+endif
 "}}}
 "{{{ License
 " Copyright (c) 2016 ChristopherMCA

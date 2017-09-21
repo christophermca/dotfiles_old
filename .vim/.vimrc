@@ -13,11 +13,11 @@ endif
 
 " SETUP {{{
 "=====================================================================
-" general {{{
+" GENERAL {{{
 set nocp
 set fileformat=unix
 let g:vim_json_syntax_conceal=0
-set shortmess+=I
+set shortmess+=i
 set textwidth=80
 set formatoptions=cq
 set backspace=indent,eol,start
@@ -35,27 +35,28 @@ set autoindent
   set notimeout
   set ttimeoutlen=20
 "}}}
-  " auto commands {{{
-  autocmd BufWritePre * :silent! :call <SID>Respace()
-  set autoread
+"}}}
+" AUTOCMDS {{{
+set autoread
+autocmd BufWritePre * :silent! :call <SID>Respace()
 
-  augroup checkfileupdate
-    autocmd WinEnter * :silent :checktime
-  augroup END
+augroup checkfileupdate
+  autocmd WinEnter * :silent :checktime
+augroup END
 
-  augroup vimrc_autocmds
-    hi OverLength ctermfg=NONE ctermbg=17
-    autocmd BufEnter * match OverLength /\%80v.*/
-  augroup END
+augroup vimrc_autocmds
+  autocmd!
+  hi OverLength ctermfg=NONE ctermbg=17
+  autocmd BufEnter * match OverLength /\%80v.*/
+augroup END
 
-  augroup reload_vimrc
-    autocmd!
-    autocmd bufwritepost $myvimrc source $myvimrc
-  augroup end
+augroup reload_vimrc
+  autocmd!
+  autocmd bufwritepost $myvimrc source $myvimrc
+augroup end
 
-  augroup bufread,bufnewfile *.cson set filetype=coffee
-  augroup bufread,bufnewfile *.json set filetype=json
-  "}}}
+augroup bufread,bufnewfile *.cson set filetype=coffee
+augroup bufread,bufnewfile *.json set filetype=json
 "}}}
 " COLORS AND FONTS {{{
 "=====================================================================
@@ -288,9 +289,9 @@ endfunction
 function! ToggleColorEdit()
   if !exists("g:editing_colors")
     let g:editing_colors = 1
-    :vsplit ~/.vim/pack/colorschemes/opt/speyside/colors/speyside.vim
-    :so $VIMRUNTIME/syntax/hitest.vim
-    :XtermColorTable
+    :vsplit ~/.vim/pack/colorschemes/start/speyside/colors/speyside.vim
+    " :so $VIMRUNTIME/syntax/hitest.vim
+    " :XtermColorTable
   else
     unlet g:editing_colors
     :silent! :bd Highlight\ test | :bd */speyside.vim | :bd XtermColorTable
@@ -309,9 +310,7 @@ endfunction
 "=====================================================================
 "
 "{{{ Speyside - Coloscheme
-if !exists('g:SpeysideLuminosity')
-  let g:SpeysideLuminosity = 1
-endif
+let g:SpeysideLuminosity = 1
 
 "}}}}
 

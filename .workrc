@@ -138,6 +138,7 @@ alias shrink="npm run test-shrinkwrap || make shrinkwrap"
         echo -e "${COL_BLUE}running cleanStart {yarn}...${NORMAL}";
         #TODO yarn cache clean call; fails when called in this script
         yarn cache clean;
+        rm -rf node_modules
         make clean setup assets;
       elif command -v make > /dev/null; then
         echo -e "${COL_BLUE}running cleanStart {npm}...${NORMAL}";
