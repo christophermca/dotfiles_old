@@ -136,7 +136,7 @@ alias shrink="npm run test-shrinkwrap || make shrinkwrap"
         $(rm -rf node_modules && npm install && gulp build server)
       elif command -v yarn > /dev/null; then
         echo -e "${COL_BLUE}running cleanStart {yarn}...${NORMAL}";
-        #TODO yarn cache clean call; fails when called in this script
+        #TODO yarn cache clean call;
         yarn cache clean;
         rm -rf node_modules
         make clean setup assets;
