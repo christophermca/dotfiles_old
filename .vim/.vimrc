@@ -17,7 +17,6 @@ endif
 set nocp
 set fileformat=unix
 let g:vim_json_syntax_conceal=0
-set shortmess+=i
 set textwidth=80
 set formatoptions=cq
 set backspace=indent,eol,start
