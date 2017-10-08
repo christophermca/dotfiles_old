@@ -1,7 +1,7 @@
-# ~/.tmuxinator/vt.yml
+# ~/.tmuxinator/speyside.yml
 
-name: vt
-root: ~/Repos/deal/
+name: speyside
+root: ~/Repos/dotfiles/.vim/pack/colorschemes/start/speyside/
 
 # Optional tmux socket
 # socket_name: foo
@@ -28,11 +28,10 @@ root: ~/Repos/deal/
 # attach: false
 
 # Runs after everything. Use it to attach to tmux with custom options etc.
-# post: tmux -CC attach -t vt
+# post: tmux -CC attach -t speyside
 
 windows:
   - speyside:
-      layout: a269,238x61,0,0{150x61,0,0,8,87x61,151,0,9}
+      layout: main-vertical
       panes:
-        - vim
-        -
+        - vim -O ./colors/speyside.vim ./autoload/speyside
