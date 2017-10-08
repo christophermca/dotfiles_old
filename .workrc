@@ -170,6 +170,7 @@ runDebug() {
    fi;
 
   if [ -a core/worker-shim.js ]; then
+    NODE_ENV=test
     node debug core/worker-shim.js;
   else
     node debug
@@ -192,7 +193,7 @@ startDebug() {
   if [$1 == '-t']; then
     NODE_ENV=test
   else
-    NODE_ENV=
+    unset NODE_ENV
   fi
 
   killDebug
