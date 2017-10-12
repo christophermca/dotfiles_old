@@ -1,19 +1,36 @@
+let s:ColorDictionary = g:SpeysideColorDictionary
 function! speyside#overrides#Dark(background) abort
-  echom 'dark overrides go here'
+  echo 'dark overrides go here'
+  augroup speysideOverrides
+    autocmd!
+    let l:speysideOverridesDict = {
+        \'Normal': {'bg': a:background,},
+        \}
 
-  "call <SID>_exectuteOverride(speysideOverridesDict)
+    call <SID>_exectuteOverride(l:speysideOverridesDict)
+
+  augroup END
 endfunction
 
 function! speyside#overrides#Light(background) abort
-  let ColorDictionary = speyside#colors#init()
-  echo ColorDictionary
-  let speysideOverridesDict = {
-        \'Normal': {'fg': get(ColorDictionary, 'black'), 'bg': a:background},
-        \'CursorLine': {'bg': get(ColorDictionary, 'gray')[1]}
-        \}
+  augroup speysideOverrides
+    autocmd!
+    let l:speysideOverridesDict = {
+          \'Normal': {'fg': get(s:ColorDictionary, 'black'), 'bg': a:background},
+          \'Number': {'fg': 229,},
+          \'CursorLine': {'fg': 'NONE', 'bg': get(s:ColorDictionary, 'gray')[1]},
+          \'Directory': {'bg':'NONE', 'fg': 26},
+          \'SpecialKey': {'bg':'NONE', 'fg': 75},
+          \'PreProc': {'bg':'NONE', 'fg': 75},
+          \';Nontext': {'bg':'NONE', 'fg': 0},
+          \'Function': {'fg':35 },
+          \'String': {'fg':104 , 'styl': 'bold'},
+          \'Identifier': {'fg':35 , 'styl': 'bold'}
+          \}
 
-  call <SID>_exectuteOverride(speysideOverridesDict)
+    call <SID>_exectuteOverride(l:speysideOverridesDict)
 
+  augroup END
 endfunction
 
 function! s:_exectuteOverride(overrides) abort
@@ -37,11 +54,10 @@ function! s:_exectuteOverride(overrides) abort
       let new_highlight_color = new_highlight_color . s:mode . "bg=" . l:bg . ' '
     endif
     if has_key(override, 'styl')
-      let l:styl = override.styl
-      let new_highlight_color = new_highlight_color . s:mode . l:styl
+      let styl = override.styl
+      let new_highlight_color = new_highlight_color . s:mode . '=' .  styl . ' '
     endif
 
-    echo 'here: ' . l:new_highlight_color
     exe 'hi ' . l:name . ' ' . l:new_highlight_color
 
   endfor

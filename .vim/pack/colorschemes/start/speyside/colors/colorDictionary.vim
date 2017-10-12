@@ -1,14 +1,5 @@
-function! speyside#colors#init()
-  " dkGray 0
-  " gray 0
-  " diff 1
-  " green 1
-  " dkblue 0
-  " blue 1
-  " purople 0
-  " warm 0
-
-  return {
+if !exists('g:SpeysideColorDictionary')
+  let g:SpeysideColorDictionary = {
         \'norm_bg_dark' :234,
         \'norm_bg_base' :237,
         \'norm_bg_light' :251,
@@ -32,5 +23,5 @@ function! speyside#colors#init()
         \'warm' : [214, 190, 222, 202, 222,],
         \}
 
-endfunction
+endif
 " vim: fdm=marker foldlevelstart=0 foldlevel=0

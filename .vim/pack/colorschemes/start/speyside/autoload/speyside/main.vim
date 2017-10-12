@@ -1,11 +1,9 @@
-function! speyside#main#UpdateLuminance(mode, background) abort
+function! speyside#main#UpdateLuminance(background) abort
   if g:SpeysideLuminosity >= 2
     let g:SpeysideLuminosity = 0
   else
     let g:SpeysideLuminosity += 1
   endif
-
-  let s:testing = 'testing'
 
   if g:SpeysideLuminosity == 0
     call <SID>_resetSpeyside()
@@ -17,7 +15,6 @@ function! speyside#main#UpdateLuminance(mode, background) abort
 endfunction
 
 function! s:_resetSpeyside() abort
-  echo 'reset colorscheme'
-  "au! speysideOverrides
-   colorscheme speyside
+  au! speysideOverrides
+  colorscheme speyside
 endfunction
