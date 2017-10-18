@@ -6,7 +6,7 @@
 "=============================================================================
 " Vim >= 7.0 specific colors
 if !has('packages')
-source ~/.vundle
+  source ~/.vundle
 endif
 
 " compatibility

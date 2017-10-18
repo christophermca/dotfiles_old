@@ -58,3 +58,6 @@
 [submodule ".vim/pack/mca/start/xterm-color-table"]
 	path = .vim/pack/mca/start/xterm-color-table.vim
 	url = https://github.com/guns/xterm-color-table.vim.git
+[submodule ".vim/pack/mca/opt/vim-HiLinkTrace"]
+	path = .vim/pack/mca/opt/vim-HiLinkTrace
+	url = https://github.com/gerw/vim-HiLinkTrace.git
