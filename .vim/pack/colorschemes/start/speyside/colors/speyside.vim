@@ -124,6 +124,9 @@ exe "let s:bg_ltBlue1 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'ltBlue')[1] .
 exe "let s:fg_ltBlue2 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'ltBlue')[2] ."'"
 exe "let s:bg_ltBlue2 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'ltBlue')[2] ."'"
 
+exe "let s:fg_ltBlue3 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'ltBlue')[3] ."'"
+exe "let s:bg_ltBlue3 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'ltBlue')[3] ."'"
+
 exe "let s:fg_blue1 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'blue')[0] ."'"
 exe "let s:bg_blue1 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'blue')[0] ."'"
 
@@ -164,17 +167,17 @@ exe "let s:bg_purple0 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'purple')[0] .
 exe "let s:fg_purple1 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'purple')[1] ."'"
 exe "let s:bg_purple1 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'purple')[1] ."'"
 
-exe "let s:fg_purple3 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'purple')[2] ."'"
-exe "let s:bg_purple3 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'purple')[2] ."'"
+exe "let s:fg_purple2 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'purple')[2] ."'"
+exe "let s:bg_purple2 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'purple')[2] ."'"
 
-exe "let s:fg_purple4 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'purple')[3] ."'"
-exe "let s:bg_purple4 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'purple')[3] ."'"
+exe "let s:fg_purple3 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'purple')[3] ."'"
+exe "let s:bg_purple3 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'purple')[3] ."'"
 
-exe "let s:fg_purple5 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'purple')[4] ."'"
-exe "let s:bg_purple5 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'purple')[4] ."'"
+exe "let s:fg_purple4 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'purple')[4] ."'"
+exe "let s:bg_purple4 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'purple')[4] ."'"
 
-exe "let s:fg_purple6 = ' " s:mode."fg=" . get(s:ColorDictionary, 'purple')[5] ."'"
-exe "let s:bg_purple6 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'purple')[5] ."'"
+exe "let s:fg_purple5 = ' " s:mode."fg=" . get(s:ColorDictionary, 'purple')[5] ."'"
+exe "let s:bg_purple5 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'purple')[5] ."'"
 "}}}
 
 "Warm {{{
@@ -197,7 +200,7 @@ exe "let s:bg_warm4 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'warm')[4] ."'"
 "SET Highlights {{{
 exe "hi Normal" .s:fg_norm .s:bg_norm
 exe "hi Visual" .s:fg_black .s:bg_ltBlue1
-exe "hi Type" .s:fg_purple4
+exe "hi Type" .s:fg_ltBlue3
 exe "hi Number" .s:fg_warm1
 exe "hi Boolean" .s:fg_warm2
 exe "hi Conditional" .s:fg_green2 .s:sty_b
