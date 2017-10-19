@@ -313,7 +313,6 @@ let g:SpeysideLuminosity = 1
 
 "}}}}
 
-
 " AG - the silver searcher {{{
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
@@ -328,29 +327,10 @@ let g:netrw_localrmdir='rm -r'
 let g:netrw_bufsettings="noma nomod nonu nobl nowrap ro rnu"
 " }}}
 
-" CTRL P {{{
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP ./'
-let g:ctrlp_extensions = ['buffertag', 'tag', 'line', 'dir']
-
-" Set the max files
-let g:ctrlp_max_files = 10000
-
-" Optimize file searching
-if has("unix")
-let g:ctrlp_user_command = {
-  \ 'types': {
-  \ 1: ['.git/', 'cd %s && git ls-files']
-  \ },
-  \ 'fallback': 'find %s -type f | head -' . g:ctrlp_max_files
-  \ }
-endif
-"}}}
-
 "Async Linting Engine{{{
 let g:ale_lint_on_text_changed = 'never'
 
-" Edit Error and Warning highlighting
+" Edit Error and Warning Highlighting
 let g:ale_sign_warning='●'
 hi ALEErrorSign ctermfg=red ctermbg=none
 

@@ -13,9 +13,6 @@
 [submodule ".vim/pack/mca/start/ack.vim"]
 	path = .vim/pack/mca/start/ack.vim
 	url = https://github.com/mileszs/ack.vim.git
-[submodule ".vim/pack/mca/start/ctrlp.vim"]
-	path = .vim/pack/mca/start/ctrlp.vim
-	url = https://github.com/kien/ctrlp.vim.git
 [submodule ".vim/pack/mca/start/emmet-vim"]
 	path = .vim/pack/mca/start/emmet-vim
 	url = https://github.com/mattn/emmet-vim.git
@@ -61,3 +58,6 @@
 [submodule ".vim/pack/mca/opt/vim-HiLinkTrace"]
 	path = .vim/pack/mca/opt/vim-HiLinkTrace
 	url = https://github.com/gerw/vim-HiLinkTrace.git
+[submodule ".vim/pack/mca/start/fzf.vim"]
+	path = .vim/pack/mca/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
