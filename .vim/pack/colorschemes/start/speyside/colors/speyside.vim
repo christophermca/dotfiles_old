@@ -9,7 +9,7 @@ if exists("syntax_on")
   syntax reset
 endif
 
-set background=dark
+"set background = dark
 let colors_name = "speyside"
 
 
@@ -63,7 +63,7 @@ exe "let s:fg_diff_del = ' ".s:mode."fg=". get(s:ColorDictionary, 'diff')[2] ."'
 exe "let s:bg_diff_del = ' ".s:mode."bg=". get(s:ColorDictionary, 'diff')[3] ."'"
 
 exe "let s:fg_difftxt = ' ".s:mode."fg=". get(s:ColorDictionary, 'diff')[4] ."'"
-exe "let s:bg_difftxt = ' ".s:mode."bg=". get(s:ColorDictionary, 'diff')[5] ."'"
+exe "let s:bg_difftxt = ' ".s:mode."bg=". get(s:ColorDictionary, 'dkGray')[1] ."'"
 
 exe "let s:fg_spell_bad = ' ".s:mode."fg=". get(s:ColorDictionary, 'diff')[2] ."'"
 exe "let s:bg_spell_bad = ' ".s:mode."bg=". get(s:ColorDictionary, 'diff')[3] ."'"
@@ -89,8 +89,8 @@ exe "let s:bg_norm = ' ".s:mode."bg=" . get(s:ColorDictionary, 'norm_bg_base') .
 exe "let s:fg_white = ' ".s:mode."fg=" . get(s:ColorDictionary, 'white') ."'"
 exe "let s:bg_white = ' ".s:mode."bg=" . get(s:ColorDictionary, 'white') ."'"
 
-exe "let s:fg_lineNR = ' ".s:mode."fg=" . get(s:ColorDictionary, 'lineNR') ."'"
-exe "let s:bg_lineNR = ' ".s:mode."bg=" . get(s:ColorDictionary, 'lineNR') ."'"
+exe "let s:fg_lineNR = ' ".s:mode."fg=" . get(s:ColorDictionary, 'lineNR')[0] ."'"
+exe "let s:bg_lineNR = ' ".s:mode."bg=" . get(s:ColorDictionary, 'lineNR')[1] ."'"
 
 exe "let s:fg_black = ' ".s:mode."fg=" . get(s:ColorDictionary, 'black') ."'"
 exe "let s:bg_black = ' ".s:mode."bg=" . get(s:ColorDictionary, 'black') ."'"
@@ -101,17 +101,11 @@ exe "let s:bg_dkGray = ' ".s:mode."bg=" . get(s:ColorDictionary, 'dkGray')[0] ."
 exe "let s:fg_dkGray1 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'dkGray')[1] ."'"
 exe "let s:bg_dkGray1 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'dkGray')[1] ."'"
 
-exe "let s:fg_dkGray2 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'dkGray')[2] ."'"
-exe "let s:bg_dkGray2 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'dkGray')[2] ."'"
-
 exe "let s:fg_gray = ' ".s:mode."fg=" . get(s:ColorDictionary, 'gray')[0] ."'"
 exe "let s:bg_gray = ' ".s:mode."bg=" . get(s:ColorDictionary, 'gray')[0] ."'"
 
-exe "let s:fg_gray1 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'gray')[1] ."'"
-exe "let s:bg_gray1 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'gray')[1] ."'"
-
-exe "let s:fg_gray2 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'gray')[2] ."'"
-exe "let s:bg_gray2 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'gray')[2] ."'"
+exe "let s:fg_gray2 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'gray')[1] ."'"
+exe "let s:bg_gray2 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'gray')[1] ."'"
 " }}}
 
 "Blue {{{
@@ -121,11 +115,11 @@ exe "let s:bg_ltBlue0 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'ltBlue')[0] .
 exe "let s:fg_ltBlue1 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'ltBlue')[1] ."'"
 exe "let s:bg_ltBlue1 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'ltBlue')[1] ."'"
 
-exe "let s:fg_ltBlue2 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'ltBlue')[2] ."'"
-exe "let s:bg_ltBlue2 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'ltBlue')[2] ."'"
+exe "let s:fg_ltBlue3 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'ltBlue')[2] ."'"
+exe "let s:bg_ltBlue3 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'ltBlue')[2] ."'"
 
-exe "let s:fg_ltBlue3 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'ltBlue')[3] ."'"
-exe "let s:bg_ltBlue3 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'ltBlue')[3] ."'"
+exe "let s:fg_ltBlue4 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'ltBlue')[3] ."'"
+exe "let s:bg_ltBlue4 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'ltBlue')[3] ."'"
 
 exe "let s:fg_blue1 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'blue')[0] ."'"
 exe "let s:bg_blue1 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'blue')[0] ."'"
@@ -144,14 +138,23 @@ exe "let s:bg_green1 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'green')[0] ."'
 exe "let s:fg_green2 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'green')[1] ."'"
 exe "let s:bg_green2 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'green')[1] ."'"
 
-exe "let s:fg_green3 = ' ".s:mode . get(s:ColorDictionary, 'green')[2] ."'"
-exe "let s:bg_green3 = ' ".s:mode . get(s:ColorDictionary, 'green')[2] ."'"
+exe "let s:fg_green3 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'green')[3] ."'"
+exe "let s:bg_green3 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'green')[3] ."'"
 
-exe "let s:fg_green4 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'green')[3] ."'"
-exe "let s:bg_green4 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'green')[3] ."'"
+exe "let s:fg_green5 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'green')[2] ."'"
+exe "let s:bg_green5 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'green')[2] ."'"
 
 exe "let s:fg_statusLine_green = ' ".s:mode."fg=". get(s:ColorDictionary, 'statusLine_green') ."'"
 exe "let s:bg_statusLine_green = ' ".s:mode."bg=". get(s:ColorDictionary, 'statusLine_green') ."'"
+
+exe "let s:fg_ltGreen0 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'ltGreen')[0] ."'"
+exe "let s:bg_ltGreen0 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'ltGreen')[0] ."'"
+
+exe "let s:fg_ltGreen1 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'ltGreen')[1] ."'"
+exe "let s:bg_ltGreen1 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'ltGreen')[1] ."'"
+
+exe "let s:fg_ltGreen2 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'ltGreen')[2] ."'"
+exe "let s:bg_ltGreen2 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'ltGreen')[2] ."'"
 "}}}
 
 "Purple {{{
@@ -160,24 +163,6 @@ exe "let s:bg_purple_todo = ' ".s:mode."bg=" . get(s:ColorDictionary, 'purple_to
 
 exe "let s:fg_purple_comment = ' ".s:mode."fg=" . get(s:ColorDictionary, 'purple_comment') ."'"
 exe "let s:bg_purple_comment = ' ".s:mode."bg=" . get(s:ColorDictionary, 'purple_comment') ."'"
-
-exe "let s:fg_purple0 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'purple')[0] ."'"
-exe "let s:bg_purple0 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'purple')[0] ."'"
-
-exe "let s:fg_purple1 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'purple')[1] ."'"
-exe "let s:bg_purple1 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'purple')[1] ."'"
-
-exe "let s:fg_purple2 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'purple')[2] ."'"
-exe "let s:bg_purple2 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'purple')[2] ."'"
-
-exe "let s:fg_purple3 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'purple')[3] ."'"
-exe "let s:bg_purple3 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'purple')[3] ."'"
-
-exe "let s:fg_purple4 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'purple')[4] ."'"
-exe "let s:bg_purple4 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'purple')[4] ."'"
-
-exe "let s:fg_purple5 = ' " s:mode."fg=" . get(s:ColorDictionary, 'purple')[5] ."'"
-exe "let s:bg_purple5 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'purple')[5] ."'"
 "}}}
 
 "Warm {{{
@@ -190,23 +175,26 @@ exe "let s:bg_warm1 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'warm')[1]."'"
 exe "let s:fg_warm2 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'warm')[2] ."'"
 exe "let s:bg_warm2 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'warm')[2]."'"
 
-exe "let s:fg_warm3 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'warm')[3] ."'"
-exe "let s:bg_warm3 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'warm')[3]."'"
+exe "let s:fg_warm4 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'warm')[3] ."'"
+exe "let s:bg_warm4 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'warm')[3] ."'"
 
-exe "let s:fg_warm4 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'warm')[4] ."'"
-exe "let s:bg_warm4 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'warm')[4] ."'"
+exe "let s:fg_warm5 = ' ".s:mode."fg=" . get(s:ColorDictionary, 'warm')[4] ."'"
+exe "let s:bg_warm5 = ' ".s:mode."bg=" . get(s:ColorDictionary, 'warm')[4] ."'"
 "}}}
+
 "}}}
 "SET Highlights {{{
-exe "hi Normal" .s:fg_norm .s:bg_norm
-exe "hi Visual" .s:fg_black .s:bg_ltBlue1
-exe "hi Type" .s:fg_ltBlue3
-exe "hi Number" .s:fg_warm1
-exe "hi Boolean" .s:fg_warm2
-exe "hi Conditional" .s:fg_green2 .s:sty_b
-exe "hi MatchParen" .s:fg_warm4 .s:bg_NONE .s:sty_b
-exe "hi Special" .s:fg_ltBlue0
-exe "hi TabLineFill" .s:bg_norm
+exe "hi Normal" . s:fg_norm . s:bg_norm
+exe "hi Nontext" . s:fg_warm5
+exe "hi Visual" . s:fg_black . s:bg_ltBlue1
+exe "hi Type" . s:fg_ltBlue3
+exe "hi Number" . s:fg_warm1
+exe "hi Boolean" . s:fg_warm2
+exe "hi Directory" . s:fg_green3 s:sty_b
+exe "hi Conditional" . s:fg_green2 . s:sty_b
+exe "hi MatchParen" . s:fg_warm2 . s:bg_NONE . s:sty_b
+exe "hi Special" . s:fg_ltBlue0
+exe "hi TabLineFill" . s:bg_norm
 "
 "{{{ Folds
 exe "hi Folded" .s:bg_dkGray
@@ -219,12 +207,12 @@ exe "hi IncSearch" .s:bg_warm1 .s:fg_dkBlue .s:sty_b
 exe "hi StatusLineNC" .s:fg_gray2 .s:bg_statusLine_green .s:sty_su
 "}}}
 "{{{ Line Number & Cursor
-exe "hi LineNr" .s:fg_lineNR .s:bg_dkGray2
-exe "hi CursorLine" .s:bg_dkGray
+exe "hi LineNr" .s:fg_lineNR .s:bg_lineNR
+exe "hi CursorLine" .s:bg_dkGray1
 exe "hi CursorLineNr" .s:fg_ltBlue1 .s:bg_dkGray
 "}}}
 "{{{ Pmenu
-exe "hi Pmenu" .s:fg_white .s:bg_gray .s:sty_n
+exe "hi Pmenu" .s:fg_white .s:bg_gray2 .s:sty_n
 exe "hi PmenuThumb" s:bg_norm
 exe "hi PmenuSel" .s:fg_ltBlue1 .s:bg_dkGray
 "}}}
@@ -244,21 +232,24 @@ endif
 "}}}
 "{{{ Statement
 exe "hi Statement" .s:fg_ltBlue1 .s:sty_b
-exe "hi Operator" .s:fg_green2
+exe "hi Operator" .s:fg_warm4 s:sty_b
 
 "}}}
 "{{{ Identifier
-exe "hi Identifier" .s:fg_green4
+exe "hi Identifier" .s:fg_green5 s:sty_n
 exe "hi Function" .s:fg_green1 s:sty_b
 
 "}}}
 "{{{ Constant
 exe "hi Constant" .s:fg_green1
-exe "hi String" .s:fg_purple0 .s:b
+exe "hi String" .s:fg_ltBlue4 .s:b
 "}}}
 "{{{ Messaging
 exe "hi Todo" .s:fg_warm2 .s:bg_purple_todo .s:sty_b
 exe "hi Comment" .s:fg_purple_comment .s:sty_b
+"}}}
+"{{{ Javascript
+ hi link JavascriptNumber Number
 "}}}
 "{{{ Ruby
 exe "hi rubyDefine" .s:fg_green1 s:sty_b
@@ -287,5 +278,4 @@ if !hasmapto('<Plug>Speyside') && maparg('gs','n') ==# ''
   omap gs  <Plug>Speyside
 endif
 "}}}
-
 " vim: fdm=marker foldlevelstart=0 foldlevel=0
