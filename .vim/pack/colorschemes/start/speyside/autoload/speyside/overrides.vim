@@ -1,20 +1,21 @@
   let s:ColorDictionary = g:SpeysideColorDictionary
-  function! speyside#overrides#Dark(background) abort
+  function! speyside#overrides#Dark() abort
   augroup speysideOverrides
     autocmd!
-    let speysideOverridesDict = speyside#dictionaries#dark#init(a:background)
+    call speyside#dictionaries#dark#init()
+    colorscheme speyside
 
-    call <SID>_exectuteOverride(l:speysideOverridesDict)
+    "call <SID>_exectuteOverride(l:speysideOverridesDict)
 
   augroup END
 endfunction
 
-function! speyside#overrides#Light(background) abort
+function! speyside#overrides#Light() abort
   augroup speysideOverrides
     autocmd!
-    let speysideOverridesDict = speyside#dictionaries#light#init(a:background)
-
-    call <SID>_exectuteOverride(l:speysideOverridesDict)
+    call speyside#dictionaries#light#init()
+    colorscheme speyside
+    "call <SID>_exectuteOverride(l:speysideOverridesDict)
 
   augroup END
 endfunction
@@ -22,7 +23,7 @@ endfunction
 function! s:_exectuteOverride(overrides) abort
   let new_highlight_color = ''
 
-  for k in keys(a:overrides)
+  for k in a:overrides)
     let l:name = k
     let override = a:overrides[k]
     if has("gui_running")

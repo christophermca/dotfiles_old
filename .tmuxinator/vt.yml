@@ -31,8 +31,9 @@ root: ~/Repos/deal/
 # post: tmux -CC attach -t vt
 
 windows:
-  - speyside:
+  - dev:
       layout: a269,238x61,0,0{150x61,0,0,8,87x61,151,0,9}
       panes:
         - vim
         -
+  - server: make test-dev

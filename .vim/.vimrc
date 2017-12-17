@@ -54,8 +54,12 @@ augroup reload_vimrc
   autocmd bufwritepost $myvimrc source $myvimrc
 augroup end
 
-augroup bufread,bufnewfile *.cson set filetype=coffee
-augroup bufread,bufnewfile *.json set filetype=json
+augroup FiletypeGroup
+  autocmd!
+  au bufread,bufnewfile *.cson set filetype=coffee
+  au bufread,bufnewfile *.json set filetype=json
+  au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+augroup END
 "}}}
 " COLORS AND FONTS {{{
 "=====================================================================
@@ -181,7 +185,7 @@ set magic
 set foldenable " Enable folding
 set foldmethod=syntax
 set foldlevel=99
-"set foldlevelstart=10 " Open mast folds by default
+"set foldlevelstart=11 " Open mast folds by default
 "set foldnestmax=10 " 10 nested fold max
 
 let g:SimpylFold_docstring_preview = 1
@@ -191,12 +195,11 @@ let g:SimpylFold_docstring_preview = 1
 "=====================================================================
 
 " ____Leader mappings
-" Leader
 let mapleader="\<Space>"
 
-" __ Directory
+" __Directory
 " Change directory to current edited files directory
-nmap <Leader>cd :cd %:p:h<CR>
+nmap <leader>cd :cd %:p:h<CR>
 
 " ____Resizing
 nmap <tab>h :vert res -10<CR>
@@ -206,67 +209,63 @@ nmap <tab>j :resize -10<CR>
 
 
 " Tab shortcuts
-nmap <Leader>nt :tabnew<CR>
+nmap <leader>nt :tabnew<CR>
 
 " Close tab
-nmap <Leader>xt :tabc<CR>
-
-" Increment/decrement
-nmap <Leader>a <c-a>
-nmap <Leader>x <c-x>
+nmap <leader>xt :tabc<CR>
 
 " View and select buffers
-nnoremap <Leader>l :ls<CR>:b<space>
+nnoremap <leader>l :ls<CR>:b<space>
 
 " Quick change directory
 
 "JSON prettyify and validate
-map <Leader>jn :%!python3 -m json.tool<CR>
+map <leader>jn :%!python3 -m json.tool<CR>
 
-map <Leader>de :'<,'>!python -m base64 -d<CR>
+map <leader>de :'<,'>!python -m base64 -d<CR>
 
 " Searching
-nnoremap \<Leader> :nohlsearch<CR>
+nnoremap \<leader> :nohlsearch<CR>
 
 " ****************
 " OS copy/paste
 " ****************
 
 " Copy/paste to system clipboard
-vmap <Leader>y "+y
-vmap <Leader>yy "+yy
-vmap <Leader>Y "+Y
-vmap <Leader>yw "+yw
-vmap <Leader>yb "+yb
-vmap <Leader>D "+D
-vmap <Leader>p "+p
-vmap <Leader>P "+P
+vmap <leader>y "+y
+vmap <leader>yy "+yy
+vmap <leader>Y "+Y
+vmap <leader>yw "+yw
+vmap <leader>yb "+yb
+vmap <leader>D "+D
+vmap <leader>p "+p
+vmap <leader>P "+P
 
-nmap <Leader>y "+y<cr>
-nmap <Leader>yy "+yy<cr>
-nmap <Leader>Y "+Y<cr>
-nmap <Leader>yw "+yw<cr>
-nmap <Leader>yb "+yb<cr>
-nmap <Leader>D "+D<cr>
-nmap <Leader>p "+p<cr>
-nmap <Leader>P "+P<cr>
+nmap <leader>y "+y<cr>
+nmap <leader>yy "+yy<cr>
+nmap <leader>Y "+Y<cr>
+nmap <leader>yw "+yw<cr>
+nmap <leader>yb "+yb<cr>
+nmap <leader>D "+D<cr>
+nmap <leader>p "+p<cr>
+nmap <leader>P "+P<cr>
 
-nmap <Leader>cp :let @+ = expand("%")<cr>
+nmap <leader>cp :let @+ = expand("%")<cr>
 
 
-map <Leader>ag :Ack<Space>
+map <leader>ag :Ack<Space>
 
 " Saving
-map <Leader>wr :w<CR>
+map <leader>wr :w<CR>
 
 " Vimrc
-nmap <Leader>vr :vsplit $MYVIMRC<CR>
+nmap <leader>vr :vsplit $MYVIMRC<CR>
 
 " Edit colorscheme
-nmap <Leader>ec :call ToggleColorEdit()<cr>
+nmap <leader>ec :call ToggleColorEdit()<cr>
 
 " Coffee
-nmap <Leader>cc :CoffeeCompile<CR> " Compile
+nmap <leader>cc :CoffeeCompile<CR> " Compile
 
 " ____SPLIT CONTROLS
 nmap <C-h> <C-w>h
@@ -327,20 +326,37 @@ let g:netrw_localrmdir='rm -r'
 let g:netrw_bufsettings="noma nomod nonu nobl nowrap ro rnu"
 " }}}
 
-"Async Linting Engine{{{
+"Async Linting Engine (ALE) {{{
+let g:ale_fixers = {
+      \'coffeescript': ['coffeelint'],
+      \'stylus': ['stylint'],
+      \}
 let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
 
 " Edit Error and Warning Highlighting
 let g:ale_sign_warning='●'
-hi ALEErrorSign ctermfg=red ctermbg=none
+hi ALEErrorSign ctermfg='red' ctermbg=none
 
 let g:ale_sign_error='●'
-hi ALEWarningSign ctermfg=yellow ctermbg=none"}}}
+hi ALEWarningSign ctermfg='yellow' ctermbg=none
+"}}}
 
+" Speyside {{{
+if maparg('<leader>gs', 'n') ==# ''
+  xmap <leader>gl  <Plug>Speyside
+  vmap <leader>gl  <Plug>Speyside
+  nmap <leader>gl  <Plug>Speyside
+  omap <leader>gl  <Plug>Speyside
+endif
+"}}}
+" vim: fdm=marker foldlevelstart=0 foldlevel=0
+
+" }}}
 "HomeGrown {{{
 nnoremap <leader>v :call Viper()<CR>
-nnoremap <Leader>xw :SubW<space>
-nnoremap <Leader>xs :SubSW<space>
+nnoremap <leader>xw :SubW<space>
+nnoremap <leader>xs :SubSW<space>
 "}}}
 
 " vim: fdm=marker foldminlines=1
