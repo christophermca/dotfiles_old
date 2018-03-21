@@ -31,8 +31,8 @@
 [submodule ".vim/pack/mca/start/vim-dispatch"]
 	path = .vim/pack/mca/start/vim-dispatch
 	url = https://github.com/tpope/vim-dispatch.git
-[submodule ".vim/pack/mca/start/vim-flake8"]
-	path = .vim/pack/mca/start/vim-flake8
+[submodule ".vim/pack/mca/opt/vim-flake8"]
+	path = .vim/pack/mca/opt/vim-flake8
 	url = https://github.com/nvie/vim-flake8.git
 [submodule ".vim/pack/mca/start/vim-fugitive"]
 	path = .vim/pack/mca/start/vim-fugitive
@@ -61,3 +61,6 @@
 [submodule ".vim/pack/mca/start/fzf.vim"]
 	path = .vim/pack/mca/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
+[submodule ".vim/pack/mca/start/vim-javascript-syntax"]
+	path = .vim/pack/mca/start/vim-javascript-syntax
+	url = https://github.com/jelera/vim-javascript-syntax

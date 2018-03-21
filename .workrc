@@ -65,7 +65,7 @@ alias .workrc='vim $HOME/.workrc'
 alias mochalocal="itg"
 alias db="startDebug"
 alias kd="killDebug"
-
+alias forget="flushMemcached"
 # Git
 alias clearTmux=" clear && tmux clear-history"
 alias cleanBreak="echo DEPRICATED: please use cleanStart instead"
@@ -105,6 +105,10 @@ alias shrink="npm run test-shrinkwrap || make shrinkwrap"
 
    }
 
+  flushMemcached() {
+    echo 'flush_all' | nc localhost 11211
+  }
+
   killPort() {
     if (( $# == 1 )); then
       local PORT=$1
@@ -126,7 +130,7 @@ alias shrink="npm run test-shrinkwrap || make shrinkwrap"
       #TODO fix flag
       if [[$1 -eq "-d"]]; then
         echo -e "${COL_BLUE}running cleanStart {start server}...${NORMAL}";
-        # npm cache clean && make clean setup assets dev
+         #npm cache clean && make clean setup assets dev
       fi
 
     else
@@ -136,7 +140,6 @@ alias shrink="npm run test-shrinkwrap || make shrinkwrap"
         $(rm -rf node_modules && npm install && gulp build server)
       elif command -v yarn > /dev/null; then
         echo -e "${COL_BLUE}running cleanStart {yarn}...${NORMAL}";
-        #TODO yarn cache clean call;
         yarn cache clean;
         rm -rf node_modules
         make clean setup assets;
@@ -170,6 +173,7 @@ runDebug() {
   echo "[DEBUG] ${NODE_ENV}"
 
   if [ -a core/worker-shim.js ]; then
+    NODE_ENV=test
     node debug core/worker-shim.js;
   else
     node debug

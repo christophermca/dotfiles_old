@@ -45,8 +45,7 @@ augroup END
 
 augroup vimrc_autocmds
   autocmd!
-  hi OverLength ctermfg=NONE ctermbg=17
-  autocmd BufEnter * match OverLength /\%80v.*/
+  autocmd BufEnter * match ErrorMsg /\%120v.\+/
 augroup END
 
 augroup reload_vimrc
@@ -58,7 +57,6 @@ augroup FiletypeGroup
   autocmd!
   au bufread,bufnewfile *.cson set filetype=coffee
   au bufread,bufnewfile *.json set filetype=json
-  au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 augroup END
 "}}}
 " COLORS AND FONTS {{{
@@ -183,7 +181,7 @@ set magic
 " folding {{{
 " ****************
 set foldenable " Enable folding
-set foldmethod=syntax
+set foldmethod=indent
 set foldlevel=99
 "set foldlevelstart=11 " Open mast folds by default
 "set foldnestmax=10 " 10 nested fold max
@@ -256,7 +254,7 @@ nmap <leader>cp :let @+ = expand("%")<cr>
 map <leader>ag :Ack<Space>
 
 " Saving
-map <leader>wr :w<CR>
+map <leader>w :w<CR>
 
 " Vimrc
 nmap <leader>vr :vsplit $MYVIMRC<CR>
@@ -266,6 +264,11 @@ nmap <leader>ec :call ToggleColorEdit()<cr>
 
 " Coffee
 nmap <leader>cc :CoffeeCompile<CR> " Compile
+
+" Mocha
+nmap <leader>r :call <SID>MochaTest()<cr>
+nmap <leader>e :call <SID>MochaDebugTest()<cr>
+nmap <leader>1 :call <SID>Console()<cr>
 
 " ____SPLIT CONTROLS
 nmap <C-h> <C-w>h
@@ -282,6 +285,14 @@ function! <SID>Respace()
    %s#\s\+$##ge "Spacing at EOL
    nohlsearch
    call cursor(l, c)
+endfunction
+
+function! <SID>Console()
+  :!
+endfunction
+
+function! <SID>MochaTest()
+  :!clear && mocha %
 endfunction
 
 function! ToggleColorEdit()
@@ -323,6 +334,7 @@ let g:netrw_preview = 1
 let g:netrw_liststyle = 0
 let g:netrw_banner = 0
 let g:netrw_localrmdir='rm -r'
+" TODO explain what the arguments on below line stand for.
 let g:netrw_bufsettings="noma nomod nonu nobl nowrap ro rnu"
 " }}}
 
@@ -330,6 +342,7 @@ let g:netrw_bufsettings="noma nomod nonu nobl nowrap ro rnu"
 let g:ale_fixers = {
       \'coffeescript': ['coffeelint'],
       \'stylus': ['stylint'],
+      \'javascript': ['prettier', 'eslint'],
       \}
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
@@ -342,21 +355,26 @@ let g:ale_sign_error='●'
 hi ALEWarningSign ctermfg='yellow' ctermbg=none
 "}}}
 
-" Speyside {{{
+" speyside {{{
 if maparg('<leader>gs', 'n') ==# ''
-  xmap <leader>gl  <Plug>Speyside
-  vmap <leader>gl  <Plug>Speyside
-  nmap <leader>gl  <Plug>Speyside
-  omap <leader>gl  <Plug>Speyside
+  xmap <leader>gl  <plug>speyside
+  vmap <leader>gl  <plug>speyside
+  nmap <leader>gl  <plug>speyside
+  omap <leader>gl  <plug>speyside
 endif
 "}}}
-" vim: fdm=marker foldlevelstart=0 foldlevel=0
 
-" }}}
-"HomeGrown {{{
-nnoremap <leader>v :call Viper()<CR>
-nnoremap <leader>xw :SubW<space>
-nnoremap <leader>xs :SubSW<space>
+" FZF {{{
+set rtp+=/usr/local/opt/fzf
+nmap <F7> :FZF <CR>
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 "}}}
+"
 
-" vim: fdm=marker foldminlines=1
+
+" vim: fdm=marker foldlevelstart=0 foldlevel=0 foldminlines=1
