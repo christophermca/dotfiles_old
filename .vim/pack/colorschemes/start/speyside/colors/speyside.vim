@@ -242,7 +242,7 @@ exe "hi Comment" s:fg_purple_comment
 "}}}
 "{{{ Javascript
  hi link JavascriptNumber Number
- hi link javaScriptReserved Number
+ hi link JavascriptDebugger Identifier
 "}}}
 "{{{ Ruby
 exe "hi rubyDefine" s:fg_green1 s:sty_b
