@@ -172,6 +172,8 @@ exe "let s:bg_warm4 = ' "s:mode."bg=" . get(s:CoDi['colors'], 26) ."'"
 
 exe "let s:fg_warm5 = ' "s:mode."fg=" . get(s:CoDi['colors'], 27) ."'"
 exe "let s:bg_warm5 = ' "s:mode."bg=" . get(s:CoDi['colors'], 27) ."'"
+exe "let s:fg_warm6 = ' "s:mode."fg=" . get(s:CoDi['colors'], 28) ."'"
+exe "let s:bg_warm6 = ' "s:mode."bg=" . get(s:CoDi['colors'], 28) ."'"
 "}}}
 
 "}}}
@@ -184,7 +186,7 @@ exe "hi Number"  s:fg_warm1
 exe "hi Boolean"  s:fg_warm2
 exe "hi Directory"  s:fg_green3 s:sty_b
 exe "hi Conditional"  s:fg_green2 . s:sty_b
-exe "hi MatchParen"  s:fg_warm2 . s:bg_NONE . s:sty_b
+exe "hi MatchParen"  s:fg_warm6 . s:bg_NONE . s:sty_b
 exe "hi Special"  s:fg_ltBlue0
 exe "hi TabLineFill"  s:bg_norm
 "

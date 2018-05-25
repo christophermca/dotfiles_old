@@ -47,16 +47,27 @@ bashrc() {
 
 # aliases
 alias .bashrc='vim $HOME/.bashrc'
-alias gst='git status'
-alias gpu='git pull'
-alias gw='git commit -am'
+
+###
+# GIT aliases
+###
+
+# alias gst='git status'
+# alias gpu='git pull'
+# alias gw='git commit -am'
 alias graph='git log --oneline --graph --abbrev-commit --pretty=format:"%Cgreen %h %Creset%s %n%an - %cr %n%n"'
-alias reb='git rebase'
-alias rebc='git rebase --continue'
-alias ngxS='sudo nginx'
-alias ngxK='sudo nginx -s stop'
-alias ngxR='sudo nginx -s reload'
 alias rem='remaster'
+alias reb='git rebase'
+alias rebc='git add . && git rebase --continue'
+alias rebs='git rebase --skip'
+
+###
+# NGINX aliases
+###
+
+# alias ngxS='sudo nginx'
+# alias ngxK='sudo nginx -s stop'
+# alias ngxR='sudo nginx -s reload'
 
 alias copy="tr -d '\n' | pbcopy"
 alias restartBash="reset && source ~/.bash_profile"

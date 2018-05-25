@@ -16,7 +16,6 @@ workrc() {
 
   TESTIUM
   --------------
-  itg ................ Runs testium for one file
 
   NPM
   --------------
@@ -40,7 +39,6 @@ workrc() {
   db ........... startDebug
   kd ........... killDebug
   clearTmux ........... clears tmux
-  mochalocal ........... runs itg
   "
 }
 #}}}
@@ -62,7 +60,6 @@ ulimit -n 4096
 #}}}
 # ALIASES {{{
 alias .workrc='vim $HOME/.workrc'
-alias mochalocal="itg"
 alias db="startDebug"
 alias kd="killDebug"
 alias forget="flushMemcached"
@@ -126,18 +123,19 @@ alias shrink="npm run test-shrinkwrap || make shrinkwrap"
   }
 
   cleanStart() {
-    if (($# > 0 )); then
-      #TODO fix flag
-      if [[$1 -eq "-d"]]; then
+    if (( $# == 1 )); then
+      if [ $1 = "-d" ]; then
         echo -e "${COL_BLUE}running cleanStart {start server}...${NORMAL}";
-         #npm cache clean && make clean setup assets dev
+        npm cache clean && make clean setup assets dev
       fi
+
+
 
     else
 
       if command -v npm && ! command -v make > /dev/null; then
         echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
-        $(rm -rf node_modules && npm install && gulp build server)
+        rm -rf node_modules && npm install && gulp build server
       elif command -v yarn > /dev/null; then
         echo -e "${COL_BLUE}running cleanStart {yarn}...${NORMAL}";
         yarn cache clean;
@@ -153,11 +151,6 @@ alias shrink="npm run test-shrinkwrap || make shrinkwrap"
 
   }
 
-  itg () {
-    local FILE=$1
-    #testium_launch=false PORT=3070 mocha $FILE
-    mocha $FILE
-  }
 
   function rebuild () {
     gulp build
@@ -176,6 +169,7 @@ runDebug() {
     NODE_ENV=test
     node debug core/worker-shim.js;
   else
+    echo "missing core/worker-shim";
     node debug
   fi
 }

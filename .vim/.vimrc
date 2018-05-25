@@ -212,7 +212,7 @@ nmap <leader>nt :tabnew<CR>
 " Close tab
 nmap <leader>xt :tabc<CR>
 
-" View and select buffers
+" View Buffer list
 nnoremap <leader>l :ls<CR>:b<space>
 
 " Quick change directory
@@ -260,15 +260,15 @@ map <leader>w :w<CR>
 nmap <leader>vr :vsplit $MYVIMRC<CR>
 
 " Edit colorscheme
-nmap <leader>ec :call ToggleColorEdit()<cr>
+nmap <leader>ec :call ToggleColorEdit()<CR>
 
 " Coffee
 nmap <leader>cc :CoffeeCompile<CR> " Compile
 
 " Mocha
-nmap <leader>r :call <SID>MochaTest()<cr>
-nmap <leader>e :call <SID>MochaDebugTest()<cr>
-nmap <leader>1 :call <SID>Console()<cr>
+nmap <leader>r :call <SID>MochaTest()<CR>
+nmap <leader>e :call <SID>MochaDebugTest()<CR>
+nmap <leader>1 :call <SID>Console()<CR>
 
 " ____SPLIT CONTROLS
 nmap <C-h> <C-w>h
@@ -280,39 +280,44 @@ nnoremap - :call OpenView()<CR>
 "}}}
 " {{{ FUNCTIONS
 function! <SID>Respace()
-   let l = line(".")
-   let c = col(".")
-   %s#\s\+$##ge "Spacing at EOL
-   nohlsearch
-   call cursor(l, c)
+ let l = line(".")
+ let c = col(".")
+ %s#\s\+$##ge "Spacing at EOL
+ nohlsearch
+ call cursor(l, c)
 endfunction
 
 function! <SID>Console()
-  :!
+:!
 endfunction
 
+function! <SID>MochaDebugTest()
+:!mocha debug %
+endfunction
+
+
 function! <SID>MochaTest()
-  :!clear && mocha %
+:!clear && mocha %
 endfunction
 
 function! ToggleColorEdit()
-  if !exists("g:editing_colors")
-    let g:editing_colors = 1
-    :vsplit ~/.vim/pack/colorschemes/start/speyside/colors/speyside.vim
-    " :so $VIMRUNTIME/syntax/hitest.vim
-    " :XtermColorTable
-  else
-    unlet g:editing_colors
-    :silent! :bd Highlight\ test | :bd */speyside.vim | :bd XtermColorTable
-  endif
+if !exists("g:editing_colors")
+  let g:editing_colors = 1
+  :vsplit ~/.vim/pack/colorschemes/start/speyside/colors/speyside.vim
+  " :so $VIMRUNTIME/syntax/hitest.vim
+  " :XtermColorTable
+else
+  unlet g:editing_colors
+  :silent! :bd Highlight\ test | :bd */speyside.vim | :bd XtermColorTable
+endif
 endfunction
 
 function! OpenView()
-  if isdirectory(expand('%:h'))
-    :Ex %:h
-  else
-    :Ex .
-  endif
+if isdirectory(expand("%:h"))
+  :Ex %:h
+else
+  :Ex .
+endif
 endfunction
 " }}}
 " PLUGINS CONFIGS {{{
@@ -325,7 +330,7 @@ let g:SpeysideLuminosity = 1
 
 " AG - the silver searcher {{{
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+let g:ackprg = 'ag --vimgrep'
 endif
 " }}}
 
@@ -340,10 +345,10 @@ let g:netrw_bufsettings="noma nomod nonu nobl nowrap ro rnu"
 
 "Async Linting Engine (ALE) {{{
 let g:ale_fixers = {
-      \'coffeescript': ['coffeelint'],
-      \'stylus': ['stylint'],
-      \'javascript': ['prettier', 'eslint'],
-      \}
+    \'coffeescript': ['coffeelint'],
+    \'stylus': ['stylint'],
+    \'javascript': ['prettier', 'eslint'],
+    \}
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 
@@ -357,10 +362,10 @@ hi ALEWarningSign ctermfg='yellow' ctermbg=none
 
 " speyside {{{
 if maparg('<leader>gs', 'n') ==# ''
-  xmap <leader>gl  <plug>speyside
-  vmap <leader>gl  <plug>speyside
-  nmap <leader>gl  <plug>speyside
-  omap <leader>gl  <plug>speyside
+xmap <leader>gl  <plug>speyside
+vmap <leader>gl  <plug>speyside
+nmap <leader>gl  <plug>speyside
+omap <leader>gl  <plug>speyside
 endif
 "}}}
 

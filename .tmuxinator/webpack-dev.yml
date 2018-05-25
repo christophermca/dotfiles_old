@@ -1,7 +1,7 @@
 # ~/.tmuxinator/webpack-dev.yml
 
 name: webpack-dev
-root: ~/Repos
+root: ~/Repos/deal
 
 # Optional tmux socket
 # socket_name: foo
