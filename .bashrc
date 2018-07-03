@@ -14,16 +14,15 @@ bashrc() {
     gw ..............  git commit -am
     graph ............ git graph
     reb .............. git rebase
-    rebi ............. git rebase -i
     rebc ............. git rebase --continue
+    rebs ............. git rebase --skip
     rem  ............. alias for remaster
-    grst ............. git ReSeTs git branch with upstream/master
 
     NGINX
     --------------
-    ngxS  ............ sudo nginx
-    ngxK  ............ sudo nginx -s stop
-    ngxR  ............ sudo nginx -s reload
+    ngxS (OFF) ............ sudo nginx
+    ngxK  (OFF) ............ sudo nginx -s stop
+    ngxR  (OFF) ............ sudo nginx -s reload
 
     BASH
     --------------

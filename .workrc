@@ -7,13 +7,6 @@ workrc() {
   --------------
   .workrc .............. alias for $HOME/.workrc
 
-  MAKE
-  --------------
-  mI ................ Make Inspector
-  mTD ................ Make Test-Dev
-  mS ................ Make Setup
-  cleanBreak ......... DEPRICATED USE CLEANSTART: Runs make shrinkwrap setup test-unit
-
   TESTIUM
   --------------
 
@@ -51,6 +44,7 @@ if [ ! -L "$HOME/Repos/deal/.git/hooks/pre-commit" ]; then
 fi
 
 #Color Highlighting
+COL_GREEN="$(tput setaf 2)"
 COL_BLUE="$(tput setaf 6)"
 COL_RED="$(tput setaf 1)"
 NORMAL=$(tput sgr0)
@@ -62,19 +56,12 @@ ulimit -n 4096
 alias .workrc='vim $HOME/.workrc'
 alias db="startDebug"
 alias kd="killDebug"
+alias killport="killPort"
 alias forget="flushMemcached"
 # Git
 alias clearTmux=" clear && tmux clear-history"
-alias cleanBreak="echo DEPRICATED: please use cleanStart instead"
 alias rb="rebuild"
 
-# Make
-alias mI="make inspector"
-alias mTD="make test-dev"
-alias mD="make dev"
-alias mS="make setup"
-alias shrink="npm run test-shrinkwrap || make shrinkwrap"
-#}}}
 # FUNCTIONS {{{
   # HELPER {{{
 
@@ -114,6 +101,7 @@ alias shrink="npm run test-shrinkwrap || make shrinkwrap"
         if [[ -n $USEDPORT ]];
         then
           $(ps -eo pid,command | ag [n]ode | awk "{print $2}" | xargs kill -9 > /dev/null 2>&1 &)
+          echo -e "${COL_GREEN} Done!";
         else
           echo -e "${COL_BLUE} Port ${PORT} not in use";
         fi
