@@ -17,6 +17,7 @@ bashrc() {
     rebc ............. git rebase --continue
     rebs ............. git rebase --skip
     rem  ............. alias for remaster
+    fix  ............. opens all files with changes in editor
 
     NGINX
     --------------
@@ -59,6 +60,7 @@ alias rem='remaster'
 alias reb='git rebase'
 alias rebc='git add . && git rebase --continue'
 alias rebs='git rebase --skip'
+alias fix='vim `git diff --name-only | uniq | xargs`'
 
 ###
 # NGINX aliases

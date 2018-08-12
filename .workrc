@@ -155,10 +155,10 @@ runDebug() {
 
   if [ -a core/worker-shim.js ]; then
     NODE_ENV=test
-    node debug core/worker-shim.js;
+    node inspect core/worker-shim.js;
   else
     echo "missing core/worker-shim";
-    node debug
+    node inspect
   fi
 }
 
@@ -167,8 +167,12 @@ killDebug() {
 if [[ $(lsof -i :5858) ]]; then
     killPort 5858
     echo -e "${COL_BLUE}killed node debug${NORMAL}";
-  else
-    echo -e "${COL_BLUE}node debug is not running${NORMAL}";
+
+elif [[ $(lsof -i :9229) ]]; then
+    killPort 9229
+    echo -e "${COL_BLUE}killed node debug${NORMAL}";
+else
+  echo -e "${COL_BLUE}node debug is not running${NORMAL}";
 fi
 }
 
