@@ -297,7 +297,7 @@ endfunction
 
 
 function! <SID>MochaTest()
-:!clear && mocha %
+:!clear && NODE_ENV=test mocha %
 endfunction
 
 function! ToggleColorEdit()
