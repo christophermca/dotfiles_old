@@ -75,11 +75,21 @@ if [ -e "$HOME/.bin/attach.bash" ]; then
 fi
 
 # PATH
+
 export PATH="/usr/bin:/usr/sbin:/bin:/sbin"
 export PATH="~/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:~/bin:$PATH"
 export PATH="./node_modules/.bin:$PATH"
 #export PATH="$PYENV_ROOT/bin:$PATH"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#PS1
+parse_git_branch() {
+ git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+#<username> ::Green::[path] ::yellow:: git branch
+export PS1="\u\[\033[32m\][\w]\[\033[00m\]\[\033[33m\]$(parse_git_branch)\[\033[00m\] $ " #For windows only
+
+#NVM
+
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
