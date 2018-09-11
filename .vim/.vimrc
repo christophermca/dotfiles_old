@@ -21,6 +21,7 @@ set textwidth=80
 set formatoptions=cq
 set backspace=indent,eol,start
 
+
 " node suffix help
 set suffixesadd=.coffee,.js,.styl,.css
 filetype plugin indent on
@@ -61,7 +62,10 @@ augroup END
 "}}}
 " COLORS AND FONTS {{{
 "=====================================================================
-set t_Co=260
+set t_Co=256
+if &term =~ '256color'
+  set t_ut=
+endif
 set background=dark
 colorscheme speyside
 
@@ -226,7 +230,7 @@ map <leader>de :'<,'>!python -m base64 -d<CR>
 nnoremap \<leader> :nohlsearch<CR>
 
 " ****************
-" OS copy/paste
+" X11 terminal copy/paste
 " ****************
 
 " Copy/paste to system clipboard
