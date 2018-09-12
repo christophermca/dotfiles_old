@@ -50,13 +50,6 @@ endif
     exe "let s:sty_u = ' " s:mode."=".s:u"'"
   "}}}
 "}}}
-"Color Palette {{{
-" GUI {{{
-"}}}
-"Terminal {{{
-
-  "}}}
-"}}}
 "{{{ Build Color Strings
 "special {{{
 exe "let s:fg_NONE = ' "s:mode."fg=".s:none ."'"
@@ -194,8 +187,8 @@ exe "hi TabLineFill"  s:bg_norm
 exe "hi Folded" s:bg_dkGray
 "}}}
 "{{{ Search
-exe "hi Search" s:bg_warm1 .s:fg_dkBlue .s:sty_b
-exe "hi IncSearch" s:bg_warm1 .s:fg_dkBlue .s:sty_b
+exe "hi Search" s:bg_warm6 .s:fg_dkBlue .s:sty_b
+exe "hi IncSearch" s:bg_warm6 .s:fg_dkBlue .s:sty_b
 "}}}
 "{{{ StatusLine
 exe "hi StatusLineNC" s:fg_gray2 .s:bg_statusLine_green .s:sty_su

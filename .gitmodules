@@ -64,3 +64,6 @@
 [submodule ".vim/pack/mca/start/vim-javascript-syntax"]
 	path = .vim/pack/mca/start/vim-javascript-syntax
 	url = https://github.com/jelera/vim-javascript-syntax
+[submodule ".vim/pack/mca/start/typescript-vim"]
+	path = .vim/pack/mca/start/typescript-vim
+	url = https://github.com/leafgarland/typescript-vim.git
