@@ -1,6 +1,7 @@
+#!/bin/bash
+
 set editing-mode vi
 set keymap vi-command
 set bell-style none
-#set show-mode-in-prompt on
-
+set show-mode-in-prompt on
 v: ""

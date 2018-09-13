@@ -349,7 +349,6 @@ let g:netrw_bufsettings="noma nomod nonu nobl nowrap ro rnu"
 
 "Async Linting Engine (ALE) {{{
 let g:ale_fixers = {
-    \'coffeescript': ['coffeelint'],
     \'stylus': ['stylint'],
     \'javascript': ['prettier', 'eslint'],
     \}

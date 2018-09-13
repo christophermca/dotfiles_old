@@ -5,7 +5,7 @@ export EDITOR;
 DISPLAY=:0
 export DISPLAY
 
-# python
+  # python
 #export PYTHONPATH="~/scripts/Wyndex"
 #export PROJECT_HOME=~/.virutalenv
 #export PROJECT_HOME=~/pyve

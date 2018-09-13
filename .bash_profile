@@ -15,8 +15,8 @@ if [ ! -L "$HOME/.inputrc" ]; then
 fi
 
 # Checks for vim dot files/folders
-if [ ! "$HOME/.vim" ]; then
-  ln -s ~/Repos/dotfiles/.vim/ ~/.vim/
+if [ ! -L "$HOME/.vim" ]; then
+  ln -s ~/Repos/dotfiles/.vim/ ~/.vim
 fi
 
 if [ ! "$HOME/.vimrc" ]; then
@@ -83,10 +83,12 @@ export PATH="./node_modules/.bin:$PATH"
 
 #PS1
 parse_git_branch() {
- git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+ if [ -d .git ]; then
+   git branch | sed -e '/^[^*]/d' | sed -e 's/* \(.*\)/(\1)/'
+ fi
 }
 #<username> ::Green::[path] ::yellow:: git branch
-export PS1="\u\[\033[32m\][\w]\[\033[00m\]\[\033[33m\]$(parse_git_branch)\[\033[00m\] $ " #For windows only
+export PS1="\u\[\033[32m\][\w]\[\033[00m\]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] \$ " #For windows only
 
 #NVM
 
