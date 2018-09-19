@@ -28,7 +28,6 @@ workrc() {
 
   ALISES
   --------------
-  rebl ........... rebuild
   db ........... startDebug
   kd ........... killDebug
   clearTmux ........... clears tmux
@@ -36,12 +35,7 @@ workrc() {
 }
 #}}}
 #JAVA
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0_77)
-
-# Checks for bash dot files
-if [ ! -L "$HOME/Repos/deal/.git/hooks/pre-commit" ]; then
-  ln -s -i $HOME/scripts/pre-commit $HOME/Repos/deal/.git/hooks/pre-commit
-fi
+#export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0_77)
 
 #Color Highlighting
 COL_GREEN="$(tput setaf 2)"
@@ -49,45 +43,15 @@ COL_BLUE="$(tput setaf 6)"
 COL_RED="$(tput setaf 1)"
 NORMAL=$(tput sgr0)
 
-# Memcached
-ulimit -n 4096
-#}}}
 # ALIASES {{{
 alias .workrc='vim $HOME/.workrc'
-alias db="startDebug"
-alias kd="killDebug"
 alias killport="killPort"
 alias forget="flushMemcached"
 # Git
 alias clearTmux=" clear && tmux clear-history"
-alias rb="rebuild"
 
 # FUNCTIONS {{{
   # HELPER {{{
-
-    reviewPullRequest() {
-      if (( $# == 1)); then
-        PR_NUM=$1
-        checkUntracked="$(git ls-files --others --exclude-standard)"
-        checkBranchState="$(git diff-index HEAD && git diff-index --cached HEAD)"
-        $(test -z "$checkBranchState" && test -z "$checkUntracked")
-
-        if (($? > 0)); then
-          echo 'stashing changes'
-          $(git stash save --no-keep-index --include-untracked "Saving To Check PR #${PR_NUM}")
-          if (($? > 0)); then
-            echo 'failed to stash changes, stopping process'
-          else
-            git co -b "PR-${PR_NUM}"
-            git fetch upstream refs/pull/${PR_NUM}/merge
-            git reset --hard FETCH_HEAD
-          fi
-        fi
-      else
-        echo "${COL_BLUE}Usage: reviewPullRequest <Pull Request Number>${NORMAL}"
-      fi
-
-   }
 
   flushMemcached() {
     echo 'flush_all' | nc localhost 11211
@@ -110,136 +74,46 @@ alias rb="rebuild"
     fi
   }
 
-  cleanStart() {
-    if (( $# == 1 )); then
-      if [ $1 = "-d" ]; then
-        echo -e "${COL_BLUE}running cleanStart {start server}...${NORMAL}";
-        npm cache clean && make clean setup assets dev
-      fi
-
-
-
-    else
-
-      if command -v npm && ! command -v make > /dev/null; then
-        echo -e "${COL_BLUE}running cleanStart...${NORMAL}";
-        rm -rf node_modules && npm install && gulp build server
-      elif command -v yarn > /dev/null; then
-        echo -e "${COL_BLUE}running cleanStart {yarn}...${NORMAL}";
-        yarn cache clean;
-        rm -rf node_modules
-        make clean setup assets;
-      elif command -v make > /dev/null; then
-        echo -e "${COL_BLUE}running cleanStart {npm}...${NORMAL}";
-        $(npm cache clean && make clean setup assets)
-      else
-        echo -e "${COL_RED}[ERR] ${COL_BLUE}Cannot determine strategy to clean project${NORMAL}";
-      fi
-    fi
-
-  }
-
-
-  function rebuild () {
-    gulp build
-    killPort 3070
-    tmux send-keys -t left "make dev" C-m
-  }
   #}}}
 # DEBUG {{{
-runDebug() {
-  if type "tmux" > /dev/null; then
-    clearTmux
-  fi;
-  echo "[DEBUG] ${NODE_ENV}"
+# runDebug() {
+#   if type "tmux" > /dev/null; then
+#     clearTmux
+#   fi;
+#   echo "[DEBUG] ${NODE_ENV}"
 
-  if [ -a core/worker-shim.js ]; then
-    NODE_ENV=test
-    node inspect core/worker-shim.js;
-  else
-    echo "missing core/worker-shim";
-    node inspect
-  fi
-}
+#   if [ -a core/worker-shim.js ]; then
+#     NODE_ENV=test
+#     node inspect core/worker-shim.js;
+#   else
+#     echo "missing core/worker-shim";
+#     node inspect
+#   fi
+# }
 
-killDebug() {
+# killDebug() {
 
-if [[ $(lsof -i :5858) ]]; then
-    killPort 5858
-    echo -e "${COL_BLUE}killed node debug${NORMAL}";
+# if [[ $(lsof -i :5858) ]]; then
+#     killPort 5858
+#     echo -e "${COL_BLUE}killed node debug${NORMAL}";
 
-elif [[ $(lsof -i :9229) ]]; then
-    killPort 9229
-    echo -e "${COL_BLUE}killed node debug${NORMAL}";
-else
-  echo -e "${COL_BLUE}node debug is not running${NORMAL}";
-fi
-}
+# elif [[ $(lsof -i :9229) ]]; then
+#     killPort 9229
+#     echo -e "${COL_BLUE}killed node debug${NORMAL}";
+# else
+#   echo -e "${COL_BLUE}node debug is not running${NORMAL}";
+# fi
+# }
 
-startDebug() {
-  if (( $# == 1)); then
-    NODE_ENV=test
-  else
-    unset NODE_ENV
-  fi
-   killDebug
-   runDebug
-}
-#}}}
-#{{{ RELEASE
-prepRelease() {
-  DATE=$(date +'%Y%m%d')
-  echo -e "${COL_BLUE}running cleanRelease...${NORMAL}";
-  git checkout master;
-  git fetch --all;
-  git reset --hard upstream/master;
-  git push origin master;
-  npm cache clean && make clean setup assets;
-  git checkout -b "shrinkwrap-${DATE}";
-  make shrinkwrap;
-  git commit -am "new shrinkwrap for release ${DATE}";
-  git push origin "shrinkwrap-${DATE}";
-  echo -e "${COL_BLUE}Open a PR https://github.groupondev.com/funnel/deal/pulls${NORMAL}";
-  echo -e "${COL_BLUE}Once PR is merged run command:${NORMAL} buildRelease";
-}
-
-buildRelease() {
-  read -p "Create Release Candidate? [y/n] " response
-  if [[ $response =~ ([yY]) ]]; then
-    echo -e "${COL_BLUE}CREATING RELEASE BRANCH ${NORMAL}";
-    _buildReleaseCandidate
-  else
-    echo 'nevermind then'
-  fi
-}
-
-tagRelease() {
-  DATE=$(date +'%Y.%m.%d_%H%M')
-  git tag "deal-${DATE}"
-}
-
-_buildReleaseCandidate() {
-  git fetch --all
-  DATE=$(date +'%Y.%m.%d_%H%M')
-  git co master
-  git reset --hard FETCH_HEAD
-  git branch -D release
-  git checkout -b release
-  tagRelease
-  prompt -p "shall I deploy the release branch? [y/n]" response
-  if [[ $response =~ ([yY]) ]]; then
-    _deployRelease
-  else
-    echo -e "${COL_BLUE}DID NOT DEPLOY${NORMAL}";
-  fi
-}
-
-_deployRelease() {
-  echo -e "${COL_BLUE}DEPLOYING RELEASE${NORMAL}";
-  git push -uf upstream release
-  git push origin --tags
-  git push upstream --tags
-}
+# startDebug() {
+#   if (( $# == 1)); then
+#     NODE_ENV=test
+#   else
+#     unset NODE_ENV
+#   fi
+#    killDebug
+#    runDebug
+# }
 #}}}
 #}}}
 # vim: fdm=marker foldlevelstart=1 foldlevel=0
