@@ -63,9 +63,11 @@ augroup END
 " COLORS AND FONTS {{{
 "=====================================================================
 set t_Co=256
+
 if &term =~ '256color'
   set t_ut=
 endif
+
 set background=dark
 colorscheme speyside
 
@@ -280,7 +282,7 @@ nmap <C-l> <C-w>l
 nmap <C-k> <C-w>k
 nmap <C-j> <C-w>j
 
-nnoremap - :call OpenView()<CR>
+nnoremap - :call <SID>OpenView()<CR>
 "}}}
 " {{{ FUNCTIONS
 function! <SID>Respace()
@@ -316,7 +318,7 @@ else
 endif
 endfunction
 
-function! OpenView()
+function! <SID>OpenView()
 if isdirectory(expand("%:h"))
   :Ex %:h
 else
@@ -334,7 +336,7 @@ let g:SpeysideLuminosity = 1
 
 " AG - the silver searcher {{{
 if executable('ag')
-let g:ackprg = 'ag --vimgrep'
+  let g:ackprg = 'ag --vimgrep'
 endif
 " }}}
 

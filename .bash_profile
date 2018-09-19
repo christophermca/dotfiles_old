@@ -88,7 +88,7 @@ parse_git_branch() {
  fi
 }
 #<username> ::Green::[path] ::yellow:: git branch
-export PS1="\u\[\033[32m\][\w]\[\033[00m\]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] \$ " #For windows only
+export PS1="\u\[\033[32m\] [\w]\[\033[00m\]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] \$ " #For windows only
 
 #NVM
 

@@ -122,6 +122,8 @@ fi
 
 }
 
+export TERM="xterm-256color"
+
 # _NOTES FOR TERMINAL COLORS_
 
 # BLACK=$(tput setaf 0)
@@ -139,7 +141,3 @@ fi
 # BLINK=$(tput blink)
 # REVERSE=$(tput smso)
 # UNDERLINE=$(tput smul)
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
