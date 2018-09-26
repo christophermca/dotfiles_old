@@ -42,9 +42,6 @@ if [ ! -L "$HOME/.tmux.conf" ]; then
   ln -fs ~/Repos/dotfiles/.tmux.conf ~/.tmux.conf
 fi
 
-#if [ ! -L "$HOME/.tmuxinator" ]; then
-#  ln -fs ~/Repos/dotfiles/.tmuxinator/ ~/.tmuxinator/
-#fi
 
 # Load .bashrc, containing non-login related bash initializations.
 source ~/.bashrc
@@ -63,23 +60,26 @@ if [ -e "$HOME/.workrc" ]; then
 fi
 
 #rbenv
-eval "$(rbenv init -)"
+eval "$(rbenv init - --no-rehash)"
 
 # Load .tmuxinator, containing tmuxinator logic
-if [ -e "$HOME/.bin/tmuxinator.bash" ]; then
-  source ~/.bin/tmuxinator.bash
-fi
+# if [ -e "$HOME/.bin/tmuxinator.bash" ]; then
+#   source ~/.bin/tmuxinator.bash
+# fi
 
 if [ -e "$HOME/.bin/attach.bash" ]; then
   source ~/.bin/attach.bash
 fi
 
-# PATH
 
+# PATH
 export PATH="/usr/bin:/usr/sbin:/bin:/sbin"
 export PATH="~/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:~/bin:$PATH"
 export PATH="./node_modules/.bin:$PATH"
+export PATH="$HOME/.yarn/bin:$PATH"
 #export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="/home/cmcadams/.linuxbrew/bin:/home/cmcadams/.linuxbrew/sbin':$PATH"
+export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin':$PATH"
 
 #PS1
 parse_git_branch() {
@@ -87,11 +87,21 @@ parse_git_branch() {
    git branch | sed -e '/^[^*]/d' | sed -e 's/* \(.*\)/(\1)/'
  fi
 }
-#<username> ::Green::[path] ::yellow:: git branch
-export PS1="\u\[\033[32m\] [\w]\[\033[00m\]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] \$ " #For windows only
+#<username> ::Green::[path] ::yellow:: git branch=
+export PS1="\u\[\033[32m\][\w]\[\033[00m\]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] \$ " #For windows only
 
 #NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-#export NVM_DIR="$HOME/.nvm"
-#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#Functions
+
+save_bash_profile() {
+  if [ -e "$HOME/Repos/dotfiles" ]; then
+    cp ~/.bash_profile ~/Repos/dotfiles/.bash_profile
+    cd ~/Repos/dotfiles
+    git add .bash_profile
+    git commit -m 'update bash_profile'
+  fi
+}
