@@ -1,6 +1,5 @@
 #!/bin/bash
 ## symlink dotfiles
-
 # Checks for bash dot files
 if [ ! -L "$HOME/.profile" ]; then
   ln -fs ~/Repos/dotfiles/.profile ~/.profile
@@ -44,6 +43,7 @@ fi
 
 
 # Load .bashrc, containing non-login related bash initializations.
+
 source ~/.bashrc
 
 # Load .profile, containing login, non-bash related initializations.
@@ -81,15 +81,6 @@ export PATH="$HOME/.yarn/bin:$PATH"
 export PATH="/home/cmcadams/.linuxbrew/bin:/home/cmcadams/.linuxbrew/sbin':$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin':$PATH"
 
-#PS1
-parse_git_branch() {
- if [ -d .git ]; then
-   git branch | sed -e '/^[^*]/d' | sed -e 's/* \(.*\)/(\1)/'
- fi
-}
-#<username> ::Green::[path] ::yellow:: git branch=
-export PS1="\u\[\033[32m\][\w]\[\033[00m\]\[\033[33m\]\$(parse_git_branch)\[\033[00m\] \$ " #For windows only
-
 #NVM
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -105,3 +96,18 @@ save_bash_profile() {
     git commit -m 'update bash_profile'
   fi
 }
+
+# git bash_completion
+if command -v brew > /dev/null ; then
+
+  if [ -f `brew --prefix`/etc/bash_completion ]; then
+     . `brew --prefix`/etc/bash_completion
+  fi
+
+  # bash-git-prompt
+  if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+    __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
+    source $__GIT_PROMPT_DIR/gitprompt.sh
+    #source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+  fi
+fi
