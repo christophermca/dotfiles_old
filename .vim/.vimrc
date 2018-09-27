@@ -69,7 +69,7 @@ if &term =~ '256color'
 endif
 
 set background=dark
-colorscheme speyside
+colorscheme meta5
 
 " choose font by gui
 if has("gui_running")
@@ -375,8 +375,8 @@ endif
 "}}}
 
 " FZF {{{
-set rtp+=/usr/local/opt/fzf
-nmap <F7> :FZF <CR>
+set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
+nmap <leader>f :FZF <CR>
 
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)

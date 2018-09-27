@@ -141,3 +141,5 @@ export TERM="xterm-256color"
 # BLINK=$(tput blink)
 # REVERSE=$(tput smso)
 # UNDERLINE=$(tput smul)
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

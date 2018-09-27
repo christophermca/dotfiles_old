@@ -8,13 +8,14 @@
 [alias]
    st = status
    co = checkout
-   graph = 'git log --oneline --graph --abbrev-commit --pretty=format:"%Cgreen %h %Creset%s %n%an - %cr %n%n"'
+   graph = '!git log --oneline --graph --abbrev-commit --pretty=format:"%Cgreen %h %Creset%s %n%an - %cr %n%n"'
    mismatch = ls-files -u
    del = branch -D
    remdel = push origin --no-verify --delete
    updel = push upstream --no-verify --delete
    pullr = pull --rebase
    b = branch
+   unstage = reset HEAD --
 [help]
    browser = chrome
 [core]
@@ -24,8 +25,6 @@
   safecrlf = false
   excludesfile = /Users/chrismcadams/.gitignore_global
   gitproxy = gitproxy for github
-[credential]
-	helper = osxkeychain
 [diff]
 	tool = vimdiff
 [difftool]
