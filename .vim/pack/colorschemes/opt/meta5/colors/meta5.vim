@@ -50,7 +50,7 @@ hi Boolean        guifg=#87ff5f gui=bold ctermfg=119 cterm=bold
 hi Conditional    guifg=#5fdfff ctermfg=81
 hi String         guifg=#0087df ctermfg=32
 hi Character      guifg=#0087ff ctermfg=33
-hi Identifier     guifg=#00afff ctermfg=39
+hi Identifier     guifg=#00afff ctermfg=39 cterm=NONE
 hi Function       guifg=#df8700 ctermfg=172
 hi Type           guifg=#87dfff gui=NONE ctermfg=117
 hi Typedef        guifg=#87dfff gui=bold ctermfg=117 cterm=bold

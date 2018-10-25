@@ -1,3 +1,4 @@
+# configuration for bash
 #!/bin/bash
 bashrc() {
    echo "
@@ -70,60 +71,20 @@ alias fix='vim `git diff --name-only | uniq | xargs`'
 # alias ngxK='sudo nginx -s stop'
 # alias ngxR='sudo nginx -s reload'
 
-alias copy="tr -d '\n' | pbcopy"
-alias restartBash="reset && source ~/.bash_profile"
+#alias copy="tr -d '\n' | pbcopy"
+alias restartBash=restart_bash_profile
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 
-attach() {
-  if type "tmux" > /dev/null; then
+#Functions
 
-    local SESSION=$1
-    local readonly GREEN=$(tput setaf 2)
-    local readonly NORMAL=$(tput sgr0)
-
-    if [ $# -eq 0 ]; then
-      tmux ls >> /dev/null 2>&1
-      if [ $? -eq 0 ]; then
-        printf "${GREEN}list:________\n${NORMAL}";
-        tmux ls -F '#{session_name}'
-        printf "\n\nWhat session would you like to attach? " -n
-        read SESSION
-        $(tmux attach -d -t $SESSION)
-      else
-        printf "${GREEN}No sessions created\n${NORMAL}"
-      fi
-
-    else
-      if [ $? -ne 0 ]; then
-        $(tmux attach -d -t $SESSION)
-      else
-        printf "ERR: Could not find session \`${SESSION}\`\n"
-      fi
-    fi
+restart_bash_profile() {
+  local readonly OPTIONS=$1
+  if [[ $1 == '--full' || $1 == '-f' ]]; then
+    reset && . ~/.bash_profile
+  else
+    reset && . ~/.bashrc
   fi
 }
-
-remaster() {
-  local readonly CURRENTBRANCH=$(git symbolic-ref --short HEAD)
-
-  git fetch --all
-
-  if [[ -n "$CURRENTBRANCH" ]]; then
-    if [[ "$CURRENTBRANCH" != "master" ]]; then
-      git checkout master
-      git reset --hard upstream/master
-      git push origin master --no-verify
-      git checkout $CURRENTBRANCH
-      git pull --rebase upstream master
-    else
-      git reset --hard upstream/master
-    fi
-fi
-
-}
-
-export TERM="xterm-256color"
-
 # _NOTES FOR TERMINAL COLORS_
 
 # BLACK=$(tput setaf 0)
@@ -143,3 +104,4 @@ export TERM="xterm-256color"
 # UNDERLINE=$(tput smul)
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
