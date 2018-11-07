@@ -1,4 +1,8 @@
+# profile configuration specific to bash
+
 #!/bin/bash
+
+### TODO move symlink work to a new file
 ## symlink dotfiles
 # Checks for bash dot files
 if [ ! -L "$HOME/.profile" ]; then
@@ -43,24 +47,23 @@ fi
 
 
 # Load .bashrc, containing non-login related bash initializations.
-
 source ~/.bashrc
 
 # Load .profile, containing login, non-bash related initializations.
 source ~/.profile
 
-# Load .cdtrc, containing only cdt related config
-if [ -e "$HOME/.cdtrc" ]; then
-   source ~/.cdtrc
-fi
-
 # Load .workrc, containing only work related bash config and initializations.
 if [ -e "$HOME/.workrc" ]; then
-   source ~/.workrc
+   source ~/.workrc;
 fi
 
 #rbenv
 eval "$(rbenv init - --no-rehash)"
+
+#start ssh-agent
+if [ ! -v $SSH_AGENT_PID ]; then
+  eval "$(ssh-agent -s)" >> /dev/null
+fi
 
 # Load .tmuxinator, containing tmuxinator logic
 # if [ -e "$HOME/.bin/tmuxinator.bash" ]; then
@@ -71,31 +74,20 @@ if [ -e "$HOME/.bin/attach.bash" ]; then
   source ~/.bin/attach.bash
 fi
 
-
 # PATH
 export PATH="/usr/bin:/usr/sbin:/bin:/sbin"
-export PATH="~/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:~/bin:$PATH"
+export PATH="$HOME/.rbenv/shims:/usr/local/bin:/usr/bin:/bin:~/bin:$PATH"
 export PATH="./node_modules/.bin:$PATH"
 export PATH="$HOME/.yarn/bin:$PATH"
-#export PATH="$PYENV_ROOT/bin:$PATH"
-export PATH="/home/cmcadams/.linuxbrew/bin:/home/cmcadams/.linuxbrew/sbin':$PATH"
-export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin':$PATH"
+export PATH="$HOME/.linuxbrew/bin:/home/cmcadams/.linuxbrew/sbin:$PATH"
+export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
+export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
+export PATH="/mnt/c/ProgramData/chocolatey/bin:$PATH"
 
 #NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-#Functions
-
-save_bash_profile() {
-  if [ -e "$HOME/Repos/dotfiles" ]; then
-    cp ~/.bash_profile ~/Repos/dotfiles/.bash_profile
-    cd ~/Repos/dotfiles
-    git add .bash_profile
-    git commit -m 'update bash_profile'
-  fi
-}
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # git bash_completion
 if command -v brew > /dev/null ; then
@@ -105,9 +97,19 @@ if command -v brew > /dev/null ; then
   fi
 
   # bash-git-prompt
-  if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
-    __GIT_PROMPT_DIR=$(brew --prefix)/opt/bash-git-prompt/share
-    source $__GIT_PROMPT_DIR/gitprompt.sh
-    #source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+  if [ -f `brew --prefix`/opt/bash-git-prompt/share/gitprompt.sh ]; then
+    source `brew --prefix`/opt/bash-git-prompt/share/gitprompt.sh
   fi
 fi
+
+export SSH_ASKPASS=ssh_askpass
+
+#Functions
+save_bash_profile() {
+  if [ -e "$HOME/Repos/dotfiles" ]; then
+    cp ~/.bash_profile ~/Repos/dotfiles/.bash_profile
+    cd ~/Repos/dotfiles
+    git add .bash_profile
+    git commit -m 'update bash_profile'
+  fi
+}
