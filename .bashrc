@@ -1,5 +1,5 @@
-# configuration for bash
 #!/bin/bash
+
 bashrc() {
    echo "
   BASHRC
@@ -53,9 +53,6 @@ alias .bashrc='vim $HOME/.bashrc'
 # GIT aliases
 ###
 
-# alias gst='git status'
-# alias gpu='git pull'
-# alias gw='git commit -am'
 alias graph='git log --oneline --graph --abbrev-commit --pretty=format:"%Cgreen %h %Creset%s %n%an - %cr %n%n"'
 alias rem='remaster'
 alias reb='git rebase'
@@ -63,17 +60,8 @@ alias rebc='git add . && git rebase --continue'
 alias rebs='git rebase --skip'
 alias fix='vim `git diff --name-only | uniq | xargs`'
 
-###
-# NGINX aliases
-###
-
-# alias ngxS='sudo nginx'
-# alias ngxK='sudo nginx -s stop'
-# alias ngxR='sudo nginx -s reload'
-
 #alias copy="tr -d '\n' | pbcopy"
 alias restartBash=restart_bash_profile
-alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 
 #Functions
 

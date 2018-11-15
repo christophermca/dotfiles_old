@@ -231,14 +231,14 @@ nnoremap <A-x> <C-x>
 " ****************
 
 " Copy/paste to system clipboard
-vmap <leader>y "+y
+vmap <leader>y "*y
 vmap <leader>yy "+yy
 vmap <leader>Y "+Y
 vmap <leader>yw "+yw
 vmap <leader>yb "+yb
 vmap <leader>D "+D
-vmap <leader>p "+p
-vmap <leader>P "+P
+vmap <leader>p "*p
+vmap <leader>P "*P
 
 nmap <leader>y "+y<cr>
 nmap <leader>yy "+yy<cr>
@@ -344,10 +344,12 @@ let g:netrw_bufsettings = "noma nomod nonumber nobuflisted nowrap readonly relat
 
 "Async Linting Engine (ALE) {{{
 let g:ale_fixers = {
-    \'stylus': ['prettier', 'stylint'],
-    \'scss': ['stylelint', 'prettier'],
+    \'*': ['remove_trailing_lines', 'trim_whitespace'],
+    \'stylus': ['prettier', 'stylelint'],
+    \'scss': ['prettier','stylelint'],
     \'javascript': ['prettier', 'eslint'],
     \'typescript':['prettier', 'eslint'],
+    \'css':['prettier', 'stylelint'],
     \}
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
