@@ -1,12 +1,11 @@
 # generic profile rc used for all shells not just bash
 
-#!/bin/bash
+#!/bin/sh
 HISTCONTROL=ignoreboth
+export DOTFILES="$HOME/Repos/dotfiles"
 export TERM="xterm-256color"
-EDITOR='vim'
-export EDITOR;
-DISPLAY=:0
-export DISPLAY
+export EDITOR='vim'
+export DISPLAY=:0
 attach() {
   if type "tmux" > /dev/null; then
 
@@ -51,6 +50,7 @@ remaster() {
     else
       git reset --hard upstream/master
     fi
-fi
-
+  fi
 }
+
+
