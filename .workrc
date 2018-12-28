@@ -52,10 +52,7 @@ alias clearTmux=" clear && tmux clear-history"
 
 # FUNCTIONS {{{
   # HELPER {{{
-
-  flushMemcached() {
-    echo 'flush_all' | nc localhost 11211
-  }
+export PATH="/mnt/c/ProgramData/chocolatey/bin:$PATH"
 
   killPort() {
     if (( $# == 1 )); then
