@@ -2,7 +2,7 @@
 
 set editing-mode vi
 set keymap vi-command
-set keyseq-timout 150
+set keyseq-timeout 1
 set bell-style none
 set show-mode-in-prompt on
 v: ""

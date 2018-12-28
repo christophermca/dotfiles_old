@@ -52,7 +52,7 @@ alias clearTmux=" clear && tmux clear-history"
 
 # FUNCTIONS {{{
   # HELPER {{{
-export PATH="/mnt/c/ProgramData/chocolatey/bin:$PATH"
+  #export PATH="/mnt/c/ProgramData/chocolatey/bin:$PATH"
 
   killPort() {
     if (( $# == 1 )); then
