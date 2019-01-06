@@ -29,6 +29,10 @@ export PATH="$HOME/.yarn/bin:$PATH"
 export PATH="$HOME/.linuxbrew/bin:/home/cmcadams/.linuxbrew/sbin:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
 
+#DISPLAY
+
+export DISPLAY=:0.0
+
 #RBENV
 eval "$(rbenv init - --no-rehash)"
 
@@ -53,11 +57,31 @@ export NVM_DIR="$HOME/.nvm"
 
 # ALIASES
 
-export C_Drive="/mnt/c"
+#windows root
+export Cdrive="/mnt/c"
+export WR="$Cdrive/Users/${whoami}"
 alias .bash_profile='vim $HOME/.bash_profile'
-alias restartBash=restart_bash_profile
+alias restartBash="restart_bash_profile"
+alias killport="killPort"
 
 #Functions
+killPort() {
+  if (( $# == 1 )); then
+    local PORT=$1
+    local readonly USEDPORT=$(lsof -i :$PORT);
+
+    if [[ -n $USEDPORT ]];
+    then
+      $(ps -eo pid,command | ag [n]ode | awk "{print $2}" | xargs kill -9 > /dev/null 2>&1 &)
+      echo -e "${COL_GREEN} Done!";
+    else
+      echo -e "${COL_BLUE} Port ${PORT} not in use";
+    fi
+  else
+    echo "${COL_BLUE}Usage: killPort <pid>${NORMAL}"
+  fi
+}
+
 save_bash_profile() {
   if [ -e "$HOME/Repos/dotfiles" ]; then
     cp ~/.bash_profile ~/Repos/dotfiles/.bash_profile

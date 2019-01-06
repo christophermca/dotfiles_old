@@ -69,9 +69,6 @@
 [submodule ".vim/pack/mca/opt/vim-HiLinkTrace"]
 	path = .vim/pack/mca/opt/vim-HiLinkTrace
 	url = https://github.com/gerw/vim-HiLinkTrace.git
-[submodule ".vim/pack/colorscheme/opt/maui92"]
-	path = .vim/pack/colorscheme/opt/maui92
-	url = http://github.com/christophermca/maui-92
-[submodule ".vim/pack/.vim/pack/colorschemes/opt/maui92"]
-	path = .vim/pack/.vim/pack/colorschemes/opt/maui92
-	url = http://github.com/christophermca/maui-92
+[submodule ".vim/pack/colorschemes/opt/maui92"]
+	path = .vim/pack/colorschemes/opt/maui92
+	url = git@github.com:christophermca/maui92.git
