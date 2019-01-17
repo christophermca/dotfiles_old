@@ -304,8 +304,8 @@ function! ToggleColorEdit()
 if !exists("g:editing_colors")
   let g:editing_colors = 1
   :vsplit ~/.vim/pack/colorschemes/start/speyside/colors/speyside.vim
-  " :so $VIMRUNTIME/syntax/hitest.vim
-  " :XtermColorTable
+  :so $VIMRUNTIME/syntax/hitest.vim
+  :XtermColorTable
 else
   unlet g:editing_colors
   :silent! :bd Highlight\ test | :bd */speyside.vim | :bd XtermColorTable
