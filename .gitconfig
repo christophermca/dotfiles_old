@@ -1,4 +1,3 @@
-[user]
 [web]
    browser = chrome
 [push]
@@ -22,6 +21,7 @@
   autocrlf = input
   safecrlf = false
   excludesfile = /Users/chrismcadams/.gitignore_global
+  eol = lf
   gitproxy = gitproxy for github
 [diff]
 	tool = vimdiff
