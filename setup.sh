@@ -2,6 +2,8 @@
 
 echo 'Starting Setup'
 
+echo 'symlinking dotfiles'
+
 ## symlink dotfiles
 if [ ! -L "$HOME/.bash_profile" ]; then
   ln -fs ~/Repos/dotfiles/.bash_profile ~/.bash_profile
@@ -19,7 +21,6 @@ if [ ! -L "$HOME/.inputrc" ]; then
   ln -fs ~/Repos/dotfiles/.inputrc ~/.inputrc
 fi
 
-# Checks for vim dot files/folders
 if [ ! -L "$HOME/.vim" ]; then
   ln -s ~/Repos/dotfiles/.vim/ ~/.vim
 fi
@@ -32,20 +33,25 @@ if [ ! -L "$HOME/.vundle" ]; then
   ln -fs ~/Repos/dotfiles/.vundle ~/.vundle
 fi
 
-# Checks for git dot files
 if [ ! -L "$HOME/.gitconfig" ]; then
   ln -fs ~/Repos/dotfiles/.gitconfig ~/.gitconfig
 fi
 
-# Checks for git dot files
 if [ ! -L "$HOME/.tern-config" ]; then
   ln -fs ~/Repos/dotfiles/.tern-config ~/.tern-config
 fi
 
-# Checks for tmux dot files
 if [ ! -L "$HOME/.tmux.conf" ]; then
   ln -fs ~/Repos/dotfiles/.tmux.conf ~/.tmux.conf
 fi
 
+if !type 'brew' >> /dev/null; then
+  # TODO Do I need to run this in a subshell?
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+fi
+
+if  type 'brew' >> /dev/null; then
+  brew install ack
+fi
+
 echo 'Complete!'
-reset
