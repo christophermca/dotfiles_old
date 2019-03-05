@@ -22,15 +22,11 @@ if [ ! -L "$HOME/.inputrc" ]; then
 fi
 
 if [ ! -L "$HOME/.vim" ]; then
-  ln -s ~/Repos/dotfiles/.vim/ ~/.vim
+  ln -fs ~/Repos/dotfiles/.vim/ ~/.vim
 fi
 
 if [ ! "$HOME/.vimrc" ]; then
-  ln -s ~/Repos/dotfiles/.vim/.vimrc ~/.vimrc
-fi
-
-if [ ! -L "$HOME/.vundle" ]; then
-  ln -fs ~/Repos/dotfiles/.vundle ~/.vundle
+  ln -fs ~/.vim/.vimrc ~/.vimrc
 fi
 
 if [ ! -L "$HOME/.gitconfig" ]; then
@@ -45,12 +41,12 @@ if [ ! -L "$HOME/.tmux.conf" ]; then
   ln -fs ~/Repos/dotfiles/.tmux.conf ~/.tmux.conf
 fi
 
-if !type 'brew' >> /dev/null; then
+if ! command -v 'brew' >> /dev/null; then
   # TODO Do I need to run this in a subshell?
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
 fi
 
-if  type 'brew' >> /dev/null; then
+if  command 'brew' >> /dev/null; then
   brew install ack
 fi
 
