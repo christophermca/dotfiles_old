@@ -72,7 +72,7 @@
 	url = https://github.com/gerw/vim-HiLinkTrace.git
 [submodule ".vim/pack/colorschemes/opt/maui92"]
 	path = .vim/pack/colorschemes/opt/maui92
-	url = git@github.com:christophermca/maui92.git
+	url = https://github.com/christophermca/maui92.git
 [submodule ".vim/pack/mca/start/xterm-color-table.vim"]
 	path = .vim/pack/mca/start/xterm-color-table.vim
 	url = https://github.com/guns/xterm-color-table.vim
