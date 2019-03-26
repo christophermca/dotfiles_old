@@ -6,39 +6,39 @@ echo 'symlinking dotfiles'
 
 ## symlink dotfiles
 if [ ! -L "$HOME/.bash_profile" ]; then
-  ln -fs ~/Repos/dotfiles/.bash_profile ~/.bash_profile
+  ln -fs ./.bash_profile ~/.bash_profile
 fi
 
 if [ ! -L "$HOME/.profile" ]; then
-  ln -fs ~/Repos/dotfiles/.profile ~/.profile
+  ln -fs ./.profile ~/.profile
 fi
 
 if [ ! -L "$HOME/.bashrc" ]; then
-  ln -fs ~/Repos/dotfiles/.bashrc ~/.bashrc
+  ln -fs ./.bashrc ~/.bashrc
 fi
 
 if [ ! -L "$HOME/.inputrc" ]; then
-  ln -fs ~/Repos/dotfiles/.inputrc ~/.inputrc
+  ln -fs ./.inputrc ~/.inputrc
 fi
 
 if [ ! -L "$HOME/.vim" ]; then
-  ln -fs ~/Repos/dotfiles/.vim/ ~/.vim
+  ln -fs ./.vim/ ~/.vim
 fi
 
 if [ ! "$HOME/.vimrc" ]; then
-  ln -fs ~/.vim/.vimrc ~/.vimrc
+  ln -fs ./.vim/.vimrc ~/.vimrc
 fi
 
 if [ ! -L "$HOME/.gitconfig" ]; then
-  ln -fs ~/Repos/dotfiles/.gitconfig ~/.gitconfig
+  ln -fs ./.gitconfig ~/.gitconfig
 fi
 
 if [ ! -L "$HOME/.tern-config" ]; then
-  ln -fs ~/Repos/dotfiles/.tern-config ~/.tern-config
+  ln -fs ./.tern-config ~/.tern-config
 fi
 
 if [ ! -L "$HOME/.tmux.conf" ]; then
-  ln -fs ~/Repos/dotfiles/.tmux.conf ~/.tmux.conf
+  ln -fs ./.tmux.conf ~/.tmux.conf
 fi
 
 if ! command -v 'brew' >> /dev/null; then

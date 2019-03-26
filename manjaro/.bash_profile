@@ -7,12 +7,9 @@
 
 # Load .profile, containing login, non-bash related initializations.
 [[ -f ~/.profile ]] && . ~/.profile
-source ~/.profile
 
 # Load .workrc, containing only work related bash config and initializations.
-if [ -e "$HOME/.workrc" ]; then
-   source ~/.workrc;
-fi
+[[ -f ~/.workrc ]] && . ~/.workrc
 
 # start ssh-agent
 if [ ! -v $SSH_AGENT_PID ]; then
@@ -20,9 +17,8 @@ if [ ! -v $SSH_AGENT_PID ]; then
 fi
 
 
-if [ -e "$HOME/.bin/attach.bash" ]; then
-  source ~/.bin/attach.bash
-fi
+
+[[ -f ~/.bin/attach.bash ]] && . ~/.bin/attach.bash
 
 # PATH
 export PATH="/usr/bin:/usr/sbin:/bin:/sbin"
@@ -32,7 +28,6 @@ export PATH="$HOME/.yarn/bin:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
 
 #DISPLAY
-
 #export DISPLAY=:0.0
 
 #RBENV
@@ -62,8 +57,6 @@ export NVM_DIR="$HOME/.nvm"
 # ALIASES
 
 #windows root
-export Cdrive="/mnt/c"
-export WR="$Cdrive/Users/${whoami}"
 alias .bash_profile='vim $HOME/.bash_profile'
 alias restartBash="restart_bash_profile"
 alias killport="killPort"
