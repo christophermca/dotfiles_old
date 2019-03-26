@@ -1,9 +1,12 @@
-#!/bin/bash
+#
+# ~/.bash_profile
+#
 
 # Load .bashrc, containing non-login related bash initializations.
-source ~/.bashrc
+[[ -f ~/.bashrc ]] && . ~/.bashrc
 
 # Load .profile, containing login, non-bash related initializations.
+[[ -f ~/.profile ]] && . ~/.profile
 source ~/.profile
 
 # Load .workrc, containing only work related bash config and initializations.
