@@ -1,6 +1,6 @@
 **This is the outdated repository**
 
-The **_new_** [dotfiles Repository](https://github.com/christophermca/dotfiles)
+The **_new_** [dotfiles repository](https://github.com/christophermca/dotfiles)
 These are my dotfile for unix enviroments.
 
 
