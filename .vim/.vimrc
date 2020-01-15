@@ -10,58 +10,16 @@ if !has('packages')
 endif
 
 " compatibility
+set nocompatible
 
-" SETUP {{{
-"=====================================================================
-" GENERAL {{{
-set nocp
 set fileformat=unix
-let g:vim_json_syntax_conceal=0
 set textwidth=80
 set formatoptions=cq
 set backspace=indent,eol,start
-
-
-" node suffix help
-set suffixesadd=.coffee,.js,.styl,.css
 filetype plugin indent on
 syntax enable " enable syntax processing
 set autoindent
 
-"when saving vimrc reload the source
-
-  " fix slow escape in iterm2
-  set ttimeout
-  set notimeout
-  set ttimeoutlen=20
-"}}}
-"}}}
-" AUTOCMDS {{{
-set autoread
-autocmd BufWritePre * :silent! :call <SID>Respace()
-
-augroup checkfileupdate
-  autocmd WinEnter * :silent :checktime
-augroup END
-
-augroup vimrc_autocmds
-  autocmd!
-  autocmd BufEnter * match ErrorMsg /\%120v.\+/
-augroup END
-
-augroup reload_vimrc
-  autocmd!
-  autocmd bufwritepost $myvimrc source $myvimrc
-augroup end
-
-augroup FiletypeGroup
-  autocmd!
-  au bufread,bufnewfile *.cson set filetype=coffee
-  au bufread,bufnewfile *.json set filetype=json
-augroup END
-"}}}
-" COLORS AND FONTS {{{
-"=====================================================================
 set t_Co=256
 
 if &term =~ '256color'
@@ -69,7 +27,44 @@ if &term =~ '256color'
 endif
 
 set background=dark
+let g:SpeysideDefaultLuminence = 1
 colorscheme speyside
+set cursorline
+
+" node suffix help
+set suffixesadd=.js,.jsx,.ts,.tsx,.styl,.css
+
+" fix slow escape in iterm2
+set ttimeout
+set notimeout
+set ttimeoutlen=20
+" AUTOCMDS {{{
+ set autoread
+ autocmd BufWritePre * :silent! :call <SID>Respace()
+
+ augroup checkfileupdate
+   autocmd WinEnter * :silent :checktime
+ augroup END
+
+ augroup vimrc_autocmds
+   autocmd!
+   autocmd BufEnter * match ErrorMsg /\%120v.\+/
+ augroup END
+
+ augroup reload_vimrc
+   autocmd!
+   autocmd bufwritepost $myvimrc source $myvimrc
+ augroup end
+
+ augroup FiletypeGroup
+   autocmd!
+   au bufread,bufnewfile *.cson set filetype=coffee
+   au bufread,bufnewfile *.json set filetype=json
+   au bufread,bufnewfile *.styl set filetype=stylus
+ augroup END
+"}}}
+" FONTS  {{{
+"=====================================================================
 
 " choose font by gui
 if has("gui_running")
@@ -85,7 +80,7 @@ endif
 " }}}
 " VIM UI {{{
 "=====================================================================
-" error notification {{{
+" error notification `bells` {{{
 set visualbell " set error flashing
 set noerrorbells " no beeping
 "}}}
@@ -98,21 +93,21 @@ set nobackup " No backup files
 set nowritebackup " Only in case you don't want a backup file while editing
 set noswapfile " No swap files
 "}}}
-" general {{{
-set cursorline
-"set lazyredraw " Redraw only when we need to
+" saving {{{
+set confirm " Confirm if you want to save
+set hidden " Allow buffer switching without saving
+" }}}
 set viewoptions=folds,options,cursor,unix,slash " Better Unix Windows compatibility
 set virtualedit=all " Allow for cursor beyond last character
 set history=1000 " Store a ton of history (default is 20)
-set hidden " Allow buffer switching without saving
-set confirm " Confirm if you want to save
 set tabpagemax=15 " Only show 15 page tabs
 set showmode " Display the current mode
 set linespace=0 " No extra spaces between rows
 set nowrap " Do not wrap long lines
 set scrolloff=1 " Minimum lines to keep above and below cursor
 set ttyscroll=3 " Workaround for gvim screen redraw issues
-"}}}
+"set lazyredraw " Redraw only when we need to
+"
 " window {{{
 " gui {{{
 " ****************
@@ -189,8 +184,6 @@ set magic
 set foldenable " Enable folding
 set foldmethod=indent
 set foldlevel=99
-"set foldlevelstart=11 " Open mast folds by default
-"set foldnestmax=10 " 10 nested fold max
 
 let g:SimpylFold_docstring_preview = 1
 "}}}
@@ -229,13 +222,19 @@ map <leader>jn :%!python3 -m json.tool<CR>
 map <leader>de :'<,'>!python -m base64 -d<CR>
 
 " Searching
-nnoremap \<leader> :nohlsearch<CR>
+nnoremap <silent> \<leader> :nohlsearch<CR>
+
+" Increment/decrement
+nnoremap <A-a> <C-a>
+nnoremap <A-x> <C-x>
 
 " ****************
 " X11 terminal copy/paste
 " ****************
 
 " Copy/paste to system clipboard
+
+set clipboard=unnamed
 vmap <leader>y "+y
 vmap <leader>yy "+yy
 vmap <leader>Y "+Y
@@ -263,18 +262,17 @@ map <leader>ag :Ack<Space>
 map <leader>w :w<CR>
 
 " Vimrc
-nmap <leader>vr :vsplit $MYVIMRC<CR>
+nmap <silent> <leader>vr :vsplit $MYVIMRC<CR>
 
 " Edit colorscheme
 nmap <leader>ec :call ToggleColorEdit()<CR>
 
 " Coffee
-nmap <leader>cc :CoffeeCompile<CR> " Compile
 
 " Mocha
 nmap <leader>r :call <SID>MochaTest()<CR>
 nmap <leader>e :call <SID>MochaDebugTest()<CR>
-nmap <leader>1 :call <SID>Console()<CR>
+nmap <silent> <leader>1 :call <SID>Console()<CR>
 
 " ____SPLIT CONTROLS
 nmap <C-h> <C-w>h
@@ -310,8 +308,8 @@ function! ToggleColorEdit()
 if !exists("g:editing_colors")
   let g:editing_colors = 1
   :vsplit ~/.vim/pack/colorschemes/start/speyside/colors/speyside.vim
-  " :so $VIMRUNTIME/syntax/hitest.vim
-  " :XtermColorTable
+  :so $VIMRUNTIME/syntax/hitest.vim
+  :XtermColorTable
 else
   unlet g:editing_colors
   :silent! :bd Highlight\ test | :bd */speyside.vim | :bd XtermColorTable
@@ -329,54 +327,60 @@ endfunction
 " PLUGINS CONFIGS {{{
 "=====================================================================
 "
-"{{{ Speyside - Coloscheme
-let g:SpeysideLuminosity = 1
 
-"}}}}
+" YCM {{{
+" let g:ycm_semantic_triggers['typescript'] = ['.']
+" }}}
 
 " AG - the silver searcher {{{
 if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+  let g:ackprg = "ag --vimgrep"
 endif
 " }}}
 
 " NETRW {{{
 let g:netrw_preview = 1
 let g:netrw_liststyle = 0
+let g:netrw_list_hide= '\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_banner = 0
-let g:netrw_localrmdir='rm -r'
-" TODO explain what the arguments on below line stand for.
-let g:netrw_bufsettings="noma nomod nonu nobl nowrap ro rnu"
+let g:netrw_localrmdir = "rm -r"
+let g:netrw_bufsettings = "noma nomod nonumber nobuflisted nowrap readonly relativenumber"
 " }}}
 
 "Async Linting Engine (ALE) {{{
 let g:ale_fixers = {
-    \'stylus': ['stylint'],
+    \'*': ['remove_trailing_lines', 'trim_whitespace'],
+    \'stylus': ['prettier', 'stylelint'],
+    \'scss': ['prettier','stylelint'],
     \'javascript': ['prettier', 'eslint'],
+    \'typescript':['prettier', 'eslint'],
+    \'css':['prettier', 'stylelint'],
     \}
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 
 " Edit Error and Warning Highlighting
-let g:ale_sign_warning='●'
+let g:ale_sign_warning='~'
 hi ALEErrorSign ctermfg='red' ctermbg=none
 
-let g:ale_sign_error='●'
+let g:ale_sign_error='>'
 hi ALEWarningSign ctermfg='yellow' ctermbg=none
+nmap <silent> <leader>aj :ALENext<cr>
+nmap <silent> <leader>ak :ALEPrevious<cr>
 "}}}
 
 " speyside {{{
-if maparg('<leader>gs', 'n') ==# ''
-xmap <leader>gl  <plug>speyside
-vmap <leader>gl  <plug>speyside
-nmap <leader>gl  <plug>speyside
-omap <leader>gl  <plug>speyside
+if maparg('<leader>gl', 'n') ==# ''
+xmap <leader>gl  <plug>Speyside
+vmap <leader>gl  <plug>Speyside
+nmap <leader>gl  <plug>Speyside
+omap <leader>gl  <plug>Speyside
 endif
 "}}}
 
 " FZF {{{
-set rtp+=/usr/local/opt/fzf
-nmap <F7> :FZF <CR>
+set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
+nmap <f7> :FZF <CR>
 
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -386,5 +390,5 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 "}}}
 "
 
+" vim: fdm=marker foldlevelstart=-1 foldlevel=0 foldminlines=1
 
-" vim: fdm=marker foldlevelstart=0 foldlevel=0 foldminlines=1
