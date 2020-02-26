@@ -12,7 +12,7 @@ export DISPLAY
 #source /usr/local/bin/virtualenvwrapper.sh
 
 # git bash_completion
-if command -v brew; then
+if command -v brew > /dev/null; then
 
   if [ -f `brew --prefix`/etc/bash_completion ]; then
      . `brew --prefix`/etc/bash_completion

@@ -1,17 +1,17 @@
 [submodule "vim-jsx"]
-  path = .vim/pack/mca/opt/vim-jsx
+  path = ./.vim/pack/mca/opt/vim-jsx
   url = git@github.com:mxw/vim-jsx.git
 [submodule "meta5"]
-  path = .vim/pack/colorschemes/start/meta5
+  path = ./.vim/pack/colorschemes/start/meta5
   url = git@github.com:christophermca/meta5.git
 [submodule "ultisnips"]
-  path = .vim/pack/mca/opt/ultisnips
+  path = ./.vim/pack/mca/opt/ultisnips
   url = https://github.com/SirVer/ultisnips.git
 [submodule "ale"]
-  path = .vim/pack/mca/start/ale
+  path = ./.vim/pack/mca/start/ale
   url = https://github.com/w0rp/ale.git
 [submodule "omnisharp-vim"]
-  path = .vim/pack/mca/opt/omnisharp-vim
+  path = ./.vim/pack/mca/opt/omnisharp-vim
   url = https://github.com/OmniSharp/omnisharp-vim.git
 [submodule "vim-commentary"]
   path = .vim/pack/mca/start/vim-commentary
