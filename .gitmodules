@@ -1,6 +1,3 @@
-[submodule ".vim/pack/colorschemes/start/meta5 "]
-  path = ./.vim/pack/colorschemes/start/meta5
-  url = git@github.com:christophermca/meta5.git
 [submodule ".vim/pack/mca/opt/ultisnips "]
   path = ./.vim/pack/mca/opt/ultisnips
   url = https://github.com/SirVer/ultisnips.git
@@ -67,7 +64,7 @@
   url = https://github.com/christophermca/maui92.git
 [submodule ".vim/pack/mca/opt/pylint.vim"]
   path = .vim/pack/mca/opt/pylint.vim
-  url = git@github.com:vim-scripts/pylint.vim.git
+  url = https://github.com:vim-scripts/pylint.vim.git
 [submodule "vim-HiLinkTrace"]
   path = .vim/pack/mca/opt/vim-HiLinkTrace
   url = https://github.com/gerw/vim-HiLinkTrace.git
@@ -76,19 +73,34 @@
   url = https://github.com/christophermca/maui92.git
 [submodule "pythoncomplete"]
   path = .vim/pack/mca/opt/pythoncomplete
-  url = git@github.com:vim-scripts/pythoncomplete.git
+  url = https://github.com:vim-scripts/pythoncomplete.git
 [submodule "python-syntax"]
   path = .vim/pack/mca/opt/python-syntax
-  url = git@github.com:vim-python/python-syntax.git
+  url = https://github.com:vim-python/python-syntax.git
 [submodule "pylint"]
   path = .vim/pack/mca/opt/pylint
-  url = git@github.com:vim-scripts/pylint.vim.git
+  url = https://github.com:vim-scripts/pylint.vim.git
 [submodule "ack"]
   path = .vim/pack/mca/start/ack
   url = https://github.com/mileszs/ack.vim.git
 [submodule "speyside"]
   path = .vim/pack/colorschemes/start/speyside
-  url = git@github.com:christophermca/speyside.git
+  url = https://github.com/christophermca/speyside.git
 [submodule ".vim/pack/mca/opt/vim-jsx"]
 	path = .vim/pack/mca/opt/vim-jsx
-	url = git@github.com:mxw/vim-jsx.git
+	url = https://github.com:mxw/vim-jsx.git
+[submodule ".vim/pack/colorschemes/start/meta5"]
+	path = .vim/pack/colorschemes/start/meta5
+	url = https://github.com/christophermca/meta5.git
+[submodule ".vim/pack/mca/opt/ultisnips"]
+	path = .vim/pack/mca/opt/ultisnips
+	url = https://github.com/SirVer/ultisnips.git
+[submodule ".vim/pack/mca/start/ale"]
+	path = .vim/pack/mca/start/ale
+	url = https://github.com/w0rp/ale.git
+[submodule ".vim/pack/mca/start/ack"]
+	path = .vim/pack/mca/start/ack
+	url = https://github.com/mileszs/ack.vim.git
+[submodule ".vim/pack/mca/start/fzf.vim"]
+	path = .vim/pack/mca/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
