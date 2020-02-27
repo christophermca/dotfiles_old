@@ -1,9 +1,3 @@
-[submodule ".vim/pack/mca/opt/ultisnips "]
-  path = ./.vim/pack/mca/opt/ultisnips
-  url = https://github.com/SirVer/ultisnips.git
-[submodule ".vim/pack/mca/start/ale "]
-  path = ./.vim/pack/mca/start/ale
-  url = https://github.com/w0rp/ale.git
 [submodule ".vim/pack/mca/opt/omnisharp-vim "]
   path = ./.vim/pack/mca/opt/omnisharp-vim
   url = https://github.com/OmniSharp/omnisharp-vim.git
@@ -19,13 +13,6 @@
 [submodule "vim-surround"]
   path = .vim/pack/mca/start/vim-surround
   url = https://github.com/tpope/vim-surround.git
-[submodule "fzf"]
-  path = .vim/pack/mca/start/fzf.vim
-  url = https://github.com/junegunn/fzf.vim.git
-[submodule "xterm-color-table"]
-  path = .vim/pack/mca/start/xterm-color-table.vim
-  url = https://github.com/guns/xterm-color-table.vim.git
-
 [submodule "emmet-vim"]
   path = .vim/pack/mca/opt/emmet-vim
   url = https://github.com/mattn/emmet-vim.git
@@ -80,9 +67,6 @@
 [submodule "pylint"]
   path = .vim/pack/mca/opt/pylint
   url = https://github.com:vim-scripts/pylint.vim.git
-[submodule "ack"]
-  path = .vim/pack/mca/start/ack
-  url = https://github.com/mileszs/ack.vim.git
 [submodule "speyside"]
   path = .vim/pack/colorschemes/start/speyside
   url = https://github.com/christophermca/speyside.git
@@ -104,3 +88,6 @@
 [submodule ".vim/pack/mca/start/fzf.vim"]
 	path = .vim/pack/mca/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
+[submodule ".vim/pack/mca/start/xterm-color-table.vim"]
+	path = .vim/pack/mca/start/xterm-color-table.vim
+	url = https://github.com/guns/xterm-color-table.vim.git

@@ -379,7 +379,7 @@ endif
 "}}}
 
 " FZF {{{
-set rtp+=/home/linuxbrew/.linuxbrew/opt/fzf
+set rtp+=/usr/local/bin/fzf
 nmap <f7> :FZF <CR>
 
 " Insert mode completion
