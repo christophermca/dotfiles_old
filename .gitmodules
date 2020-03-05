@@ -46,18 +46,12 @@
 [submodule ".vim/pack/mca/opt/tsuquyomi"]
   path = .vim/pack/mca/opt/tsuquyomi
   url = https://github.com/Quramy/tsuquyomi.git
-[submodule ".vim/pack/mca/opt/maui92"]
-  path = .vim/pack/mca/opt/maui92
-  url = https://github.com/christophermca/maui92.git
 [submodule ".vim/pack/mca/opt/pylint.vim"]
   path = .vim/pack/mca/opt/pylint.vim
   url = https://github.com:vim-scripts/pylint.vim.git
 [submodule "vim-HiLinkTrace"]
   path = .vim/pack/mca/opt/vim-HiLinkTrace
   url = https://github.com/gerw/vim-HiLinkTrace.git
-[submodule "maui92"]
-  path = .vim/pack/colorschemes/opt/maui92
-  url = https://github.com/christophermca/maui92.git
 [submodule "pythoncomplete"]
   path = .vim/pack/mca/opt/pythoncomplete
   url = https://github.com:vim-scripts/pythoncomplete.git
@@ -67,6 +61,9 @@
 [submodule "pylint"]
   path = .vim/pack/mca/opt/pylint
   url = https://github.com:vim-scripts/pylint.vim.git
+[submodule "maui92"]
+  path = .vim/pack/colorschemes/opt/maui92
+  url = https://github.com/christophermca/maui92.git
 [submodule "speyside"]
   path = .vim/pack/colorschemes/start/speyside
   url = https://github.com/christophermca/speyside.git
@@ -91,3 +88,15 @@
 [submodule ".vim/pack/mca/start/xterm-color-table.vim"]
 	path = .vim/pack/mca/start/xterm-color-table.vim
 	url = https://github.com/guns/xterm-color-table.vim.git
+[submodule ".vim/pack/mca/start/vim-surround"]
+	path = .vim/pack/mca/start/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule ".vim/pack/mca/start/vim-commentary"]
+	path = .vim/pack/mca/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
+[submodule ".vim/pack/mca/start/vim-fugitive"]
+	path = .vim/pack/mca/start/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule ".vim/pack/mca/opt/vim-javascript-syntax"]
+	path = .vim/pack/mca/opt/vim-javascript-syntax
+	url = https://github.com/jelera/vim-javascript-syntax
