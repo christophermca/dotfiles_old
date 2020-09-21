@@ -1,6 +1,6 @@
 [user]
    name = Christopher MCAdams
-   email = cmcadams@groupon.com
+   email = cimg@pge.com
 [web]
    browser = chrome
 [push]
@@ -15,6 +15,8 @@
    updel = push upstream --no-verify --delete
    pullr = pull --rebase
    b = branch
+  susy = submodules --sync
+  sup = submodules update --init --recursive --remote
 [help]
    browser = chrome
 [core]

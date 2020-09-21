@@ -352,13 +352,13 @@ let g:ale_fixers = {
     \'*': ['remove_trailing_lines', 'trim_whitespace'],
     \'stylus': ['prettier', 'stylelint'],
     \'scss': ['prettier','stylelint'],
-    \'javascript': ['prettier', 'eslint'],
+    \'javascript': ['prettier','stylelint'],
     \'typescript':['prettier', 'eslint'],
     \'css':['prettier', 'stylelint'],
     \}
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
-
+let g:ale_lint_on_save = 'never'
 " Edit Error and Warning Highlighting
 let g:ale_sign_warning='~'
 hi ALEErrorSign ctermfg='red' ctermbg=none
@@ -379,7 +379,7 @@ endif
 "}}}
 
 " FZF {{{
-set rtp+=/usr/local/bin/fzf
+set rtp+=/usr/local/opt/fzf
 nmap <f7> :FZF <CR>
 
 " Insert mode completion
