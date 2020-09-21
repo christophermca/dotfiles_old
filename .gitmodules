@@ -64,9 +64,6 @@
 [submodule "maui92"]
   path = .vim/pack/colorschemes/opt/maui92
   url = https://github.com/christophermca/maui92.git
-[submodule "speyside"]
-  path = .vim/pack/colorschemes/start/speyside
-  url = https://github.com/christophermca/speyside.git
 [submodule ".vim/pack/mca/opt/vim-jsx"]
 	path = .vim/pack/mca/opt/vim-jsx
 	url = https://github.com:mxw/vim-jsx.git
@@ -100,3 +97,6 @@
 [submodule ".vim/pack/mca/start/fzf.vim"]
 	path = .vim/pack/mca/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
+[submodule ".vim/pack/colorschemes/start/speyside"]
+	path = .vim/pack/colorschemes/start/speyside
+	url = https://github.com/christophermca/speyside
