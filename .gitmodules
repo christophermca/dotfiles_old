@@ -97,6 +97,6 @@
 [submodule ".vim/pack/mca/opt/vim-javascript-syntax"]
 	path = .vim/pack/mca/opt/vim-javascript-syntax
 	url = https://github.com/jelera/vim-javascript-syntax
-[submodule "/Users/CIMG/Repos/dotfiles/.vim/pack/mca/start/fzf.vim"]
-	path = /Users/CIMG/Repos/dotfiles/.vim/pack/mca/start/fzf.vim
+[submodule ".vim/pack/mca/start/fzf.vim"]
+	path = .vim/pack/mca/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim.git
