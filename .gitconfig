@@ -1,6 +1,6 @@
 [user]
    name = Christopher MCAdams
-   email = cimg@pge.com
+   email = cmcadams@newrelic.com
 [web]
    browser = chrome
 [push]
@@ -24,7 +24,6 @@
   fileMode = false
   autocrlf = input
   safecrlf = false
-  excludesfile = /Users/chrismcadams/.gitignore_global
   gitproxy = gitproxy for github
 [credential]
 	helper = osxkeychain
@@ -34,3 +33,5 @@
 	prompt = true
 [color]
 	ui = true
+[pull]
+	ff = only

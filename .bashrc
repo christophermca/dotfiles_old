@@ -19,12 +19,6 @@ bashrc() {
     rem  ............. alias for remaster
     fix  ............. opens all files with changes in editor
 
-    NGINX
-    --------------
-    ngxS (OFF) ............ sudo nginx
-    ngxK  (OFF) ............ sudo nginx -s stop
-    ngxR  (OFF) ............ sudo nginx -s reload
-
     BASH
     --------------
     copy  ............ copies output
@@ -40,7 +34,6 @@ bashrc() {
     TMUX
     --------------
     attach  ......... runs tmux attach
-
    ";
 };
 
@@ -62,16 +55,10 @@ alias rebc='git add . && git rebase --continue'
 alias rebs='git rebase --skip'
 alias fix='vim `git diff --name-only | uniq | xargs`'
 
-###
-# NGINX aliases
-###
-
-# alias ngxS='sudo nginx'
-# alias ngxK='sudo nginx -s stop'
-# alias ngxR='sudo nginx -s reload'
-
 alias copy="tr -d '\n' | pbcopy"
 alias restartBash="reset && source ~/.bash_profile"
+
+#Grep process
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 
 attach() {
@@ -107,18 +94,30 @@ remaster() {
   local readonly CURRENTBRANCH=$(git symbolic-ref --short HEAD)
 
   git fetch --all
+  git remote | grep 'upstream';
+
+  if [ $? -eq 0 ]; then
+	  REMOTE='upstream'
+  else
+	  REMOTE='origin'
+  fi
 
   if [[ -n "$CURRENTBRANCH" ]]; then
     if [[ "$CURRENTBRANCH" != "master" ]]; then
       git checkout master
-      git reset --hard upstream/master
-      git push origin master --no-verify
+      git reset --hard $REMOTE/master
+
+      ## if forked repository update origin
+      # if [[ $REMOTE == 'upstream' ]]; then
+      #   git push origin master --no-verify
+      # fi
+
       git checkout $CURRENTBRANCH
-      git pull --rebase upstream master
+      git pull --rebase $REMOTE master
     else
-      git reset --hard upstream/master
+      git reset --hard $REMOTE/master
     fi
-fi
+  fi
 
 }
 
@@ -142,5 +141,19 @@ export TERM="xterm-256color"
 # REVERSE=$(tput smso)
 # UNDERLINE=$(tput smul)
 
-export NVM_DIR="/Users/CIMG/.nvm"
+# bash_completion
+if command -v brew > /dev/null; then
+
+  if [ -f `brew --prefix`/etc/bash_completion ]; then
+     . `brew --prefix`/etc/bash_completion
+  fi
+
+  # bash-git-prompt
+  if [ -f "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh" ]; then
+     source "$(brew --prefix)/opt/bash-git-prompt/share/gitprompt.sh"
+  fi
+
+fi
+export NVM_DIR="/Users/cmcadams/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
