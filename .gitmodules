@@ -85,3 +85,9 @@
 [submodule ".vim/pack/mca/opt/typescript-vim"]
 	path = .vim/pack/mca/opt/typescript-vim
 	url = https://github.com/leafgarland/typescript-vim.git
+[submodule "vim-jsx-typescript"]
+	path = .vim/pack/mca/opt/vim-jsx-typescript
+	url = https://github.com/peitalin/vim-jsx-typescript.git
+[submodule "vim-graphql"]
+	path = .vim/pack/mca/opt/vim-graphql
+	url = https://github.com/jparise/vim-graphql.git
