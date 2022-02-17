@@ -94,6 +94,8 @@ remaster() {
   local readonly CURRENTBRANCH=$(git symbolic-ref --short HEAD)
 
   git fetch --all
+
+  # check if remote 'upstream' exists
   git remote | grep 'upstream';
 
   if [ $? -eq 0 ]; then
@@ -102,6 +104,7 @@ remaster() {
 	  REMOTE='origin'
   fi
 
+  # if current branch isnt mater
   if [[ -n "$CURRENTBRANCH" ]]; then
     if [[ "$CURRENTBRANCH" != "master" ]]; then
       git checkout master
