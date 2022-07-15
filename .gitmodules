@@ -57,7 +57,7 @@
 	url = https://github.com/SirVer/ultisnips.git
 [submodule ".vim/pack/mca/start/ale"]
 	path = .vim/pack/mca/start/ale
-	url = https://github.com/w0rp/ale.git
+	url = https://github.com/dense-analysis/ale.git
 [submodule ".vim/pack/mca/start/ack"]
 	path = .vim/pack/mca/start/ack
 	url = https://github.com/mileszs/ack.vim.git

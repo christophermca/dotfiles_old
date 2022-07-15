@@ -1,6 +1,6 @@
 [user]
-   name = Christopher MCAdams
-   email = cmcadams@newrelic.com
+	name = Christopher MCAdams
+  email = cmcadams@newrelic.com
 [web]
    browser = chrome
 [push]
@@ -10,7 +10,7 @@
    co = checkout
    graph = 'git log --oneline --graph --abbrev-commit --pretty=format:"%Cgreen %h %Creset%s %n%an - %cr %n%n"'
    mismatch = ls-files -u
-   del = branch -delete --force
+   del = branch --delete --force
    remdel = push origin --no-verify --delete
    updel = push upstream --no-verify --delete
    pullr = pull --rebase
@@ -35,3 +35,5 @@
 	ui = true
 [pull]
 	ff = only
+[init]
+	defaultBranch = master

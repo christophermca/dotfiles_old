@@ -104,21 +104,28 @@ remaster() {
 	  REMOTE='origin'
   fi
 
-  # if current branch isnt mater
+  # if current branch isnt master
   if [[ -n "$CURRENTBRANCH" ]]; then
     if [[ "$CURRENTBRANCH" != "master" ]]; then
       git checkout master
+      # get latest
       git reset --hard $REMOTE/master
 
-      ## if forked repository update origin
-      # if [[ $REMOTE == 'upstream' ]]; then
-      #   git push origin master --no-verify
-      # fi
+      # if forked repository update origin
+       if [[ $REMOTE == 'upstream' ]]; then
+         read -p "should I update origin/master? (y/n)" response
+         if [[ $response == 'y' ]]; then
+           echo $response
+           # git push origin master -n
+         fi
+       fi
 
       git checkout $CURRENTBRANCH
-      git pull --rebase $REMOTE master
+      # git pull --rebase $REMOTE master
     else
-      git reset --hard $REMOTE/master
+      # get latest
+      # git reset --hard $REMOTE/master
+      echo 'git reset --hard $REMOTE/master'
     fi
   fi
 
