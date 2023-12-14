@@ -16,11 +16,11 @@ fi
 
 # Checks for vim dot files/folders
 if [ ! -L "$HOME/.vim" ]; then
-  ln -s ~/Repos/dotfiles/.vim/ ~/.vim
+  ln -fs ~/Repos/dotfiles/.vim/ ~/.vim
 fi
 
 if [ ! "$HOME/.vimrc" ]; then
-  ln -s ~/Repos/dotfiles/.vim/.vimrc ~/.vimrc
+  ln -fs ~/Repos/dotfiles/.vim/.vimrc ~/.vimrc
 fi
 
 if [ ! -L "$HOME/.vundle" ]; then

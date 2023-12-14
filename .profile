@@ -31,3 +31,8 @@ if command -v brew > /dev/null; then
   fi
 
 fi
+#
+# Load .workrc, containing only work related bash config and initializations.
+if [ -e "$HOME/.workrc" ]; then
+   source ~/.workrc
+fi

@@ -15,8 +15,8 @@
    updel = push upstream --no-verify --delete
    pullr = pull --rebase
    b = branch
-  susy = submodules --sync
-  sup = submodules update --init --recursive --remote
+  susy = submodule sync --recursive
+  sup = submodule update --init --recursive --remote
 [help]
    browser = chrome
 [core]

@@ -16,6 +16,11 @@ bashrc() {
     reb .............. git rebase
     rebc ............. git rebase --continue
     rebs ............. git rebase --skip
+    chrpy .............. git cherry-pick
+    chrpyc .............. git cherry-pick --continue
+    chrpys .............. git cherry-pick --skip
+    rebc ............. git rebase --continue
+    rebs ............. git rebase --skip
     rem  ............. alias for remaster
     fix  ............. opens all files with changes in editor
 
@@ -50,6 +55,9 @@ alias .bashrc='vim $HOME/.bashrc'
 # alias gw='git commit -am'
 alias graph='git log --oneline --graph --abbrev-commit --pretty=format:"%Cgreen %h %Creset%s %n%an - %cr %n%n"'
 alias rem='remaster'
+alias chrpy='git cherry-pick'
+alias chrpyc='git cherry-pick --continue'
+alias chrpys='git cherry-pick --skip'
 alias reb='git rebase'
 alias rebc='git add . && git rebase --continue'
 alias rebs='git rebase --skip'
@@ -164,6 +172,7 @@ if command -v brew > /dev/null; then
   fi
 
 fi
-export NVM_DIR="/Users/cmcadams/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
