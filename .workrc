@@ -1,5 +1,44 @@
 #! /usr/bin/bash
 
+alias .workrc='vim $HOME/.workrc'
+
+_r0_comp() {
+   local cur prev opts
+
+   COMPREPLY=()
+
+   cur="${COMP_WORDS[COMP_CWORD]}"
+   prev="${COMP_WORDS[COMP_CWORD - 1]}"
+   opts=$(ls -d $HOME/Repos/*.d)
+
+   COMPREPLY=($(compgen -W "${opts}" -- "${cur}"))
+
+   return 0
+}
+
+complete -F _r0_comp r0
+
+r0() {
+  # When r0 is called without parameters. It will list all available
+  # `grouped_directories` eg (folders with postfix `somefoldername.d`)
+  if [ $# -lt 1 ]; then
+    cd $HOME/Repos
+    echo -e "List of available 'Group-directories':\n"
+    ls -d ./*.d
+    read -p 'Which project do you want to view: ' GROUP_DIRECTORY
+    if [ $GROUP_DIRECTORY ]; then
+      if [ -d $HOME/Repos/$GROUP_DIRECTORY ]; then
+        cd $GROUP_DIRECTORY
+      else
+        cd "${GROUP_DIRECTORY}.d"
+      fi
+    fi
+  else
+    # When r0 is called with a parameters. navigate to that location
+    cd $1
+  fi
+}
+
 alias ffx="/Applications/Firefox.app/Contents/MacOS/firefox-bin"
 
 # docker
