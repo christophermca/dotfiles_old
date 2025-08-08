@@ -31,7 +31,15 @@ if command -v brew > /dev/null; then
   # fi
 
 fi
-#
+
+if [ -e "$HOME/.sdkman" ]; then
+  source "$HOME/.sdkman/bin/sdkman-init.sh"
+fi
+
+if [ -e "$HOME/.local/share/NRVault" ]; then
+   source $HOME/.local/share/NRVault
+fi
+
 # Load .workrc, containing only work related bash config and initializations.
 if [ -e "$HOME/.workrc" ]; then
    source ~/.workrc
