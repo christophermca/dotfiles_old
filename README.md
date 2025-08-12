@@ -9,5 +9,5 @@ These are my dotfile for unix enviroments.
 1. Pull down repo
 2. Install `Brew`
 3. Run `
-    cp ~/Repos/dotfiles/.bash_profile ~/.bash_profile && source ~/.bash_profile
+    cp ~/Repos/dotfiles/.zprofile ~/.zprofile && source ~/.zprofile
    `
