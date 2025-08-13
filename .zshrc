@@ -37,9 +37,10 @@ zshrc() {
    ";
 };
 
+bindkey -v
 
 # aliases
-alias .bashrc='vim $HOME/.bashrc'
+alias .zshrc='vim $HOME/.zshrc'
 
 ###
 # GIT aliases
@@ -56,7 +57,8 @@ alias rebs='git rebase --skip'
 alias fix='vim `git diff --name-only | uniq | xargs`'
 
 alias copy="tr -d '\n' | pbcopy"
-alias restartBash="reset && source ~/.bash_profile"
+alias restartBash="reset && exec zsh"
+alias restartZsh=restartBash
 
 #Grep process
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
@@ -164,6 +166,7 @@ if command -v brew > /dev/null; then
   fi
 
 fi
+
 export NVM_DIR="/Users/cmcadams/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -175,4 +178,3 @@ zstyle ':vcs_info:git:*' formats '%b '
 
 setopt PROMPT_SUBST
 PROMPT='%F{green}%*::%n%f %F{blue}%~%f %F{red}${vcs_info_msg_0_}%f %(!.#.$) '
-

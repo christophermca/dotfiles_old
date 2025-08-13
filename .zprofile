@@ -2,12 +2,12 @@
 ## symlink dotfiles
 
 # Checks for bash dot files
-if [ ! -L "$HOME/.profile" ]; then
-  ln -fs ~/Repos/dotfiles/.profile ~/.profile
+if [ ! -L "$HOME/.zprofile" ]; then
+  ln -fs ~/Repos/dotfiles/.zprofile ~/.zprofile
 fi
 
 if [ ! -L "$HOME/.bashrc" ]; then
-  ln -fs ~/Repos/dotfiles/.bashrc ~/.bashrc
+  ln -fs ~/Repos/dotfiles/.zshrc ~/.zshrc
 fi
 
 if [ ! -L "$HOME/.inputrc" ]; then
@@ -42,15 +42,20 @@ if [ ! -L "$HOME/.tmux.conf" ]; then
   ln -fs ~/Repos/dotfiles/.tmux.conf ~/.tmux.conf
 fi
 
+# Checks for workrc
+if [ ! -L "$HOME/.workrc" ]; then
+  ln -fs ~/Repos/dotfiles/.workrc ~/.workrc
+fi
+
 #if [ ! -L "$HOME/.tmuxinator" ]; then
 #  ln -fs ~/Repos/dotfiles/.tmuxinator/ ~/.tmuxinator/
 #fi
 
-# Load .bashrc, containing non-login related bash initializations.
-source ~/.bashrc
+# Load .zshrc, containing non-login related shell initializations.
+# source ~/.zshrc
 
-# Load .profile, containing login, non-bash related initializations.
-source ~/.profile
+# Load .envconfig, containing login
+# source ~/.zshenv
 
 # Load .cdtrc, containing only cdt related config
 if [ -e "$HOME/.cdtrc" ]; then
