@@ -96,7 +96,7 @@
 	url = https://github.com/styled-components/vim-styled-components.git
 [submodule ".vim/pack/mca/start/coc.nvim"]
 	path = .vim/pack/mca/start/coc.nvim
-	url = https://github.com/neoclide/coc.nvim.git
+	url = https://github.com/neoclide/coc.nvim.git 
 [submodule ".vim/pack/colorscheme/start/speyside"]
 	path = .vim/pack/colorscheme/start/speyside
 	url = https://github.com/christophermca/speyside
