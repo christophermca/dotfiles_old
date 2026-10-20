@@ -181,3 +181,5 @@ fi
 
 # Created by `pipx` on 2024-01-11 16:05:36
 export PATH="$PATH:/Users/cmcadams/.local/bin"
+
+export PATH="$PATH:/Users/cmcadams/Library/Android/sdk/platform-tools"
